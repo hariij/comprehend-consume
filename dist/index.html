@@ -291,7 +291,112 @@
   .gdot.lit{background:var(--gold);border-color:var(--gold);box-shadow:0 0 12px rgba(229,163,60,.75)}
   .gdot:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
   @media (prefers-reduced-motion: reduce){.kdot{animation:none;opacity:0}.wbtn:hover{transform:none}}
+
+  /* ---------- treasure HUD ---------- */
+  #gauge{cursor:pointer}
+  #hpBadge{position:absolute;top:-8px;right:-8px;background:var(--terra);color:#F7F0E1;border-radius:999px;
+    min-width:22px;height:22px;padding:0 5px;font-size:.7rem;display:flex;align-items:center;justify-content:center;
+    border:2px solid var(--paper);font-family:var(--body)}
+  #hpBadge.pop{animation:hpPop .5s ease}
+  @keyframes hpPop{40%{transform:scale(1.5)}}
+  #gchap{font-size:.64rem;color:var(--teal);margin-top:2px;font-family:var(--tamil)}
+  #hpDrawer{position:fixed;top:0;right:0;height:100%;width:min(350px,90vw);background:var(--paper);
+    border-left:2px solid rgba(43,33,24,.2);box-shadow:-10px 0 34px rgba(43,33,24,.18);z-index:40;
+    transform:translateX(102%);transition:transform .4s ease;padding:1.4rem 1.3rem;overflow-y:auto}
+  #hpDrawer.open{transform:none}
+  #hpDrawer h4{font-family:var(--tamil);font-size:1.05rem;margin-bottom:.2rem;color:var(--terra)}
+  #hpDrawer .sub{font-size:.85rem;opacity:.75;margin-bottom:1rem}
+  #hpClose{position:absolute;top:10px;right:12px;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--ink);line-height:1}
+  #hpGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px 18px;padding-top:4px}
+  .art{text-align:center;opacity:.3;filter:grayscale(1);transition:all .4s ease;padding:.4rem .2rem .8rem;position:relative}
+  .art::after{content:'';position:absolute;left:5%;right:5%;bottom:0;height:7px;border-radius:3px;
+    background:linear-gradient(#8A5A3B,#6E4227);box-shadow:0 3px 6px rgba(43,33,24,.3)}
+  .art.got{opacity:1;filter:none}
+  .art svg{width:54px;height:54px;display:block;margin:0 auto 6px}
+  .art .an{font-size:.74rem;line-height:1.3;display:block}
+  #hpCardBox{margin-top:1.2rem;text-align:center;display:none}
+  #hpCardBox.show{display:block}
+  #hpProg{height:8px;background:rgba(43,33,24,.12);border-radius:99px;margin:0 0 1rem;overflow:hidden}
+  #hpProgFill{height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--terra),var(--gold),var(--teal));transition:width .5s ease}
+  #hpBloom{position:fixed;inset:0;background:rgba(43,33,24,.55);z-index:50;display:none;align-items:center;justify-content:center;padding:1rem}
+  #hpBloom.show{display:flex}
+  #hpBloom .inner{background:var(--paper);border-radius:18px;padding:2.2rem 1.8rem;text-align:center;max-width:400px;position:relative;overflow:hidden}
+  #hpBloom h4{font-family:var(--tamil);font-size:1.3rem;color:var(--terra);margin-bottom:.6rem}
+  .share-line{background:none;border:none;color:var(--teal);cursor:pointer;font-size:.8rem;font-family:inherit;
+    display:block;margin:-1.6rem auto 2.2rem;opacity:.75}
+  .share-line:hover{opacity:1;text-decoration:underline}
+  #hpShareRow{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin-top:1.6rem}
+  #hpToast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--paper);
+    padding:.6rem 1.2rem;border-radius:999px;font-size:.85rem;opacity:0;transition:all .35s ease;z-index:60;pointer-events:none}
+  #hpToast.show{opacity:1;transform:translateX(-50%)}
+  #wsPlay{margin-top:.7rem}
+  #hpScrim{position:fixed;inset:0;background:rgba(43,33,24,.35);z-index:39;display:none}
+  #hpScrim.show{display:block}
+  .sbtn{font-size:.85rem;padding:.5rem 1rem}
+  /* ---------- விளக்கு lamplight mode ---------- */
+  body.lamplight{--paper:#201B31;--sand:#352D4E;--ink:#F1E7CF;--gold:#F0B04C;--indigo:#98A2E8}
+  body.lamplight .widget{background:#2B2445;border-color:rgba(241,231,207,.18)}
+  body.lamplight .thesis{color:#7CC1B9}
+  body.lamplight figure img{box-shadow:0 8px 44px rgba(240,176,76,.22)}
+  body.lamplight #gauge{background:rgba(32,27,49,.94);border-color:rgba(241,231,207,.28)}
+  body.lamplight .answer{border-color:rgba(241,231,207,.35)}
+  body.lamplight .art::after{background:linear-gradient(#4A3F68,#352D4E)}
+  body.lamplight #supportTea{background:#2B2445;color:var(--ink)}
+  body.lamplight #chapNav a{color:var(--ink)}
+  #themeBtn{font-size:1rem}
+  /* ---------- print ---------- */
+  @media print{
+    #gauge,#chapNav,#langToggle,#supportTea,#hpDrawer,#hpBloom,#hpToast,.widget,.share-line,#hpShareRow{display:none!important}
+    .reveal{opacity:1!important;transform:none!important}
+    body{background:#fff}
+    figure{margin:1.2rem 0}
+  }
+  body.lamplight .art::after{background:#A5744E}
+  .wreset{font-size:.78rem;padding:.35rem 1rem;margin-top:.9rem;opacity:.65}
+  .wreset:hover{opacity:1}
+  #hpShareMenu{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:70;background:rgba(43,33,24,.45);padding:1rem}
+  #hpShareMenu.show{display:flex}
+  #hpShareMenu .inner{background:var(--paper);border-radius:16px;padding:1.6rem 1.4rem;max-width:320px;width:100%;text-align:center;position:relative}
+  #hpShareMenu h5{font-family:var(--tamil);color:var(--terra);font-size:1rem;margin-bottom:1rem}
+  #hpShareMenu .wbtn{display:block;width:100%;margin:.4rem 0}
+  #hpSmClose{position:absolute;top:8px;right:12px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--ink)}
+  body.lamplight .brick{color:rgba(241,231,207,.6);border-color:rgba(241,231,207,.45)}
+  body.lamplight .mtag{color:#2B2118}
+  body.lamplight .gdot{border-color:rgba(241,231,207,.5)}
+  body.lamplight .widget svg [stroke="#2B2118"],
+  body.lamplight #hpGrid svg [stroke="#2B2118"],
+  body.lamplight #gauge svg [stroke="#2B2118"]{stroke:#F1E7CF}
+  body.lamplight .widget svg [fill="#2B2118"],
+  body.lamplight #hpGrid svg [fill="#2B2118"]{fill:#F1E7CF}
+  body.lamplight .kural .meaning{border-top-color:rgba(241,231,207,.3)}
+  body.lamplight #hpDrawer{border-left-color:rgba(241,231,207,.25)}
+  body.lamplight footer{border-top-color:rgba(241,231,207,.2)}
+  #hpName{display:block;background:none;border:1px dashed var(--terra);border-radius:999px;
+    padding:.22rem .9rem;margin:0 auto .7rem;font-size:.78rem;color:var(--terra);cursor:pointer;font-family:inherit}
+  #hpTea .qr{width:220px;max-width:80%;border-radius:10px;display:block;margin:0 auto .8rem;border:4px solid #fff}
+  #hpTea .upiid{font-family:monospace;font-size:.95rem;background:rgba(43,33,24,.08);
+    padding:.35rem .7rem;border-radius:8px;display:inline-block;margin:.2rem 0 .6rem;color:var(--ink)}
+  body.lamplight #hpTea .upiid{background:rgba(241,231,207,.12)}
+  #hpTea .tip{font-size:.78rem;opacity:.75;line-height:1.6;margin:.6rem 0}
 </style>
+<link rel="alternate" hreflang="en" href="https://hariprav.in/comprehend-consume/">
+<link rel="alternate" hreflang="ta" href="https://hariprav.in/comprehend-consume/?lang=ta">
+<link rel="alternate" hreflang="x-default" href="https://hariprav.in/comprehend-consume/">
+<meta property="og:locale" content="en_IN">
+<meta property="og:locale:alternate" content="ta_IN">
+<meta name="theme-color" id="metaTheme" content="#F7F0E1">
+<link rel="manifest" href="manifest.json">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article",
+"headline":"What We Can Comprehend Is What We Can Consume",
+"alternativeHeadline":"நாம் புரிந்துகொள்வதே நாம் நுகர்வது",
+"author":{"@type":"Person","name":"Hari Pravin","url":"https://hariprav.in","sameAs":["https://haripravin.medium.com"]},
+"publisher":{"@type":"Person","name":"Hari Pravin"},
+"inLanguage":["en","ta"],
+"image":"https://hariprav.in/comprehend-consume/images/01-hero-sand-well-og.jpg",
+"url":"https://hariprav.in/comprehend-consume/",
+"mainEntityOfPage":"https://hariprav.in/comprehend-consume/"}
+</script>
 </head>
 <body class="lang-en">
 
@@ -332,7 +437,7 @@
 <article>
 
 <figure class="reveal">
-  <img src="images/01-hero-sand-well.jpg" alt="A hand-dug well in sand with teal water risen inside, a mambatti resting beside the dug-out heap of sand." onerror="this.src='https://placehold.co/800x450/E9D8B4/2B2118?text=Image+Loading...'">
+  <img src="images/01-hero-sand-well.jpg" fetchpriority="high" decoding="async" alt="A hand-dug well in sand with teal water risen inside, a mambatti resting beside the dug-out heap of sand." onerror="this.style.display='none'">
 </figure>
 
 <!-- ============ PROLOGUE ============ -->
@@ -405,7 +510,7 @@
   <p class="reveal"><span class="L en">She was the grandmother who ran the house.</span><span class="L ta">அந்த வீட்டை நடத்திய பாட்டி அவள்தான்.</span></p>
 
   <figure class="reveal">
-    <img src="images/02-thumbprint.jpg" alt="A terracotta thumbprint on a signature line, its ridge lines flowing outward into a blooming kolam." onerror="this.src='https://placehold.co/800x450/E9D8B4/2B2118?text=Image+Loading...'">
+    <img src="images/02-thumbprint.jpg" loading="lazy" decoding="async" alt="A terracotta thumbprint on a signature line, its ridge lines flowing outward into a blooming kolam." onerror="this.style.display='none'">
     <figcaption><span class="L en">One thumbprint. Two hundred songs.</span><span class="L ta">ஒரு கைரேகை. இருநூறு பாட்டுகள்.</span></figcaption>
   </figure>
 
@@ -447,7 +552,7 @@
   <p class="reveal"><span class="L en">There was one master in the village, if there was one at all. There was one bundle of palm leaves, kept dry, kept close, read aloud to a chosen circle. Whether you got near it depended on your caste, your money, and where you happened to be born. Learning did not travel to you. You travelled to it, if they let you in.</span><span class="L ta">ஊருக்கு ஒரே வாத்தியார், அதுவும் இருந்தால். ஒரே ஒரு ஓலைச்சுவடிக் கட்டு, ஈரம் படாமல், பத்திரமாக, தேர்ந்தெடுக்கப்பட்ட சிலருக்கு மட்டுமே வாசிக்கப்பட்டது. அதன் அருகில் போக முடியுமா என்பது உங்கள் சாதி, உங்கள் பணம், நீங்கள் பிறந்த இடம் இவற்றைப் பொறுத்தே அமைந்தது. கல்வி உங்களிடம் வரவில்லை. நீங்கள் தான் அதனிடம் போனீர்கள், அவர்கள் உங்களை அனுமதித்தால்.</span></p>
 
   <figure class="reveal">
-    <img src="images/03-village-master.jpg" alt="A single teacher on a platform reading palm leaves by one lamp to a small circle, while faint figures watch from far outside the light." onerror="this.src='https://placehold.co/800x450/E9D8B4/2B2118?text=Image+Loading...'">
+    <img src="images/03-village-master.jpg" loading="lazy" decoding="async" alt="A single teacher on a platform reading palm leaves by one lamp to a small circle, while faint figures watch from far outside the light." onerror="this.style.display='none'">
     <figcaption><span class="L en">One master. One lamp. One small circle.</span><span class="L ta">ஒரு வாத்தியார். ஒரு விளக்கு. ஒரு சிறிய வட்டம்.</span></figcaption>
   </figure>
 
@@ -492,7 +597,7 @@
   <p class="breath"><span class="L en">Technology speaks English.<br>Life does not.</span><span class="L ta">தொழில்நுட்பம் ஆங்கிலம் பேசுகிறது.<br>வாழ்க்கை பேசுவதில்லை.</span></p>
 
   <figure class="reveal">
-    <img src="images/04-english-wall.jpg" alt="A boy with a school bag stands before a brick wall of unreadable English text, while a teal doorway cracks open toward books, a river, and the sun." onerror="this.src='https://placehold.co/800x450/E9D8B4/2B2118?text=Image+Loading...'">
+    <img src="images/04-english-wall.jpg" loading="lazy" decoding="async" alt="A boy with a school bag stands before a brick wall of unreadable English text, while a teal doorway cracks open toward books, a river, and the sun." onerror="this.style.display='none'">
   </figure>
 
   <div class="widget reveal">
@@ -516,7 +621,7 @@
   <p class="reveal"><span class="L en">Two people watch the same T20 Cricket match. One sees sixes, noise, and a scoreboard in a hurry. The other sees the leg-spinner saved for the new left-hander. The long boundary guarded by one quiet field change. A dot ball in the nineteenth over that is worth more than a boundary in the fifth. Same match. One is watching fireworks. The other is watching a puzzle being solved at full speed.</span><span class="L ta">இருவர் ஒரே T20 போட்டியைப் பார்க்கிறார்கள். ஒருவர் சிக்ஸர்களையும், சத்தத்தையும், ஸ்கோர்போர்டையும் பார்க்கிறார். இன்னொருவர், புது இடதுகை பேட்ஸ்மேனுக்காக லெக்-ஸ்பின்னரைக் காத்து வைத்திருப்பதை, ஒரே ஒரு அமைதியான ஃபீல்டிங் மாற்றத்தால் நீண்ட பவுண்டரி காக்கப்படுவதை, ஐந்தாவது ஓவரின் பவுண்டரியை விட, பத்தொன்பதாவது ஓவரின் டாட் பாலுக்கு மதிப்பு அதிகம் என்பதை எல்லாம் பார்க்கிறார். அதே போட்டிதான். ஒருவர் வாணவேடிக்கை பார்க்கிறார். இன்னொருவர் முழு வேகத்தில் அவிழ்க்கப்படும் புதிரைப் பார்க்கிறார்.</span></p>
 
   <figure class="reveal">
-    <img src="images/05-same-match.jpg" alt="The same cricket ground drawn twice: fireworks and scattered figures on the left, tactical arrows and hidden strategy on the right." onerror="this.src='https://placehold.co/800x450/E9D8B4/2B2118?text=Image+Loading...'">
+    <img src="images/05-same-match.jpg" loading="lazy" decoding="async" alt="The same cricket ground drawn twice: fireworks and scattered figures on the left, tactical arrows and hidden strategy on the right." onerror="this.style.display='none'">
     <figcaption><span class="L en">Same match. Two ways of seeing.</span><span class="L ta">அதே போட்டி. இரண்டு பார்வைகள்.</span></figcaption>
   </figure>
 
@@ -605,7 +710,7 @@
   <p class="reveal"><span class="L en">He types: explain compound interest like I am twelve, and in Tamil. It does. He types: now explain it like I am an expert. It does that too, in the same breath, without a sigh, without making him feel small for asking. At two in the morning, when the one master in the village would have been asleep for six hours, it is awake. When the English wall rises, it walks him through the gate in his own language, and never even mentions the wall.</span><span class="L ta">அவன் டைப் செய்கிறான்: கூட்டு வட்டியை எனக்குப் பன்னிரண்டு வயது என்று நினைத்து, தமிழில் விளக்கு. அது விளக்குகிறது. அடுத்து: இப்போது நான் நிபுணன் என்று நினைத்து விளக்கு. அதையும் அதே மூச்சில் செய்கிறது. பெருமூச்சு விடவில்லை. கேட்டதற்காக அவனைச் சிறுமைப்படுத்தவில்லை. இரவு இரண்டு மணிக்கு, ஊரின் ஒரே வாத்தியார் தூங்கி ஆறு மணி நேரம் ஆன பிறகு, இது விழித்திருக்கிறது. ஆங்கிலச் சுவர் எழும்பும் போது, அவன் மொழியிலேயே வாசல் வழியாக அழைத்துச் செல்கிறது. சுவரைப் பற்றிப் பேசவே இல்லை.</span></p>
 
   <figure class="reveal">
-    <img src="images/06-teacher-in-pocket.jpg" alt="A young man on a mat at night, his phone's glow rising in a teal stream that becomes a well of water above him." onerror="this.src='https://placehold.co/800x450/E9D8B4/2B2118?text=Image+Loading...'">
+    <img src="images/06-teacher-in-pocket.jpg" loading="lazy" decoding="async" alt="A young man on a mat at night, his phone's glow rising in a teal stream that becomes a well of water above him." onerror="this.style.display='none'">
     <figcaption><span class="L en">Two in the morning. The teacher is awake.</span><span class="L ta">இரவு இரண்டு மணி. ஆசிரியர் விழித்திருக்கிறார்.</span></figcaption>
   </figure>
 
@@ -659,7 +764,7 @@
   <p class="reveal"><span class="L en">The parent no longer has to know everything. He only has to know how to ask.</span><span class="L ta">பெற்றோருக்கு இனி எல்லாம் தெரிய வேண்டியதில்லை. எப்படிக் கேட்பது என்று தெரிந்தால் மட்டும் போதும்.</span></p>
 
   <figure class="reveal">
-    <img src="images/07-appa-question.jpg" alt="A father with grease-marked arms and his daughter leaning over one glowing phone, a question mark blooming into a kolam flower above them." onerror="this.src='https://placehold.co/800x450/E9D8B4/2B2118?text=Image+Loading...'">
+    <img src="images/07-appa-question.jpg" loading="lazy" decoding="async" alt="A father with grease-marked arms and his daughter leaning over one glowing phone, a question mark blooming into a kolam flower above them." onerror="this.style.display='none'">
     <figcaption><span class="L en">He only has to know how to ask.</span><span class="L ta">எப்படிக் கேட்பது என்று தெரிந்தால் போதும்.</span></figcaption>
   </figure>
 
@@ -687,7 +792,7 @@
   <p class="reveal"><span class="L en">A race can be an ugly thing. This one, for now, is doing something close to beautiful. Long may it run. Long may it stay kind.</span><span class="L ta">போட்டி என்பது எப்போதும் நல்லதையே உருவாக்காது. இது, இப்போதைக்கு, மனிதகுலத்திற்கு ஒரு அழகான வாய்ப்பை உருவாக்கிக் கொண்டிருக்கிறது. இது நீண்ட காலம் தொடரட்டும். இந்தப் பெருந்தன்மையும், அனைவரையும் அரவணைக்கும் மனப்பான்மையும் மாறாமல் இருக்கட்டும்.</span></p>
 
   <figure class="reveal">
-    <img src="images/08-race-of-lamps.jpg" alt="Five traditional Tamil oil lamps racing forward, their separate glows merging into one shared pool of light where small figures sit reading." onerror="this.src='https://placehold.co/800x450/E9D8B4/2B2118?text=Image+Loading...'">
+    <img src="images/08-race-of-lamps.jpg" loading="lazy" decoding="async" alt="Five traditional Tamil oil lamps racing forward, their separate glows merging into one shared pool of light where small figures sit reading." onerror="this.style.display='none'">
     <figcaption><span class="L en">The race is theirs. The light is ours.</span><span class="L ta">பந்தயம் அவர்களுடையது. ஒளி நம்முடையது.</span></figcaption>
   </figure>
 
@@ -777,7 +882,7 @@
   </div>
 
   <figure class="reveal">
-    <img src="images/09-dig-many-wells.jpg" alt="Many hand-dug wells across the sand, each with risen water; men, women, a child and an elder at their own wells under one sun." onerror="this.src='https://placehold.co/800x450/E9D8B4/2B2118?text=Image+Loading...'">
+    <img src="images/09-dig-many-wells.jpg" loading="lazy" decoding="async" alt="Many hand-dug wells across the sand, each with risen water; men, women, a child and an elder at their own wells under one sun." onerror="this.style.display='none'">
   </figure>
 </section>
 
@@ -791,7 +896,7 @@
   <p><a href="https://hariprav.in">hariprav.in</a> &nbsp;·&nbsp; <a href="https://haripravin.medium.com">Medium</a></p>
   
   <div style="margin-top: 2.2rem; display: flex; justify-content: center;">
-    <img src="https://api.visitorbadge.io/api/visitors?path=hariprav.in%2Fcomprehend-consume&countColor=%232E6E6A" alt="Visitor Count">
+    <img loading="lazy" src="https://api.visitorbadge.io/api/visitors?path=hariprav.in%2Fcomprehend-consume&countColor=%232E6E6A" alt="Visitor Count">
   </div>
 </footer>
 
@@ -804,6 +909,8 @@
     <rect id="gwater" x="6" y="70" width="34" height="0" fill="#2E6E6A" clip-path="url(#gclip)"/>
   </svg>
   <div class="glabel"><span class="L en">DIG</span><span class="L ta">தோண்டு</span></div>
+  <div id="gchap"></div>
+  <span id="hpBadge">0</span>
 </div>
 
 <!-- support tea floating button -->
@@ -1086,9 +1193,17 @@
           b.classList.add('flipped'); b.textContent=w4word(idx);
           b.style.background=FLIPC[idx%4]; b.style.borderColor=FLIPC[idx%4];
           w4flipped++;
-          if(w4flipped===6){ w4door.classList.add('open'); confetti(w4wrap.closest('.widget')); }
+          if(w4flipped===GIBBERISH.length){ w4door.classList.add('open'); confetti(w4wrap.closest('.widget')); }
         });
         w4list.push(b); w4wrap.appendChild(b);
+      });
+      var w4rst=document.createElement('button');
+      w4rst.type='button'; w4rst.className='wbtn alt wreset';
+      w4rst.innerHTML='<span class="L en">\u21ba Reset</span><span class="L ta">\u21ba மீட்டமை</span>';
+      w4wrap.closest('.widget').appendChild(w4rst);
+      w4rst.addEventListener('click', function(){
+        w4flipped=0; if(w4door) w4door.classList.remove('open');
+        w4list.forEach(function(b,i){ b.classList.remove('flipped'); b.textContent=GIBBERISH[i]; b.style.background=''; b.style.borderColor=''; b.style.color=''; });
       });
       [btnEn,btnTa].forEach(function(bt){ 
           if(bt) bt.addEventListener('click', function(){
@@ -1395,6 +1510,513 @@
     cells[12].classList.add('lit');
     wGupdate();
   }
+})();
+</script>
+
+<div id="hpScrim"></div>
+<div id="hpDrawer" role="dialog" aria-label="Collected artifacts">
+  <button id="hpClose" type="button" aria-label="Close">×</button>
+  <h4><span class="L en">Your Pouch</span><span class="L ta">உங்கள் பொக்கிஷம்</span></h4>
+  <button id="hpName" type="button"></button>
+  <p class="sub"><span class="L en">Every widget you play hands you one artifact from the essay.</span><span class="L ta">ஒவ்வொரு விளையாட்டும் கட்டுரையிலிருந்து ஒரு பொக்கிஷத்தைத் தருகிறது.</span></p>
+  <div id="hpProg"><div id="hpProgFill"></div></div>
+            <div id="hpGrid">
+<div class="art" data-art="dig"><svg viewBox="0 0 40 40"><path d="M30 5 L14 26" stroke="#7A4B3A" stroke-width="4" stroke-linecap="round"/><path d="M9 23 L19 21 L21 30 L11 32 Z" fill="#C0603A"/></svg><span class="an"><span class="L en">Mambatti</span><span class="L ta">மண்வெட்டி</span></span></div>
+      <div class="art" data-art="thumb"><svg viewBox="0 0 40 40"><rect x="10" y="7" width="20" height="26" rx="2" fill="#F7F0E1" stroke="#2B2118" stroke-width="2.5"/><path d="M14 13 h12 M14 18 h12 M14 23 h7" stroke="#2B2118" stroke-width="2" opacity=".45"/><ellipse cx="24" cy="27" rx="3.4" ry="4.4" fill="none" stroke="#C0603A" stroke-width="1.8"/></svg><span class="an"><span class="L en">Land Deed</span><span class="L ta">பத்திரம்</span></span></div>
+      <div class="art" data-art="lamp"><svg viewBox="0 0 40 40"><rect x="17" y="18" width="6" height="14" rx="2" fill="#C0603A"/><ellipse cx="20" cy="17" rx="8" ry="3.5" fill="#C0603A"/><path d="M20 6 q4 5 0 10 q-4 -5 0 -10" fill="#2E6E6A"/></svg><span class="an"><span class="L en">Lamp</span><span class="L ta">விளக்கு</span></span></div>
+      <div class="art" data-art="brick"><svg viewBox="0 0 40 40"><rect x="7" y="13" width="26" height="14" rx="2" fill="#C0603A" stroke="#2B2118" stroke-width="2"/><path d="M7 20 h26 M20 13 v7 M14 20 v7 M26 20 v7" stroke="#F7F0E1" stroke-width="1.6" opacity=".8"/></svg><span class="an"><span class="L en">Brick</span><span class="L ta">செங்கல்</span></span></div>
+      <div class="art" data-art="match"><svg viewBox="0 0 40 40"><rect x="17" y="4" width="5" height="7" rx="2" fill="#7A4B3A"/><path d="M15 11 h9 v14 q0 6 -4.5 6 q-4.5 0 -4.5 -6 Z" fill="#E9D8B4" stroke="#2B2118" stroke-width="2"/><circle cx="31" cy="30" r="4" fill="#C0603A"/></svg><span class="an"><span class="L en">Cricket Bat</span><span class="L ta">மட்டை</span></span></div>
+      <div class="art" data-art="pot"><svg viewBox="0 0 40 40"><path d="M13 10 q7 -5 14 0 q3 10 -2 20 q-6 4 -10 0 q-5 -10 -2 -20" fill="#C0603A" stroke="#2B2118" stroke-width="2"/></svg><span class="an"><span class="L en">Clay Pot</span><span class="L ta">மண் பானை</span></span></div>
+      <div class="art" data-art="raga"><svg viewBox="0 0 40 40"><circle cx="12" cy="29" r="7.5" fill="#C0603A" stroke="#2B2118" stroke-width="2"/><circle cx="31" cy="9" r="4" fill="#C0603A" stroke="#2B2118" stroke-width="2"/><path d="M30 11 L14 26" stroke="#2B2118" stroke-width="3.4" stroke-linecap="round"/><path d="M31.5 12.5 L15.5 27.5" stroke="#E5A33C" stroke-width="1.2"/></svg><span class="an"><span class="L en">Veena</span><span class="L ta">வீணை</span></span></div>
+      <div class="art" data-art="patience"><svg viewBox="0 0 40 40"><rect x="14" y="7" width="12" height="15" rx="1.5" fill="none" stroke="#2B2118" stroke-width="2.4"/><rect x="15.5" y="9" width="9" height="5" fill="#7A4B3A"/><path d="M10 26 h20 v5 q0 3 -3 3 h-14 q-3 0 -3 -3 Z" fill="none" stroke="#2B2118" stroke-width="2.4"/></svg><span class="an"><span class="L en">Filter Coffee</span><span class="L ta">பில்டர் காபி</span></span></div>
+      <div class="art" data-art="question"><svg viewBox="0 0 40 40"><path d="M14 8 q6 -5 12 0" fill="none" stroke="#2B2118" stroke-width="2.4"/><rect x="11" y="10" width="18" height="6" rx="3" fill="#C0603A"/><rect x="11" y="18" width="18" height="6" rx="3" fill="#E5A33C"/><rect x="11" y="26" width="18" height="6" rx="3" fill="#C0603A"/></svg><span class="an"><span class="L en">Tiffin Box</span><span class="L ta">டிபன் பாக்ஸ்</span></span></div>
+      <div class="art" data-art="race"><svg viewBox="0 0 40 40"><path d="M12 7 h16 v5 q0 8 -8 10 q-8 -2 -8 -10 Z" fill="#E5A33C" stroke="#2B2118" stroke-width="2"/><path d="M12 9 q-6 1 -2 7 M28 9 q6 1 2 7" fill="none" stroke="#2B2118" stroke-width="2"/><rect x="17" y="22" width="6" height="5" fill="#C0603A"/><rect x="12" y="27" width="16" height="4" rx="1.5" fill="#7A4B3A"/></svg><span class="an"><span class="L en">Trophy</span><span class="L ta">கோப்பை</span></span></div>
+      <div class="art" data-art="sharing"><svg viewBox="0 0 40 40"><g fill="#C0603A"><circle cx="11" cy="11" r="2.6"/><circle cx="20" cy="11" r="2.6"/><circle cx="29" cy="11" r="2.6"/><circle cx="11" cy="20" r="2.6"/><circle cx="29" cy="20" r="2.6"/><circle cx="11" cy="29" r="2.6"/><circle cx="20" cy="29" r="2.6"/><circle cx="29" cy="29" r="2.6"/></g><path d="M20 13 q7 7 0 14 q-7 -7 0 -14" fill="none" stroke="#2E6E6A" stroke-width="2.4"/></svg><span class="an"><span class="L en">Kolam</span><span class="L ta">கோலம்</span></span></div>
+      <div class="art" data-art="well"><svg viewBox="0 0 40 40"><ellipse cx="20" cy="12" rx="7" ry="2.8" fill="none" stroke="#2B2118" stroke-width="2.4"/><path d="M13 12 q-2 4 0 7 q7 4 14 0 q2 -3 0 -7" fill="none" stroke="#2B2118" stroke-width="2.4"/><path d="M11 20 q9 7 18 0 q3 8 -2 12 q-7 4 -14 0 q-5 -4 -2 -12" fill="#E5A33C" stroke="#2B2118" stroke-width="2.4"/></svg><span class="an"><span class="L en">Kudam</span><span class="L ta">குடம்</span></span></div>
+  </div>
+  <div id="hpCardBox">
+    <p style="font-size:.9rem"><span class="L en">All twelve collected. The well is full.</span><span class="L ta">பன்னிரண்டும் சேர்ந்தன. கிணறு நிறைந்தது.</span></p>
+    <button class="wbtn" id="hpShareAch" type="button"><span class="L en">Share achievement</span><span class="L ta">சாதனையைப் பகிர</span></button>
+    <button class="wbtn alt" id="hpDlCard" type="button"><span class="L en">Share card image</span><span class="L ta">அட்டையைப் பகிர</span></button>
+  </div>
+</div>
+<div id="hpBloom"><div class="inner">
+  <h4><span class="L en">The well is full.</span><span class="L ta">கிணறு நிறைந்தது.</span></h4>
+  <p style="font-size:.95rem"><span class="L en">You played all twelve. The water rose to meet you.</span><span class="L ta">பன்னிரண்டையும் விளையாடினீர்கள். நீர் உங்களை நோக்கி ஊறியது.</span></p>
+  <div id="hpShareRow">
+    <button class="wbtn" id="hpBloomShare" type="button"><span class="L en">Share achievement</span><span class="L ta">சாதனையைப் பகிர</span></button>
+    <button class="wbtn alt" id="hpBloomDl" type="button"><span class="L en">Share card image</span><span class="L ta">அட்டையைப் பகிர</span></button>
+    <button class="wbtn alt" id="hpBloomClose" type="button"><span class="L en">Keep reading</span><span class="L ta">தொடர்ந்து படிக்க</span></button>
+  </div>
+</div></div>
+<div id="hpToast"></div>
+<canvas id="hpCanvas" width="1200" height="1200" style="display:none"></canvas>
+
+<script>
+(function(){
+  'use strict';
+  function $(id){ return document.getElementById(id); }
+  function isTa(){ return document.body.classList.contains('lang-ta'); }
+  function dual(en,ta){ return '<span class="L en">'+en+'</span><span class="L ta">'+ta+'</span>'; }
+  function pageUrl(){
+    var u = 'https://hariprav.in/comprehend-consume/';
+    return isTa() ? u+'?lang=ta' : u;
+  }
+
+  /* ================= aria-live for widget results ================= */
+  document.querySelectorAll('.note, .answer').forEach(function(el){ el.setAttribute('aria-live','polite'); });
+
+  /* ================= toast ================= */
+  var toastT=null;
+  function toast(en,ta){
+    var t=$('hpToast'); t.textContent = isTa()? ta : en;
+    t.classList.add('show'); clearTimeout(toastT);
+    toastT=setTimeout(function(){ t.classList.remove('show'); },2200);
+  }
+
+  /* ================= artifact collection ================= */
+  var ARTS=['dig','thumb','lamp','brick','match','pot','raga','patience','question','race','sharing','well'];
+  var got={};
+  try{ (JSON.parse(localStorage.getItem('hp-arts')||'[]')).forEach(function(k){ got[k]=1; }); }catch(e){}
+  var celebrated = false;
+  try{ celebrated = localStorage.getItem('hp-celebrated')==='1'; }catch(e){}
+
+  function count(){ return ARTS.filter(function(k){return got[k];}).length; }
+  function paint(){
+    var n=count();
+    var badge=$('hpBadge'); if(badge){ badge.textContent=n; }
+    var fill=$('hpProgFill'); if(fill){ fill.style.width=(n/ARTS.length*100)+'%'; }
+    ARTS.forEach(function(k){
+      var el=document.querySelector('[data-art="'+k+'"]');
+      if(el) el.classList.toggle('got', !!got[k]);
+    });
+    if(n===ARTS.length){ $('hpCardBox').classList.add('show'); }
+  }
+  function collect(k){
+    if(got[k]) return;
+    got[k]=1;
+    try{ localStorage.setItem('hp-arts', JSON.stringify(Object.keys(got))); }catch(e){}
+    paint();
+    var badge=$('hpBadge');
+    if(badge){ badge.classList.remove('pop'); void badge.offsetWidth; badge.classList.add('pop'); }
+    if(count()===ARTS.length && !celebrated){
+      celebrated=true;
+      try{ localStorage.setItem('hp-celebrated','1'); }catch(e){}
+      setTimeout(function(){ $('hpBloom').classList.add('show'); },900);
+    }
+  }
+
+  /* ---- completion hooks (observe, never modify, existing widgets) ---- */
+  function onResetVisible(id, art){
+    var el=$(id); if(!el) return;
+    new MutationObserver(function(){
+      if(el.style.display && el.style.display!=='none') collect(art);
+    }).observe(el,{attributes:true,attributeFilter:['style']});
+  }
+  onResetVisible('w1reset','dig');
+  onResetVisible('w2reset','thumb');
+  onResetVisible('w9reset','well');
+
+  var w3=$('w3range'); if(w3) w3.addEventListener('input',function(){ if(+w3.value===100) collect('lamp'); });
+  var w4b=$('w4bricks'); if(w4b) w4b.addEventListener('click',function(){
+    setTimeout(function(){
+      var all=w4b.querySelectorAll('.brick').length, fl=w4b.querySelectorAll('.brick.flipped').length;
+      if(all>0 && fl>=all) collect('brick');
+    },0);
+  });
+  var w5k=$('w5coach'); if(w5k) w5k.addEventListener('click',function(){ collect('match'); });
+  var chipsSeen={};
+  document.querySelectorAll('[data-chip]').forEach(function(c){
+    c.addEventListener('click',function(){
+      chipsSeen[c.getAttribute('data-chip')]=1;
+      if(Object.keys(chipsSeen).length>=3) collect('patience');
+    });
+  });
+  var w7n=$('w7now'); if(w7n) w7n.addEventListener('click',function(){ collect('question'); });
+  var w8=$('w8range'); if(w8) w8.addEventListener('input',function(){ if(+w8.value===+w8.max) collect('race'); });
+  var wMa=$('wMarch'); if(wMa) wMa.addEventListener('click',function(){ collect('pot'); });
+  document.querySelectorAll('[data-listen="3"]').forEach(function(b){
+    b.addEventListener('click',function(){ collect('raga'); });
+  });
+  var wG=$('wGgrid'); if(wG) wG.addEventListener('click',function(){
+    setTimeout(function(){
+      var all=wG.querySelectorAll('.gdot').length, lit=wG.querySelectorAll('.lit').length;
+      if(all>0 && lit>=all) collect('sharing');
+    },0);
+  });
+
+  /* ================= gauge = HUD ================= */
+  var gauge=$('gauge');
+  if(gauge){
+    gauge.removeAttribute('aria-hidden');
+    gauge.setAttribute('role','button');
+    gauge.setAttribute('tabindex','0');
+    gauge.setAttribute('aria-label','Reading progress and collected artifacts');
+    function openDrawer(){ $('hpDrawer').classList.add('open'); var s=$('hpScrim'); if(s) s.classList.add('show'); }
+    gauge.addEventListener('click',openDrawer);
+    gauge.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openDrawer(); }});
+  }
+  function hpCloseDrawer(){ $('hpDrawer').classList.remove('open'); var s=$('hpScrim'); if(s) s.classList.remove('show'); }
+  $('hpClose').addEventListener('click',hpCloseDrawer);
+  var hpScrimEl=$('hpScrim'); if(hpScrimEl) hpScrimEl.addEventListener('click',hpCloseDrawer);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ hpCloseDrawer(); $('hpBloom').classList.remove('show'); }});
+  $('hpBloomClose').addEventListener('click',function(){ $('hpBloom').classList.remove('show'); });
+
+  /* ---- chapter indicator in gauge ---- */
+  var TA_N=['·','௧','௨','௩','௪','௫','௬','௭','௮'];
+  var secs=[].slice.call(document.querySelectorAll('section[id^="ch"], [id^="ch"].chapter'));
+  if('IntersectionObserver' in window && secs.length){
+    var chIO=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){
+          var n=parseInt(e.target.id.replace('ch',''),10);
+          if(!isNaN(n)) $('gchap').innerHTML = dual(n===0?'·':String(n), TA_N[n]||'·');
+        }
+      });
+    },{rootMargin:'-40% 0px -55% 0px'});
+    secs.forEach(function(s){ chIO.observe(s); });
+  }
+
+  /* ================= sharing ================= */
+  var smenu=null;
+  function shareMenu(text,url){
+    if(!smenu){
+      smenu=document.createElement('div'); smenu.id='hpShareMenu';
+      smenu.innerHTML='<div class="inner"><button id="hpSmClose" type="button" aria-label="Close">×</button>'
+        +'<h5>'+dual('Share via','இதன் வழியாகப் பகிர')+'</h5>'
+        +'<a class="wbtn" id="smWa" target="_blank" rel="noopener">WhatsApp</a>'
+        +'<a class="wbtn alt" id="smX" target="_blank" rel="noopener">X (Twitter)</a>'
+        +'<a class="wbtn alt" id="smLi" target="_blank" rel="noopener">LinkedIn</a>'
+        +'<a class="wbtn alt" id="smFb" target="_blank" rel="noopener">Facebook</a>'
+        +'<button class="wbtn alt" id="smCopy" type="button">'+dual('Copy link','இணைப்பை நகல்')+'</button></div>';
+      document.body.appendChild(smenu);
+      $('hpSmClose').addEventListener('click',function(){ smenu.classList.remove('show'); });
+      smenu.addEventListener('click',function(e){ if(e.target===smenu) smenu.classList.remove('show'); });
+    }
+    var u=encodeURIComponent(url), t=encodeURIComponent(text);
+    $('smWa').href='https://wa.me/?text='+t+'%20'+u;
+    $('smX').href='https://twitter.com/intent/tweet?text='+t+'&url='+u;
+    $('smLi').href='https://www.linkedin.com/sharing/share-offsite/?url='+u;
+    $('smFb').href='https://www.facebook.com/sharer/sharer.php?u='+u;
+    $('smCopy').onclick=function(){
+      if(navigator.clipboard) navigator.clipboard.writeText(text+' '+url).then(function(){
+        toast('Link copied','இணைப்பு நகலெடுக்கப்பட்டது'); smenu.classList.remove('show');
+      });
+    };
+    smenu.classList.add('show');
+  }
+  function doShare(text, url){
+    var touch = window.matchMedia && matchMedia('(pointer: coarse)').matches;
+    if(navigator.share && touch){
+      navigator.share({title:document.title, text:text, url:url}).catch(function(){});
+    } else {
+      shareMenu(text, url);
+    }
+  }
+  // footer share buttons
+  var footer=document.querySelector('footer');
+  if(footer){
+    var row=document.createElement('div');
+    row.id='hpShareRow';
+    row.innerHTML =
+      '<button class="wbtn" id="hpShareBtn" type="button">'+dual('Share this essay','கட்டுரையைப் பகிர')+'</button>'+
+      '<a class="wbtn alt" id="hpWaBtn" target="_blank" rel="noopener">WhatsApp</a>'+
+      '<a class="wbtn alt" id="hpXBtn" target="_blank" rel="noopener">X</a>'+
+      '<a class="wbtn alt" id="hpLiBtn" target="_blank" rel="noopener">LinkedIn</a>'+
+      '<a class="wbtn alt" id="hpFbBtn" target="_blank" rel="noopener">Facebook</a>'+
+      '<button class="wbtn alt" id="hpCopyBtn" type="button">'+dual('Copy link','இணைப்பை நகல்')+'</button>';
+    footer.insertBefore(row, footer.querySelector('div'));
+    function shareText(){
+      return isTa() ? 'நாம் புரிந்துகொள்வதே நாம் நுகர்வது. ஓர் ஊடாடும் கட்டுரை:' : 'What we can comprehend is what we can consume. An interactive essay:';
+    }
+    function updateShareHrefs(){
+      var u=encodeURIComponent(pageUrl()), t=encodeURIComponent(shareText());
+      $('hpWaBtn').href='https://wa.me/?text='+t+'%20'+u;
+      $('hpXBtn').href='https://twitter.com/intent/tweet?text='+t+'&url='+u;
+      $('hpLiBtn').href='https://www.linkedin.com/sharing/share-offsite/?url='+u;
+      $('hpFbBtn').href='https://www.facebook.com/sharer/sharer.php?u='+u;
+    }
+    updateShareHrefs();
+    $('hpShareBtn').addEventListener('click',function(){ doShare(shareText(), pageUrl()); });
+    $('hpCopyBtn').addEventListener('click',function(){
+      if(navigator.clipboard) navigator.clipboard.writeText(pageUrl()).then(function(){ toast('Link copied','இணைப்பு நகலெடுக்கப்பட்டது'); });
+    });
+    [$('btnEn'),$('btnTa')].forEach(function(b){ if(b) b.addEventListener('click',updateShareHrefs); });
+  }
+  // share a thesis line
+  document.querySelectorAll('p.thesis').forEach(function(p){
+    var b=document.createElement('button');
+    b.type='button'; b.className='share-line';
+    b.innerHTML = dual('↗ share this line','↗ இந்த வரியைப் பகிர');
+    p.insertAdjacentElement('afterend', b);
+    b.addEventListener('click',function(){
+      var span = p.querySelector(isTa()?'.L.ta':'.L.en');
+      doShare('"'+(span?span.textContent.trim():p.textContent.trim())+'"', pageUrl());
+    });
+  });
+
+  /* ================= completion card ================= */
+  function makeCard(){
+    var cv=$('hpCanvas'), x=cv.getContext('2d'), W=1200;
+    var ta=isTa();
+    x.fillStyle='#F7F0E1'; x.fillRect(0,0,W,W);
+    // kolam dot border
+    var C=['#C0603A','#2E6E6A','#E5A33C','#4E5AA8'];
+    for(var i=0;i<28;i++){
+      var t=i/28*Math.PI*2;
+      x.beginPath(); x.arc(600+Math.cos(t)*520, 600+Math.sin(t)*520, 10, 0, 7);
+      x.fillStyle=C[i%4]; x.fill();
+    }
+    // well
+    x.strokeStyle='#2B2118'; x.lineWidth=14; x.lineJoin='round';
+    x.beginPath(); x.moveTo(480,430); x.lineTo(510,700); x.lineTo(690,700); x.lineTo(720,430); x.stroke();
+    x.fillStyle='#2E6E6A'; x.beginPath();
+    x.moveTo(496,480); x.lineTo(514,693); x.lineTo(686,693); x.lineTo(704,480); x.closePath(); x.fill();
+    x.strokeStyle='#F7F0E1'; x.lineWidth=6;
+    x.beginPath(); x.moveTo(560,545); x.quadraticCurveTo(600,528,640,545); x.stroke();
+    x.strokeStyle='#2B2118'; x.lineWidth=10;
+    x.beginPath(); x.moveTo(330,430); x.lineTo(470,430); x.moveTo(730,430); x.lineTo(870,430); x.stroke();
+    // text
+    x.fillStyle='#2B2118'; x.textAlign='center';
+    x.font = ta ? '600 64px "Noto Serif Tamil", serif' : 'italic 600 64px Georgia, serif';
+    x.fillText(ta?'நான் தோண்டினேன்.':'I dug the well.', 600, 300);
+    x.fillStyle='#C0603A';
+    x.font = ta ? '34px "Noto Serif Tamil", serif' : '34px Georgia, serif';
+    x.fillText(ta?'12 / 12 பொக்கிஷங்கள்':'12 / 12 artifacts collected', 600, 360);
+    var nm=''; try{ nm = localStorage.getItem('hp-name') || ''; }catch(e){}
+    if(nm){
+      x.fillStyle='#4E5AA8';
+      x.font = ta ? '38px "Noto Serif Tamil", serif' : 'italic 38px Georgia, serif';
+      x.fillText('\u2014 '+nm+' \u2014', 600, 418);
+    }
+    x.fillStyle='#2B2118';
+    x.font = ta ? '30px "Noto Serif Tamil", serif' : 'italic 30px Georgia, serif';
+    var q1 = ta?'அது ஒருபோதும் கடினம் இல்லை.':'It was never too hard.';
+    var q2 = ta?'விளக்கப்படாமல் இருந்தது, அவ்வளவே.':'It was only ever unexplained.';
+    x.fillText(q1, 600, 810); x.fillText(q2, 600, 856);
+    x.fillStyle='#2E6E6A'; x.font='28px Georgia, serif';
+    x.fillText('hariprav.in/comprehend-consume', 600, 960);
+    return cv;
+  }
+  function achieveText(){
+    return isTa()
+      ? 'பன்னிரண்டு பொக்கிஷங்களையும் சேர்த்து கிணற்றைத் தோண்டிவிட்டேன்! நீங்களும் படித்து விளையாடுங்கள்:'
+      : 'I collected all 12 artifacts and dug the well! Read and play the interactive essay:';
+  }
+  function shareAchievement(){ doShare(achieveText(), pageUrl()); }
+  function downloadCard(){
+    ensureName(function(){
+      makeCard().toBlob(function(blob){
+        var f = new File([blob],'i-dug-the-well.png',{type:'image/png'});
+        if(navigator.canShare && navigator.canShare({files:[f]})){
+          navigator.share({files:[f], text: achieveText()+' '+pageUrl()}).catch(function(){});
+        } else {
+          var a=document.createElement('a');
+          a.href=URL.createObjectURL(blob); a.download='i-dug-the-well.png';
+          document.body.appendChild(a); a.click(); a.remove();
+          toast('Card saved. Attach it when you share!','அட்டை சேமிக்கப்பட்டது. பகிரும் போது இணைக்கவும்!');
+        }
+      },'image/png');
+    });
+  }
+  [['hpShareAch',shareAchievement],['hpDlCard',downloadCard],['hpBloomShare',shareAchievement],['hpBloomDl',downloadCard]].forEach(function(p){
+    var b=$(p[0]); if(b) b.addEventListener('click',p[1]);
+  });
+
+  /* ================= song widget: hear it ================= */
+  (function(){
+    var chip=document.querySelector('[data-listen]');
+    if(!chip || !(window.AudioContext||window.webkitAudioContext)) return;
+    var host=chip.parentElement;
+    var btn=document.createElement('button');
+    btn.className='wbtn'; btn.id='wsPlay'; btn.type='button';
+    btn.innerHTML=dual('▶ Hear it','▶ கேளுங்கள்');
+    host.insertAdjacentElement('afterend',btn);
+    var ctx=null;
+    function level(){
+      var a=document.querySelector('[data-listen].active');
+      return a? +a.getAttribute('data-listen') : 1;
+    }
+    btn.addEventListener('click',function(){
+      if(!ctx) ctx=new (window.AudioContext||window.webkitAudioContext)();
+      if(ctx.state==='suspended') ctx.resume();
+      var n=level(), t0=ctx.currentTime+0.06;
+      var out=ctx.createGain(); out.gain.value=0.9;
+      var target=out;
+      if(n>=3){
+        var dl=ctx.createDelay(); dl.delayTime.value=0.34;
+        var fb=ctx.createGain(); fb.gain.value=0.32;
+        var wet=ctx.createGain(); wet.gain.value=0.28;
+        out.connect(dl); dl.connect(fb); fb.connect(dl); dl.connect(wet); wet.connect(ctx.destination);
+      }
+      out.connect(ctx.destination);
+      // melody: a gentle Kalyani-flavoured phrase (C D E F# G A)
+      var F={C:523.25,D:587.33,E:659.25,Fs:739.99,G:783.99,A:880.0,C6:1046.5};
+      var phrase=[[F.E,.32],[F.G,.32],[F.A,.45],[F.G,.32],[F.Fs,.32],[F.E,.45],[F.D,.32],[F.C,.7]];
+      var t=t0;
+      phrase.forEach(function(p,i){
+        var o=ctx.createOscillator(), g=ctx.createGain();
+        o.type='triangle'; o.frequency.setValueAtTime(p[0],t);
+        if(n>=2 && (i===2||i===5)){ // gamaka: bend into the note
+          o.frequency.setValueAtTime(p[0]*0.94,t);
+          o.frequency.exponentialRampToValueAtTime(p[0],t+0.12);
+        }
+        g.gain.setValueAtTime(0.0001,t);
+        g.gain.exponentialRampToValueAtTime(0.22,t+0.04);
+        g.gain.exponentialRampToValueAtTime(0.0001,t+p[1]);
+        o.connect(g); g.connect(target);
+        o.start(t); o.stop(t+p[1]+0.05);
+        t+=p[1];
+      });
+      if(n>=2){ // tanpura-like drone: C + G
+        [130.81,196.0].forEach(function(f){
+          var o=ctx.createOscillator(), g=ctx.createGain(), lp=ctx.createBiquadFilter();
+          o.type='sawtooth'; o.frequency.value=f;
+          lp.type='lowpass'; lp.frequency.value=420;
+          g.gain.setValueAtTime(0.0001,t0);
+          g.gain.exponentialRampToValueAtTime(0.045,t0+0.3);
+          g.gain.exponentialRampToValueAtTime(0.0001,t-0.05+0.6);
+          o.connect(lp); lp.connect(g); g.connect(ctx.destination);
+          o.start(t0); o.stop(t+0.7);
+        });
+      }
+    });
+  })();
+
+  /* ================= விளக்கு lamplight mode ================= */
+  var lt=$('langToggle');
+  if(lt){
+    var tb=document.createElement('button');
+    tb.type='button'; tb.id='themeBtn';
+    tb.setAttribute('aria-label','Toggle lamplight mode');
+    tb.textContent='🪔';
+    lt.appendChild(tb);
+    function setTheme(on, save){
+      document.body.classList.toggle('lamplight', on);
+      tb.classList.toggle('active', on);
+      tb.textContent = on ? '\u2600\ufe0f' : '\ud83e\ude94';
+      tb.setAttribute('aria-pressed', on ? 'true' : 'false');
+      var m=$('metaTheme'); if(m) m.setAttribute('content', on?'#201B31':'#F7F0E1');
+      if(save){ try{ localStorage.setItem('hp-theme', on?'lamp':'paper'); }catch(e){} }
+    }
+    tb.addEventListener('click',function(){ setTheme(!document.body.classList.contains('lamplight'), true); });
+    var pref=null;
+    try{ pref=localStorage.getItem('hp-theme'); }catch(e){}
+    if(pref==='lamp') setTheme(true,false);
+    else if(pref===null && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) setTheme(true,false);
+  }
+
+  /* ================= resets for all widgets ================= */
+  (function(){
+    function addReset(el, fn){
+      if(!el) return;
+      var w = el.closest('.widget'); if(!w || w.querySelector('.wreset')) return;
+      var b=document.createElement('button');
+      b.type='button'; b.className='wbtn alt wreset';
+      b.innerHTML='<span class="L en">\u21ba Reset</span><span class="L ta">\u21ba மீட்டமை</span>';
+      w.appendChild(b); b.addEventListener('click', fn);
+    }
+    function fire(el){ el.dispatchEvent(new Event('input',{bubbles:true})); }
+    var r3=$('w3range'); addReset(r3, function(){ r3.value=10; fire(r3); });
+    var c5=$('w5casual'); addReset(c5, function(){ c5.click(); });
+    var w6a=$('w6answer'), w6def=w6a?w6a.innerHTML:'';
+    addReset(w6a, function(){
+      if(w6a) w6a.innerHTML=w6def;
+      document.querySelectorAll('[data-chip]').forEach(function(c){ c.classList.remove('active'); });
+    });
+    var t7=$('w7then'); addReset(t7, function(){ t7.click(); });
+    var r8=$('w8range'); addReset(r8, function(){ r8.value=1; fire(r8); });
+    var mc=$('wMchild'); addReset(mc, function(){ mc.click(); });
+    var l1=document.querySelector('[data-listen="1"]'); addReset(l1, function(){ l1.click(); });
+    var wg=$('wGgrid');
+    addReset(wg, function(){
+      var dots=[].slice.call(wg.querySelectorAll('.gdot'));
+      dots.forEach(function(d){ d.classList.remove('lit'); });
+      if(dots.length) dots[Math.floor(dots.length/2)].classList.add('lit');
+      var n=$('wGnote'); if(n) n.innerHTML=dual('Reset. Tap the lit lamp to begin again.','மீட்டமைக்கப்பட்டது. மீண்டும் தொடங்க ஒளிரும் விளக்கைத் தட்டுங்கள்.');
+    });
+  })();
+
+  /* ================= your name ================= */
+  function getName(){ try{ return localStorage.getItem('hp-name')||''; }catch(e){ return ''; } }
+  function paintName(){
+    var b=$('hpName'); if(!b) return;
+    var n=getName();
+    b.innerHTML = n ? ('\u270e '+n) : dual('\u270e Add your name','\u270e உங்கள் பெயரைச் சேர்க்க');
+  }
+  var nameM=null, nameCb=null;
+  function openNameModal(cb){
+    nameCb=cb||null;
+    if(!nameM){
+      nameM=document.createElement('div'); nameM.id='hpNameM';
+      nameM.className=''; nameM.style.cssText='position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:75;background:rgba(43,33,24,.45);padding:1rem';
+      nameM.innerHTML='<div class="inner" style="background:var(--paper);border-radius:16px;padding:1.6rem 1.4rem;max-width:320px;width:100%;text-align:center">'
+        +'<h5 style="font-family:var(--tamil);color:var(--terra);margin-bottom:.8rem">'+dual('Your name for the card','அட்டைக்கு உங்கள் பெயர்')+'</h5>'
+        +'<input id="hpNameIn" maxlength="24" style="width:100%;padding:.6rem .8rem;border:2px solid var(--ink);border-radius:10px;background:var(--paper);color:var(--ink);font-family:inherit;font-size:1rem;text-align:center">'
+        +'<div style="display:flex;gap:.5rem;justify-content:center;margin-top:.9rem">'
+        +'<button class="wbtn" id="hpNameSave" type="button">'+dual('Save','சேமி')+'</button>'
+        +'<button class="wbtn alt" id="hpNameSkip" type="button">'+dual('Skip','தவிர்')+'</button></div></div>';
+      document.body.appendChild(nameM);
+      $('hpNameSave').addEventListener('click',function(){
+        var v=$('hpNameIn').value.trim();
+        if(v){ try{ localStorage.setItem('hp-name',v); }catch(e){} }
+        paintName(); nameM.style.display='none';
+        if(nameCb){ var c=nameCb; nameCb=null; c(); }
+      });
+      $('hpNameSkip').addEventListener('click',function(){
+        nameM.style.display='none';
+        if(nameCb){ var c=nameCb; nameCb=null; c(); }
+      });
+      nameM.addEventListener('click',function(e){ if(e.target===nameM){ nameM.style.display='none'; nameCb=null; } });
+    }
+    $('hpNameIn').value=getName();
+    nameM.style.display='flex';
+    setTimeout(function(){ $('hpNameIn').focus(); },50);
+  }
+  function ensureName(cb){ if(getName()) cb(); else openNameModal(cb); }
+  var hpNameBtn=$('hpName');
+  if(hpNameBtn) hpNameBtn.addEventListener('click',function(){ openNameModal(null); });
+  paintName();
+
+  /* ================= tea / UPI support ================= */
+  var teaA=$('supportTea'), teaM=null;
+  if(teaA){
+    teaA.addEventListener('click',function(e){
+      e.preventDefault();
+      if(!teaM){
+        teaM=document.createElement('div'); teaM.id='hpTea';
+        teaM.style.cssText='position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:75;background:rgba(43,33,24,.45);padding:1rem';
+        teaM.innerHTML='<div class="inner" style="background:var(--paper);border-radius:16px;padding:1.6rem 1.4rem;max-width:330px;width:100%;text-align:center;position:relative;max-height:92vh;overflow-y:auto">'
+          +'<button id="hpTeaClose" type="button" aria-label="Close" style="position:absolute;top:8px;right:12px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--ink)">×</button>'
+          +'<h5 style="font-family:var(--tamil);color:var(--terra);margin-bottom:.8rem">'+dual('Buy me a tea \u2615','ஒரு தேநீர் \u2615')+'</h5>'
+          +'<img class="qr" src="images/upi-qr.jpeg" alt="UPI QR code for Hari Pravin" loading="lazy">'
+          +'<div><span class="upiid" id="hpUpiId">hariij@okhdfcbank</span></div>'
+          +'<button class="wbtn alt" id="hpUpiCopy" type="button" style="font-size:.8rem;padding:.35rem 1rem">'+dual('Copy UPI ID','UPI ஐடியை நகல்')+'</button>'
+          +'<a class="wbtn" style="display:block;margin:.7rem auto .2rem;max-width:230px" href="upi://pay?pa=hariij@okhdfcbank&pn=Hari%20Pravin&cu=INR">'+dual('Open in UPI app','UPI ஆப்பில் திற')+'</a>'
+          +'<p class="tip">'+dual('Scan with any UPI app. On this phone? Long-press the QR to save it, then use "Scan from gallery" in GPay.','எந்த UPI ஆப்பிலும் ஸ்கேன் செய்யலாம். இதே போனில் இருந்தால், QR-ஐ நீண்ட அழுத்திச் சேமித்து, GPay-இல் "கேலரியிலிருந்து ஸ்கேன்" மூலம் தேர்வு செய்யுங்கள்.')+'</p>'
+          +'<a href="https://www.chai4.me/hari" target="_blank" rel="noopener" style="color:var(--teal);font-size:.85rem">'+dual('or pay via chai4.me/hari \u2192','அல்லது chai4.me/hari வழியாக \u2192')+'</a>'
+          +'</div>';
+        document.body.appendChild(teaM);
+        $('hpTeaClose').addEventListener('click',function(){ teaM.style.display='none'; });
+        teaM.addEventListener('click',function(ev){ if(ev.target===teaM) teaM.style.display='none'; });
+        $('hpUpiCopy').addEventListener('click',function(){
+          if(navigator.clipboard) navigator.clipboard.writeText('hariij@okhdfcbank').then(function(){
+            toast('UPI ID copied','UPI ஐடி நகலெடுக்கப்பட்டது');
+          });
+        });
+      }
+      teaM.style.display='flex';
+    });
+  }
+
+  /* ================= service worker ================= */
+  if('serviceWorker' in navigator && location.protocol==='https:'){
+    window.addEventListener('load',function(){
+      navigator.serviceWorker.register('./sw.js').catch(function(){});
+    });
+  }
+
+  paint();
 })();
 </script>
 </body>
