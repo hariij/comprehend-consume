@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- SEO Meta Tags -->
+<title>What We Can Comprehend Is What We Can Consume — Hari Pravin</title>
+<meta name="description" content="For most of history, understanding belonged to a few. Then, almost quietly, a patient teacher came within everyone's reach. An interactive, bilingual essay by Hari Pravin.">
+<meta name="keywords" content="Hari Pravin, AI, comprehension, Kural 396, bilingual essay, Tamil, English, interactive essay, education, technology">
+<meta name="author" content="Hari Pravin">
+
+<!-- Open Graph Meta Tags -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="What We Can Comprehend Is What We Can Consume">
+<meta property="og:description" content="An interactive bilingual essay on comprehension, AI, and the sand well of Kural 396. By Hari Pravin.">
+<meta property="og:image" content="images/01-hero-sand-well.jpeg">
+<meta property="og:image:width" content="2752">
+<meta property="og:image:height" content="1536">
+
+<!-- Twitter Card Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What We Can Comprehend Is What We Can Consume">
+<meta name="twitter:description" content="For most of history, understanding belonged to a few. Then, almost quietly, a patient teacher came within everyone's reach. An interactive, bilingual essay by Hari Pravin.">
+<meta name="twitter:image" content="images/01-hero-sand-well.jpeg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Lora:ital,wght@0,400;0,500;1,400&family=Noto+Serif+Tamil:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- Analytics -->
+<script data-goatcounter="https://comprehend-consume.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+
+<style>
+  :root{
+    --paper:#F7F0E1; --sand:#E9D8B4; --ink:#2B2118;
+    --terra:#C0603A; --teal:#2E6E6A; --gold:#E5A33C; --indigo:#4E5AA8;
+    --display:'Fraunces', Georgia, serif;
+    --body:'Lora', Georgia, serif;
+    --tamil:'Noto Serif Tamil', serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:var(--body); font-size:1.14rem; line-height:1.8;
+    -webkit-font-smoothing:antialiased;
+  }
+  body.lang-ta{font-family:var(--tamil); line-height:1.95}
+  ::selection{background:var(--teal);color:var(--paper)}
+
+  /* language visibility */
+  .L{display:none}
+  body.lang-en .L.en{display:inline}
+  body.lang-ta .L.ta{display:inline}
+  body.lang-en p.L.en, body.lang-en div.L.en{display:block}
+  body.lang-ta p.L.ta, body.lang-ta div.L.ta{display:block}
+
+  /* toggle pill */
+  #langToggle{
+    position:fixed; top:14px; right:14px; z-index:20;
+    display:flex; border:2px solid var(--ink); border-radius:999px;
+    background:var(--paper); overflow:hidden;
+    box-shadow:0 4px 14px rgba(43,33,24,.15);
+  }
+  #langToggle button{
+    border:none; background:none; cursor:pointer;
+    padding:.45rem 1rem; font-size:.9rem; color:var(--ink);
+    font-family:var(--tamil);
+  }
+  #langToggle button.active{background:var(--ink); color:var(--paper)}
+  #langToggle button:focus-visible{outline:3px solid var(--teal); outline-offset:-3px}
+
+  /* hero */
+  .hero{max-width:900px;margin:0 auto;padding:5rem 1.6rem 0;text-align:center}
+  .hero h1{
+    font-family:var(--display); font-weight:600;
+    font-size:clamp(1.9rem,5.2vw,3.3rem); line-height:1.2;
+    margin-bottom:1.2rem;
+  }
+  body.lang-ta .hero h1{font-family:var(--tamil)}
+  .hero h1 em{font-style:italic;color:var(--terra)}
+  .hero .dek{font-style:italic; font-size:clamp(1.02rem,2.3vw,1.26rem); opacity:.84; max-width:36em; margin:0 auto 2.2rem}
+  .byline{font-size:.82rem; letter-spacing:.14em; text-transform:uppercase; color:var(--terra); margin-bottom:2.4rem}
+  .byline a{color:var(--terra);text-decoration:none;border-bottom:1px dotted var(--terra)}
+
+  /* prose */
+  article{max-width:680px;margin:0 auto;padding:0 1.6rem 6rem}
+  article p{margin:0 0 1.5rem}
+  .thesis{
+    font-family:var(--display); font-style:italic; font-size:1.32em;
+    line-height:1.55; color:var(--teal); text-align:center; margin:2.6rem 0;
+  }
+  body.lang-ta .thesis{font-family:var(--tamil); font-style:normal}
+  .breath{
+    font-family:var(--display); font-size:1.2em; line-height:1.6;
+    text-align:center; margin:2.6rem auto; max-width:24em;
+  }
+  body.lang-ta .breath{font-family:var(--tamil)}
+  .dig{
+    font-family:var(--display); font-weight:600;
+    font-size:clamp(2.6rem,8vw,4.2rem); text-align:center; margin:2.6rem 0 1rem;
+  }
+  body.lang-ta .dig{font-family:var(--tamil)}
+
+  /* chapters */
+  .chapter{margin-top:5.6rem}
+  .eyebrow{display:flex; align-items:center; justify-content:center; gap:.9rem; margin-bottom:1rem}
+  .eyebrow .num{font-family:var(--tamil); color:var(--terra); font-size:1.45rem; font-weight:600}
+  .eyebrow .sep{width:34px;height:1px;background:var(--terra);opacity:.5}
+  .eyebrow .label{font-size:.78rem; letter-spacing:.15em; text-transform:uppercase; color:var(--terra)}
+  .chapter h2{
+    font-family:var(--display); font-weight:600; text-align:center;
+    font-size:clamp(1.45rem,3.5vw,2.05rem); line-height:1.3; margin-bottom:2.2rem;
+  }
+  body.lang-ta .chapter h2{font-family:var(--tamil)}
+
+  .kolamdiv{display:flex;justify-content:center;gap:14px;margin:3.8rem 0}
+  .kolamdiv span{width:7px;height:7px;border-radius:50%;background:var(--terra);opacity:.75}
+  .kolamdiv span:nth-child(2){background:var(--teal)}
+
+  /* figures */
+  figure{margin:2.6rem calc(50% - min(50vw, 450px))}
+  figure img{display:block;width:100%;height:auto;border-radius:6px;box-shadow:0 10px 34px rgba(43,33,24,.13)}
+  figcaption{text-align:center;font-style:italic;font-size:.92rem;opacity:.66;margin-top:.8rem;padding:0 1rem}
+  @media(max-width:940px){figure{margin:2.4rem -0.6rem}}
+
+  /* kural */
+  .kural{
+    display:block;width:100%;background:var(--sand);
+    border:none;border-radius:10px;border-left:5px solid var(--terra);
+    padding:1.6rem 1.6rem 1.2rem;margin:2.2rem 0;text-align:center;
+    font-family:inherit;color:var(--ink);
+  }
+  .kural:focus-visible{outline:3px solid var(--teal);outline-offset:3px}
+  .kural .verse{font-family:var(--tamil);font-size:1.16rem;line-height:2;display:block}
+  .kural .ref{display:block;font-size:.8rem;color:var(--terra);margin-top:.6rem;letter-spacing:.04em}
+  .kural .meaning{display:none;font-style:italic;font-size:1.02rem;line-height:1.75;margin-top:.9rem;padding-top:.9rem;border-top:1px dashed rgba(43,33,24,.25)}
+  body.lang-ta .kural .meaning{font-family:var(--tamil);font-style:normal}
+  body.lang-en .kural .meaning.en{display:block}
+  body.lang-ta .kural .meaning.ta{display:block}
+  .kural .ref.L{display:none}
+  body.lang-en .kural .ref.en{display:block}
+  body.lang-ta .kural .ref.ta{display:block}
+
+  /* widgets */
+  .widget{
+    position:relative; overflow:hidden;
+    background:#F2E8D2; border:1.5px solid rgba(43,33,24,.2); border-radius:14px;
+    padding:2rem 1.6rem 1.8rem; margin:2.6rem 0; text-align:center;
+  }
+  .widget::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;
+    background:linear-gradient(90deg,var(--terra),var(--gold),var(--teal),var(--indigo))}
+  .widget h3{
+    font-size:.8rem; letter-spacing:.15em; text-transform:uppercase;
+    color:var(--teal); margin-bottom:1.2rem; font-weight:600;
+  }
+  .widget .note{font-size:.95rem; font-style:italic; opacity:.8; margin-top:1rem; min-height:1.5em}
+  body.lang-ta .widget .note{font-style:normal}
+  .wbtn{
+    font-family:inherit; font-size:1rem; cursor:pointer;
+    background:var(--terra); color:var(--paper); border:none; border-radius:999px;
+    padding:.65rem 1.6rem; margin:.3rem;
+  }
+  .wbtn.alt{background:var(--paper); color:var(--ink); border:2px solid var(--ink)}
+  .wbtn.alt.active{background:var(--ink); color:var(--paper)}
+  .wbtn:focus-visible{outline:3px solid var(--teal); outline-offset:2px}
+  
+  /* Absolute Reset Button for Widgets */
+  .wreset {
+    display: none; position: absolute; top: 12px; right: 12px;
+    padding: 0.3rem 0.8rem; font-size: 0.75rem; z-index: 10;
+  }
+  
+  .widget input[type=range]{width:min(320px,80%); accent-color:var(--teal); margin:.6rem 0}
+  .widget svg{max-width:100%; height:auto; display:block; margin:0 auto}
+
+  /* wall bricks */
+  .bricks{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:440px;margin:0 auto}
+  .brick{
+    font-family:var(--tamil); border:2px solid var(--ink); border-radius:6px;
+    background:var(--paper); padding:.7rem .3rem; cursor:pointer; font-size:.92rem;
+    color:rgba(43,33,24,.55); transition:all .3s ease;
+  }
+  .brick.flipped{background:var(--teal); color:var(--paper); border-color:var(--teal)}
+  .brick:focus-visible{outline:3px solid var(--teal); outline-offset:2px}
+  .doorway{height:0; overflow:hidden; transition:height .8s ease}
+  .doorway.open{height:auto; min-height:2.4em}
+
+  /* chat */
+  .chips{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center}
+  .answer{
+    background:var(--paper); border-radius:12px; padding:1.1rem 1.2rem; margin-top:1.1rem;
+    text-align:left; font-size:1rem; min-height:3.5em; border:1.5px dashed rgba(43,33,24,.3);
+  }
+
+  /* race lamps */
+  .lamprow{display:flex; justify-content:center; align-items:flex-end; gap:10px; min-height:74px}
+  .lamp{width:26px}
+  .pool{height:14px; background:radial-gradient(ellipse at center, rgba(233,216,180,1), rgba(233,216,180,0)); border-radius:50%; margin:6px auto 0; transition:width .5s ease}
+
+  /* final dig */
+  #finalWell{width:150px}
+
+  /* reading well gauge */
+  #gauge{
+    position:fixed; right:14px; bottom:14px; z-index:15;
+    background:rgba(247,240,225,.92); border:1.5px solid rgba(43,33,24,.25);
+    border-radius:12px; padding:10px 12px 8px; text-align:center;
+    box-shadow:0 4px 14px rgba(43,33,24,.12);
+  }
+  #gauge svg{width:34px;height:58px;display:block;margin:0 auto}
+  #gauge .glabel{font-size:.66rem; letter-spacing:.1em; color:var(--terra); margin-top:4px; font-family:var(--tamil)}
+  @media(max-width:640px){#gauge{right:8px;bottom:8px;padding:8px 9px 6px}#gauge svg{width:26px;height:46px}}
+
+  /* floating tea button (3 lines) */
+  #supportTea {
+    position: fixed; left: 14px; bottom: 14px; z-index: 15;
+    background: rgba(247,240,225,.92); border: 1.5px solid rgba(43,33,24,.25);
+    border-radius: 12px; padding: 10px 14px; text-align: center;
+    box-shadow: 0 4px 14px rgba(43,33,24,.12); text-decoration: none;
+    color: var(--ink); transition: all 0.2s ease; backdrop-filter: blur(4px);
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  }
+  #supportTea:hover { transform: translateY(-3px); background: #F2E8D2; }
+  #supportTea .emoji-large { font-size: 1.6rem; line-height: 1; margin-bottom: 2px; }
+  #supportTea .line1 { font-size: 0.8rem; opacity: 0.9; font-weight: 500; }
+  #supportTea .line2 { font-size: 0.75rem; font-weight: 600; color: var(--teal); }
+  body.lang-ta #supportTea .line1, body.lang-ta #supportTea .line2 { font-family: var(--tamil); }
+  @media(max-width:640px){ #supportTea { left: 8px; bottom: 8px; padding: 8px 10px; } }
+
+  /* reveals */
+  .reveal{opacity:0; transform:translateY(20px); transition:opacity .8s ease, transform .8s ease}
+  .reveal.in{opacity:1; transform:none}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1; transform:none; transition:none}
+    .brick,.doorway,.pool{transition:none}
+  }
+
+  footer{border-top:1px solid rgba(43,33,24,.15); max-width:680px; margin:0 auto; padding:2.6rem 1.6rem 4.5rem; text-align:center; font-size:.95rem}
+  footer .share{font-style:italic; opacity:.8; margin-bottom:1.4rem}
+  body.lang-ta footer .share{font-style:normal}
+  footer a{color:var(--teal)}
+
+  .wbtn{transition:transform .15s ease}
+  .wbtn:hover{transform:translateY(-2px) scale(1.03)}
+  .brick.flipped{color:#F7F0E1}
+  .kdot{position:absolute;left:50%;top:45%;width:9px;height:9px;border-radius:50%;pointer-events:none;
+    animation:kpop 1.2s ease-out forwards}
+  @keyframes kpop{from{transform:translate(0,0) scale(.4);opacity:1}to{transform:translate(var(--dx),var(--dy)) scale(1.1);opacity:0}}
+  .mtag{position:absolute;background:var(--gold);color:var(--ink);padding:.28rem .75rem;border-radius:999px;
+    font-size:.82rem;opacity:0;transform:scale(.6);transition:all .45s ease;white-space:nowrap;box-shadow:0 3px 8px rgba(43,33,24,.15)}
+  .mtag.show{opacity:1;transform:scale(1)}
+  .mtag.child{background:var(--paper);border:2px dashed var(--terra)}
+  #wGgrid{display:grid;grid-template-columns:repeat(8,30px);gap:9px;justify-content:center;margin:0 auto}
+  .gdot{width:30px;height:30px;border-radius:50%;border:2px solid rgba(43,33,24,.5);background:var(--paper);
+    cursor:pointer;transition:all .3s ease;padding:0}
+  .gdot.lit{background:var(--gold);border-color:var(--gold);box-shadow:0 0 12px rgba(229,163,60,.75)}
+  .gdot:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+  @media (prefers-reduced-motion: reduce){.kdot{animation:none;opacity:0}.wbtn:hover{transform:none}}
+</style>
+</head>
+<body class="lang-en">
+
+<div id="langToggle" role="group" aria-label="Language">
+  <button id="btnEn" class="active" type="button">EN</button>
+  <button id="btnTa" type="button">தமிழ்</button>
+</div>
+
+<header class="hero">
+  <p class="byline" style="margin-bottom: 0.5rem;">
+    <span class="L en">An interactive essay</span><span class="L ta">சிந்திக்க வைக்கும் ஒரு ஊடாடும் கட்டுரை</span>
+  </p>
+  <p class="byline" style="margin-top: 0; margin-bottom: 2.4rem;">
+    <a href="https://hariprav.in">Hari Pravin</a>
+  </p>
+  
+  <h1>
+    <span class="L en">What We Can <em>Comprehend</em><br>Is What We Can <em>Consume</em></span>
+    <span class="L ta">நாம் <em>புரிந்துகொள்வதே</em><br>நாம் <em>நுகர்வது</em></span>
+  </h1>
+  <p class="dek">
+    <span class="L en">For most of history, understanding belonged to a few. Then, almost quietly, a patient teacher came within everyone's reach.</span>
+    <span class="L ta">வரலாற்றின் பெரும் பகுதி வரை, புரிதல் என்பது சிலருக்கு மட்டுமே சொந்தமாக இருந்தது. பிறகு, கிட்டத்தட்ட சத்தமே இல்லாமல், பொறுமையான ஒரு ஆசிரியர் எல்லார் கைக்கும் வந்து சேர்ந்தார்.</span>
+  </p>
+</header>
+
+<article>
+
+<figure class="reveal">
+  <img src="images/01-hero-sand-well.jpeg" alt="A hand-dug well in sand with teal water risen inside, a mambatti resting beside the dug-out heap of sand.">
+</figure>
+
+<!-- ============ PROLOGUE ============ -->
+<section class="chapter">
+  <div class="eyebrow"><span class="sep"></span><span class="label"><span class="L en">Prologue</span><span class="L ta">முன்னுரை</span></span><span class="sep"></span></div>
+  <h2><span class="L en">The Sand Well</span><span class="L ta">மணற்கேணி</span></h2>
+
+  <p class="reveal"><span class="L en">There is a Kural that has waited two thousand years for this exact moment.</span><span class="L ta">சரியாக இந்தக் கணத்திற்காகவே இரண்டாயிரம் ஆண்டுகளாகக் காத்திருந்த ஒரு குறள் உண்டு.</span></p>
+
+  <div class="kural reveal">
+    <span class="verse" lang="ta">தொட்டனைத் தூறும் மணற்கேணி மாந்தர்க்குக்<br>கற்றனைத் தூறும் அறிவு</span>
+    <span class="ref L ta">திருக்குறள் 396 · கல்வி அதிகாரம்</span><span class="ref L en">Thirukkural 396 · Chapter 40: Education</span>
+    <span class="meaning L en">Dig a well in sand, and water rises to meet your digging. Learn, and wisdom rises to meet your learning.</span>
+    <span class="meaning L ta">மணலில் தோண்டத் தோண்ட நீர் ஊறும். கற்கக் கற்க அறிவு ஊறும்.</span>
+  </div>
+
+  <p class="reveal"><span class="L en">Valluvar was not writing a pretty line. He was describing a law. The water is always there, under the sand, waiting. How much you get to drink depends on how deep you are able to dig.</span><span class="L ta">வள்ளுவர் இதை அழகுக்காக எழுதவில்லை. ஒரு விதியை எழுதினார். நீர் எப்போதும் அங்கேதான் இருக்கிறது, மணலுக்கு அடியில், காத்துக்கொண்டு. எவ்வளவு நீரைப் பருகுகிறோம் என்பது, நாம் எவ்வளவு ஆழம் தோண்டுகிறோம் என்பதைப் பொறுத்தது.</span></p>
+
+  <div class="widget reveal">
+    <button class="wbtn alt wreset" id="w1reset" type="button"><span class="L en">Reset</span><span class="L ta">மீண்டும்</span></button>
+    <h3><span class="L en">Try it yourself</span><span class="L ta">நீங்களே தோண்டிப் பாருங்கள்</span></h3>
+    <svg viewBox="0 0 240 170" width="240" aria-hidden="true">
+      <path d="M10 40 H80 M160 40 H230" stroke="#2B2118" stroke-width="4" stroke-linecap="round"/>
+      <path id="w1shaft" d="M80 40 L92 150 L148 150 L160 40" fill="#F7F0E1" stroke="#2B2118" stroke-width="4" stroke-linejoin="round"/>
+      <clipPath id="w1clip"><path d="M80 40 L92 150 L148 150 L160 40 Z"/></clipPath>
+      <rect id="w1water" x="78" y="150" width="84" height="0" fill="#2E6E6A" clip-path="url(#w1clip)"/>
+      <rect x="10" y="42" width="70" height="118" fill="#E9D8B4"/>
+      <rect x="160" y="42" width="70" height="118" fill="#E9D8B4"/>
+    </svg>
+    <div style="min-height: 45px; display: flex; align-items: center; justify-content: center;">
+      <button class="wbtn" id="w1btn" type="button"><span class="L en">Dig</span><span class="L ta">தோண்டு</span></button>
+    </div>
+    <p class="note" id="w1note"><span class="L en">Each dig makes the well deeper. Watch what the water does.</span><span class="L ta">ஒவ்வொரு தோண்டலுக்கும் கிணறு ஆழமாகும். நீர் என்ன செய்கிறது என்று பாருங்கள்.</span></p>
+  </div>
+
+  <p class="reveal"><span class="L en">This essay is about the digging.</span><span class="L ta">இந்தக் கட்டுரை அந்தத் தோண்டுதலைப் பற்றியது.</span></p>
+  <p class="reveal"><span class="L en">Because here is a quiet truth that sits under every library and every school in the world. The water was never the problem. The knowledge was always there. What we could actually take from it, drink from it, live on, was only as much as we could understand.</span><span class="L ta">ஏனெனில் உலகின் ஒவ்வொரு நூலகத்துக்கும், ஒவ்வொரு பள்ளிக்கும் அடியில் ஒரு அமைதியான உண்மை இருக்கிறது. நீர் ஒருபோதும் பிரச்சனை இல்லை. அறிவு எப்போதும் அங்கேதான் இருந்தது. அதிலிருந்து நாம் எடுத்தது, பருகியது, வாழ்ந்தது எல்லாமே, நாம் எந்த அளவு புரிந்துகொண்டோம் என்பதைப் பொறுத்து மட்டுமே அமைந்தது.</span></p>
+  <p class="thesis"><span class="L en">What we can comprehend is what we can consume.</span><span class="L ta">நாம் புரிந்துகொள்வதே நாம் நுகர்வது.</span></p>
+  <p class="reveal"><span class="L en">And for most of human history, the thing that helps us understand more, a patient someone who explains it again, slower, in our own words, in our own language, belonged to very few people.</span><span class="L ta">மனித வரலாற்றின் பெரும்பகுதியில், நமக்கு மேலும் புரிய வைக்கும் ஒன்று, பொறுமையாக, மெதுவாக, நம் சொந்த வார்த்தைகளில், நம் மொழியில் மறுபடி விளக்கும் ஒருவர், மிகச் சிலருக்கு மட்டுமே கிடைத்தார்.</span></p>
+  <p class="reveal"><span class="L en">AI did not create new knowledge. It changed who gets to understand the knowledge we already had.</span><span class="L ta">AI புதிய அறிவை உருவாக்கவில்லை. ஏற்கனவே இருந்த அறிவை யார் புரிந்துகொள்ளலாம் என்பதைத்தான் அது மாற்றியது.</span></p>
+  <p class="reveal"><span class="L en">That is the story that just changed.</span><span class="L ta">அந்தக் கதைதான் இப்போது மாறியிருக்கிறது.</span></p>
+</section>
+
+<div class="kolamdiv" aria-hidden="true"><span></span><span></span><span></span></div>
+
+<!-- ============ ONE ============ -->
+<section class="chapter">
+  <div class="eyebrow"><span class="num"><span class="L ta">௧</span><span class="L en">1</span></span><span class="sep"></span><span class="label"><span class="L en">Chapter One</span><span class="L ta">அத்தியாயம் ஒன்று</span></span></div>
+  <h2><span class="L en">The Woman Who Ran a House She Could Not Read</span><span class="L ta">படிக்கத் தெரியாமல் வீட்டை நடத்திய பெண்</span></h2>
+
+  <p class="reveal"><span class="L en">She could hold four festivals, two weddings, one funeral, and a full year of household accounts in her head. She knew which vendor cheated on rice, and by how many rupees. She could recite two hundred songs and place a proverb into a conversation like a surgeon placing a stitch.</span><span class="L ta">நான்கு திருவிழாக்கள், இரண்டு கல்யாணங்கள், ஒரு இழவு, ஒரு வருடத்து வீட்டுக் கணக்கு என எல்லாமே அவள் தலையிலேயே. எந்த வியாபாரி அரிசியில் எத்தனை ரூபாய்க்கு ஏமாற்றுகிறான் என்பது அவளுக்குத் தெரியும். இருநூறு பாட்டுகள் மனப்பாடம். ஒரு பழமொழியை உரையாடலில் சரியாக வைப்பாள், ஒரு அறுவை மருத்துவர் தையல் போடுவது போல.</span></p>
+  <p class="reveal"><span class="L en">She could not read the papers of the land she was born on.</span><span class="L ta">அவள் பிறந்த மண்ணின் பத்திரத்தை அவளால் படிக்க முடியவில்லை.</span></p>
+  <p class="reveal"><span class="L en">When it was time to sign, she pressed her thumb.</span><span class="L ta">கையெழுத்து போட வேண்டிய நேரம் வந்ததும், கட்டை விரலை அழுத்தினாள்.</span></p>
+  <p class="reveal"><span class="L en">She was the grandmother who ran the house.</span><span class="L ta">அந்த வீட்டை நடத்திய பாட்டி அவள்தான்.</span></p>
+
+  <figure class="reveal">
+    <img src="images/02-thumbprint.jpeg" alt="A terracotta thumbprint on a signature line, its ridge lines flowing outward into a blooming kolam.">
+    <figcaption><span class="L en">One thumbprint. Two hundred songs.</span><span class="L ta">ஒரு கைரேகை. இருநூறு பாட்டுகள்.</span></figcaption>
+  </figure>
+
+  <div class="widget reveal">
+    <button class="wbtn alt wreset" id="w2reset" type="button"><span class="L en">Reset</span><span class="L ta">மீண்டும்</span></button>
+    <h3><span class="L en">Press and hold the thumbprint</span><span class="L ta">கைரேகையை அழுத்திப் பிடியுங்கள்</span></h3>
+    <div id="w2area" style="position:relative;height:170px;max-width:420px;margin:0 auto;">
+      <button id="w2btn" class="wbtn" type="button" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:74px;height:92px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:var(--terra);font-size:.75rem;">
+        <span class="L en">hold</span><span class="L ta">பிடி</span>
+      </button>
+    </div>
+    <p class="note" id="w2note"><span class="L en">Hold it, and watch what was inside her all along.</span><span class="L ta">பிடித்திருங்கள். அவளுக்குள் எப்போதும் இருந்ததைப் பாருங்கள்.</span></p>
+  </div>
+
+  <p class="reveal"><span class="L en">Think about what that thumbprint means. The intelligence was never missing. It was overflowing. What was missing was one key, reading, that could turn all that intelligence into something she could use beyond her doorstep. The bank. The court. The newspaper. The medicine label. All of it sat one inch beyond her reach.</span><span class="L ta">அந்த ரேகை என்ன சொல்கிறது என்று யோசியுங்கள். புத்தி குறையவே இல்லை. நிரம்பி வழிந்தது. இல்லாமல் போனது ஒரே ஒரு சாவி, எழுத்து. அந்தச் சாவி இருந்திருந்தால், அந்தப் புத்தி வீட்டு வாசலைத் தாண்டியும் போயிருக்கும். வங்கி. நீதிமன்றம். செய்தித்தாள். மருந்துச் சீட்டு. எல்லாமே ஒரு அங்குல தூரத்தில் நின்றன.</span></p>
+  <p class="reveal"><span class="L en">Avvaiyar said it plainly.</span><span class="L ta">ஔவையார் இதைத் தெளிவாகவே சொன்னார்.</span></p>
+
+  <div class="kural reveal">
+    <span class="verse" lang="ta">கற்றது கைமண் அளவு, கல்லாதது உலகளவு</span>
+    <span class="ref L ta">ஔவையார் · தனிப்பாடல்</span><span class="ref L en">Avvaiyar · standalone verse</span>
+    <span class="meaning L en">What we have learned is a fistful of sand. What we have not learned is the size of the world.</span>
+    <span class="meaning L ta">கற்றது ஒரு கைப்பிடி மண். கல்லாதது உலகத்தின் அளவு.</span>
+  </div>
+
+  <p class="reveal"><span class="L en">Notice the sand, again. In Valluvar's line, sand hides the water. In Avvaiyar's, it measures how little of it we ever hold in one hand. Two poets, centuries apart, reaching for the same sand to describe the same pain.</span><span class="L ta">மீண்டும் மணலைப் பாருங்கள். வள்ளுவரின் வரியில், மணல் நீரை மறைக்கிறது. ஔவையின் வரியில், நாம் கையில் பிடிப்பது எவ்வளவு சிறியது என்று அளக்கிறது. இரு புலவர்கள், பல நூற்றாண்டுகள் இடைவெளியில், ஒரே மணலை எடுத்து ஒரே வலியைச் சொன்னார்கள்.</span></p>
+  <p class="reveal"><span class="L en">For most people who have ever lived, that fistful was small and the world was huge. And the gap between the two was not a gap in ability. It was a gap in access. She was not less. She was less served.</span><span class="L ta">வாழ்ந்த பெரும்பாலோருக்கு, இந்தக் கைப்பிடி சிறியது, உலகம் பெரியது. இரண்டுக்கும் இடையிலான இடைவெளி திறமையின் இடைவெளி இல்லை, அது வாய்ப்பின் இடைவெளி. அவள் குறைந்தவள் இல்லை. அவளுக்குக் கிடைத்ததுதான் குறைவு.</span></p>
+  <p class="reveal"><span class="L en">The world was full. She stood in front of it, and could take only what she was allowed to understand.</span><span class="L ta">உலகம் நிறைந்திருந்தது. அவள் அதன் முன் நின்றாள். எதைப் புரிந்துகொள்ள அனுமதிக்கப்பட்டாளோ, அதை மட்டுமே எடுத்துக்கொண்டாள்.</span></p>
+</section>
+
+<div class="kolamdiv" aria-hidden="true"><span></span><span></span><span></span></div>
+
+<!-- ============ TWO ============ -->
+<section class="chapter">
+  <div class="eyebrow"><span class="num"><span class="L ta">௨</span><span class="L en">2</span></span><span class="sep"></span><span class="label"><span class="L en">Chapter Two</span><span class="L ta">அத்தியாயம் இரண்டு</span></span></div>
+  <h2><span class="L en">The One Master in the Village</span><span class="L ta">ஊருக்கு ஒரே வாத்தியார்</span></h2>
+
+  <p class="reveal"><span class="L en">For centuries, the thing that grew our understanding was a person. Not a book. A person who could take what the book said and say it again, at your speed, for your confusion.</span><span class="L ta">நூற்றாண்டுகளாக, புரிதலை வளர்த்தது ஒரு மனிதர். புத்தகம் இல்லை. புத்தகம் சொன்னதை உங்கள் வேகத்தில், உங்கள் குழப்பம் தீர, மறுபடி சொல்லக்கூடிய ஒரு மனிதர்.</span></p>
+  <p class="reveal"><span class="L en">And that person was rare.</span><span class="L ta">அந்த மனிதர் அரிதானவர்.</span></p>
+  <p class="reveal"><span class="L en">There was one master in the village, if there was one at all. There was one bundle of palm leaves, kept dry, kept close, read aloud to a chosen circle. Whether you got near it depended on your caste, your money, and where you happened to be born. Learning did not travel to you. You travelled to it, if they let you in.</span><span class="L ta">ஊருக்கு ஒரே வாத்தியார், அதுவும் இருந்தால். ஒரே ஒரு ஓலைச்சுவடிக் கட்டு, ஈரம் படாமல், பத்திரமாக, தேர்ந்தெடுக்கப்பட்ட சிலருக்கு மட்டுமே வாசிக்கப்பட்டது. அதன் அருகில் போக முடியுமா என்பது உங்கள் சாதி, உங்கள் பணம், நீங்கள் பிறந்த இடம் இவற்றைப் பொறுத்தே அமைந்தது. கல்வி உங்களிடம் வரவில்லை. நீங்கள் தான் அதனிடம் போனீர்கள், அவர்கள் உங்களை அனுமதித்தால்.</span></p>
+
+  <figure class="reveal">
+    <img src="images/03-village-master.jpeg" alt="A single teacher on a platform reading palm leaves by one lamp to a small circle, while faint figures watch from far outside the light.">
+    <figcaption><span class="L en">One master. One lamp. One small circle.</span><span class="L ta">ஒரு வாத்தியார். ஒரு விளக்கு. ஒரு சிறிய வட்டம்.</span></figcaption>
+  </figure>
+
+  <div class="widget reveal">
+    <h3><span class="L en">How far can one lamp reach?</span><span class="L ta">ஒரு விளக்கு எவ்வளவு தூரம் எட்டும்?</span></h3>
+    <svg id="w3svg" viewBox="0 0 600 190" aria-hidden="true">
+      <circle id="w3glow" cx="300" cy="95" r="34" fill="#E9D8B4" opacity="0.9"/>
+      <rect x="292" y="70" width="16" height="40" rx="4" fill="#C0603A"/>
+      <path d="M300 62 q7 8 0 16 q-7 -8 0 -16" fill="#2E6E6A"/>
+    </svg>
+    <input id="w3range" type="range" min="0" max="100" value="10" aria-label="Lamp reach">
+    <p class="note" id="w3note"><span class="L en">Drag to brighten the lamp. Try to light everyone.</span><span class="L ta">இழுத்து விளக்கை வளர்த்துப் பாருங்கள். எல்லாரையும் ஒளியில் கொண்டு வர முயற்சி செய்யுங்கள்.</span></p>
+  </div>
+
+  <p class="reveal"><span class="L en">This is the real villain of the human story. Not stupidity. Shortage. Too few teachers. Too few translators. Too few mentors. Too few people with the time and patience to explain the hard thing one more time.</span><span class="L ta">மனிதக் கதையின் உண்மையான வில்லன் இது தான். முட்டாள்தனம் இல்லை. பற்றாக்குறை. வாத்தியார்கள் பற்றாக்குறை. மொழிபெயர்ப்பாளர்கள் பற்றாக்குறை. வழிகாட்டிகள் பற்றாக்குறை. கடினமான ஒன்றை இன்னொரு முறை விளக்கும் பொறுமை உள்ளவர்களின் பற்றாக்குறை.</span></p>
+  <p class="reveal"><span class="L en">The most serious form of this had a name and a price. The private tutor. When a king wanted his son to think like an emperor, he did not send him to a school. He bought a philosopher. A raja kept his court poets close, the way a modern company keeps its best engineers. One person's full attention, from a brilliant mind, was the most expensive thing in the education of the world. So it went only to people who could already afford everything else.</span><span class="L ta">இதன் மிகத் தீவிர வடிவத்துக்கு ஒரு பெயரும் விலையும் இருந்தது. தனி ஆசிரியர். ஒரு அரசன் தன் மகன் பேரரசனாக யோசிக்க வேண்டும் என்று விரும்பினால், அவனைப் பள்ளிக்கு அனுப்பவில்லை. ஒரு தத்துவஞானியை விலைக்கு வாங்கினான். இன்று ஒரு நிறுவனம் தன் சிறந்த பொறியாளர்களைத் தன்னோடு வைத்திருப்பது போல, ராஜா தன் அவைப் புலவர்களை அருகில் வைத்திருந்தான். ஒரு சிறந்த மூளையின் முழு கவனம் என்பது, உலகக் கல்வியிலேயே மிக விலை உயர்ந்த பொருள். அதனால் அது ஏற்கனவே அனைத்தையும் வாங்கக் கூடியவர்களுக்கே சென்றது.</span></p>
+  <p class="reveal"><span class="L en">Old Tamil has a line for what such a teacher meant. It began as the first line of the Vetrivetkai, a book of wisdom written by a Pandya king-poet a thousand years ago. Today, every Tamil child knows it by heart.</span><span class="L ta">இப்படிப்பட்ட ஆசிரியர் என்னவென்று பழந்தமிழ் ஒரு வரியில் சொல்கிறது. வெற்றிவேற்கையின் முதல் வரியாகப் பிறந்தது. ஆயிரம் ஆண்டுகளுக்கு முன் ஒரு பாண்டிய அரசக் கவிஞர் எழுதியது. இன்று ஒவ்வொரு தமிழ்க் குழந்தைக்கும் இது மனப்பாடம்.</span></p>
+
+  <div class="kural reveal">
+    <span class="verse" lang="ta">எழுத்தறிவித்தவன் இறைவன் ஆவான்</span>
+    <span class="ref L ta">வெற்றிவேற்கை (நறுந்தொகை) · முதல் வரி</span><span class="ref L en">Vetrivetkai (Narunthogai) · first line</span>
+    <span class="meaning L en">The one who taught you your letters becomes, to you, like god.</span>
+    <span class="meaning L ta">எழுத்து கற்றுத் தந்தவர், நமக்கு இறைவனுக்குச் சமம்.</span>
+  </div>
+
+  <p class="reveal"><span class="L en">Sit with how heavy that is. To be taught, personally, patiently, was so rare and so life-changing that the teacher was raised almost to the level of god. You do not say that about something ordinary. You say it about something you were lucky to receive and afraid to lose.</span><span class="L ta">அது எவ்வளவு கனமானது என்று சற்று யோசியுங்கள். தனியாக, பொறுமையாகக் கற்பிக்கப்படுவது எவ்வளவு அரிதாக, வாழ்க்கையையே மாற்றுவதாக இருந்தது என்றால், ஆசிரியர் கிட்டத்தட்ட கடவுள் நிலைக்கு உயர்த்தப்பட்டார். சாதாரண ஒன்றை நாம் அப்படிச் சொல்ல மாட்டோம். கிடைத்ததே பாக்கியம், இழந்துவிடுவோமோ என்ற பயம், அப்படிப்பட்ட ஒன்றைத்தான் அப்படிச் சொல்வோம்.</span></p>
+  <p class="reveal"><span class="L en">Understanding had a narrow door. And the door was a human being, who could be in only one place, teaching one small room, for one lifetime.</span><span class="L ta">புரிதலுக்கு ஒரு குறுகிய கதவு இருந்தது. அந்தக் கதவு ஒரு மனிதர். அவர் ஒரே இடத்தில்தான் இருக்க முடியும். ஒரு சிறிய அறைக்குத்தான் சொல்லிக்கொடுக்க முடியும். ஒரே ஒரு ஆயுள்தான்.</span></p>
+</section>
+
+<div class="kolamdiv" aria-hidden="true"><span></span><span></span><span></span></div>
+
+<!-- ============ THREE ============ -->
+<section class="chapter">
+  <div class="eyebrow"><span class="num"><span class="L ta">௩</span><span class="L en">3</span></span><span class="sep"></span><span class="label"><span class="L en">Chapter Three</span><span class="L ta">அத்தியாயம் மூன்று</span></span></div>
+  <h2><span class="L en">The Wall Made of Words</span><span class="L ta">சொற்களால் ஆன சுவர்</span></h2>
+
+  <p class="reveal"><span class="L en">Even when the door opened and a teacher appeared, one wall usually remained standing. Language.</span><span class="L ta">கதவு திறந்து ஆசிரியர் வந்த பிறகும், ஒரு சுவர் எஞ்சியிருந்தது. மொழி.</span></p>
+  <p class="reveal"><span class="L en">A boy in a Chennai neighborhood is quick. Everyone says so. He takes apart the ceiling fan and puts it back with a spare screw and an opinion. But the good material, the real explanations, the deep stuff, comes in English. So he hits the wall at the exact moment he is ready to fly. The idea is not too hard for him. The idea is in a language that was never his.</span><span class="L ta">சென்னையில் ஒரு பையன். படுசுட்டி. எல்லாரும் அப்படித்தான் சொல்வார்கள். மின்விசிறியைப் பிரித்து, ஒரு ஸ்பேர் ஸ்க்ரூவையும் ஒரு சொந்தக் கருத்தையும் வைத்து, மறுபடி பொருத்துவான். ஆனால் நல்ல பாடங்கள், உண்மையான விளக்கங்கள், ஆழமான விஷயங்கள் என எல்லாமே ஆங்கிலத்தில் வருகின்றன. பறக்கத் தயாரான அந்தக் கணத்தில் சுவரில் மோதுகிறான். அந்தக் கருத்தைப் புரிந்துகொள்வது அவனுக்குக் கடினமானது இல்லை. அது அவனுடைய மொழியில் சொல்லப்படாததே பிரச்சினை.</span></p>
+  <p class="reveal"><span class="L en">A farmer holds a printout that could save his crop. The science is right. The science is also in words he cannot enter.</span><span class="L ta">ஒரு விவசாயி கையில் ஒரு தாள். அதில் அவன் பயிரைக் காப்பாற்றும் அறிவியல். அறிவியல் சரியானது. ஆனால் அவனால் நுழைய முடியாத சொற்களில் இருக்கிறது.</span></p>
+  <p class="reveal"><span class="L en">Here is the cruel part. The wall of language does not stop the weak thinkers. It stops the strong ones, who were simply born on the wrong side of a translation. Intelligence with no doorway turns into frustration. Curiosity with no entry slowly gives up.</span><span class="L ta">இதில் தான் கொடுமை. மொழிச்சுவர் மந்தமான மூளைகளை நிறுத்துவதில்லை. மொழிபெயர்ப்பின் தவறான பக்கத்தில் பிறந்த கூர்மையான மூளைகளைத் தான் அது நிறுத்துகிறது. வாசல் இல்லாத புத்தி எரிச்சலாக மாறுகிறது. நுழைவாயில் இல்லாத ஆர்வம் மெல்ல மெல்லச் சரணடைகிறது.</span></p>
+
+  <p class="breath"><span class="L en">Technology speaks English.<br>Life does not.</span><span class="L ta">தொழில்நுட்பம் ஆங்கிலம் பேசுகிறது.<br>வாழ்க்கை பேசுவதில்லை.</span></p>
+
+  <figure class="reveal">
+    <img src="images/04-english-wall.jpeg" alt="A boy with a school bag stands before a brick wall of unreadable English text, while a teal doorway cracks open toward books, a river, and the sun.">
+  </figure>
+
+  <div class="widget reveal">
+    <h3><span class="L en">Tap the bricks. Turn them into your language.</span><span class="L ta">செங்கற்களைத் தட்டுங்கள். உங்கள் மொழியாக்குங்கள்.</span></h3>
+    <div class="bricks" id="w4bricks"></div>
+    <div class="doorway" id="w4door"><p class="note"><span class="L en">A doorway opens. The wall was never about your mind.</span><span class="L ta">ஒரு வாசல் திறக்கிறது. சுவர் ஒருபோதும் உங்கள் மூளையால் எழவில்லை.</span></p></div>
+    <p class="note" id="w4note"><span class="L en">Each brick is a locked idea. Tap to unlock.</span><span class="L ta">ஒவ்வொரு செங்கல்லும் பூட்டிய ஒரு யோசனை. தட்டித் திறங்கள்.</span></p>
+  </div>
+
+  <p class="reveal"><span class="L en">For millions of people, understanding was blocked not by their minds but by their mother tongue. So the world stayed huge, and the fistful stayed small, for no reason that had anything to do with how much they could have understood.</span><span class="L ta">கோடிக்கணக்கானோருக்கு, புரிதலைத் தடுத்தது மூளை இல்லை, தாய்மொழி. உலகம் பெரியதாகவே இருந்தது, கைப்பிடி சிறியதாகவே இருந்தது. அவர்களால் எவ்வளவு புரிந்திருக்க முடியும் என்பதற்கும் இதற்கும் எந்தச் சம்பந்தமும் இல்லை.</span></p>
+</section>
+
+<div class="kolamdiv" aria-hidden="true"><span></span><span></span><span></span></div>
+
+<!-- ============ FOUR ============ -->
+<section class="chapter">
+  <div class="eyebrow"><span class="num"><span class="L ta">௪</span><span class="L en">4</span></span><span class="sep"></span><span class="label"><span class="L en">Chapter Four</span><span class="L ta">அத்தியாயம் நான்கு</span></span></div>
+  <h2><span class="L en">Same Match, Different Game</span><span class="L ta">அதே ஆட்டம், வேறு பார்வை</span></h2>
+
+  <p class="reveal"><span class="L en">Step back from schools and books for a moment. Understanding decides far more than education.</span><span class="L ta">பள்ளிகளையும் புத்தகங்களையும் சற்றுத் தள்ளி வையுங்கள். புரிதல் என்பது கல்வியை விட நிறையவே தீர்மானிக்கிறது.</span></p>
+  <p class="reveal"><span class="L en">Two people watch the same T20 Cricket match. One sees sixes, noise, and a scoreboard in a hurry. The other sees the leg-spinner saved for the new left-hander. The long boundary guarded by one quiet field change. A dot ball in the nineteenth over that is worth more than a boundary in the fifth. Same match. One is watching fireworks. The other is watching a puzzle being solved at full speed.</span><span class="L ta">இருவர் ஒரே T20 போட்டியைப் பார்க்கிறார்கள். ஒருவர் சிக்ஸர்களையும், சத்தத்தையும், ஸ்கோர்போர்டையும் பார்க்கிறார். இன்னொருவர், புது இடதுகை பேட்ஸ்மேனுக்காக லெக்-ஸ்பின்னரைக் காத்து வைத்திருப்பதை, ஒரே ஒரு அமைதியான ஃபீல்டிங் மாற்றத்தால் நீண்ட பவுண்டரி காக்கப்படுவதை, ஐந்தாவது ஓவரின் பவுண்டரியை விட, பத்தொன்பதாவது ஓவரின் டாட் பாலுக்கு மதிப்பு அதிகம் என்பதை எல்லாம் பார்க்கிறார். அதே போட்டிதான். ஒருவர் வாணவேடிக்கை பார்க்கிறார். இன்னொருவர் முழு வேகத்தில் அவிழ்க்கப்படும் புதிரைப் பார்க்கிறார்.</span></p>
+
+  <figure class="reveal">
+    <img src="images/05-same-match.jpeg" alt="The same cricket ground drawn twice: fireworks and scattered figures on the left, tactical arrows and hidden strategy on the right.">
+    <figcaption><span class="L en">Same match. Two ways of seeing.</span><span class="L ta">அதே போட்டி. இரண்டு பார்வைகள்.</span></figcaption>
+  </figure>
+
+  <div class="widget reveal">
+    <h3><span class="L en">Whose eyes are you wearing?</span><span class="L ta">யாருடைய கண்களால் பார்க்கிறீர்கள்?</span></h3>
+    <div>
+      <button class="wbtn alt active" id="w5casual" type="button"><span class="L en">Casual eyes</span><span class="L ta">சாதாரணக் கண்</span></button>
+      <button class="wbtn alt" id="w5coach" type="button"><span class="L en">Coach's eyes</span><span class="L ta">கோச்சின் கண்</span></button>
+    </div>
+    <svg viewBox="0 0 480 200" aria-hidden="true" style="margin-top:1rem">
+      <ellipse cx="240" cy="110" rx="200" ry="72" fill="none" stroke="#2B2118" stroke-width="4"/>
+      <rect x="232" y="94" width="16" height="32" fill="#E9D8B4" stroke="#2B2118" stroke-width="2"/>
+      <g id="w5a">
+        <text x="150" y="60" font-size="26">✦</text><text x="330" y="52" font-size="20" fill="#C0603A">✦</text>
+        <text x="240" y="40" font-size="22" fill="#C0603A">✦</text>
+        <circle cx="150" cy="130" r="5" fill="#2B2118"/><circle cx="330" cy="120" r="5" fill="#2B2118"/>
+        <circle cx="240" cy="160" r="5" fill="#2B2118"/>
+      </g>
+      <g id="w5b" style="display:none">
+        <circle cx="120" cy="120" r="5" fill="#2B2118"/><circle cx="355" cy="95" r="5" fill="#2B2118"/>
+        <circle cx="300" cy="155" r="5" fill="#2B2118"/><circle cx="180" cy="80" r="5" fill="#2B2118"/>
+        <path d="M240 110 Q300 70 355 95" fill="none" stroke="#2E6E6A" stroke-width="2.5" stroke-dasharray="5 5"/>
+        <path d="M240 110 Q180 140 120 120" fill="none" stroke="#2E6E6A" stroke-width="2.5" stroke-dasharray="5 5"/>
+        <circle cx="355" cy="95" r="14" fill="none" stroke="#C0603A" stroke-width="2" stroke-dasharray="3 4"/>
+        <text x="372" y="88" font-size="11" fill="#C0603A" font-style="italic" class="L en">trap</text><text x="372" y="88" font-size="12" fill="#C0603A" class="L ta">பொறி</text>
+      </g>
+    </svg>
+    <p class="note" id="w5note"><span class="L en">Fireworks. Noise. A scoreboard in a hurry.</span><span class="L ta">வாணவேடிக்கை. சத்தம். அவசர ஸ்கோர்போர்டு.</span></p>
+  </div>
+
+  <p class="reveal"><span class="L en">Take two people into the same museum. An archaeologist and a six-year-old. Stand them before the same artifact. The archaeologist sees kingdoms, trade routes, wars, a whole technology of clay and fire. The child sees an old pot. Nothing about the pot changed. Only the understanding changed. So what they took from it changed.</span><span class="L ta">இருவரை ஒரே அருங்காட்சியகத்துக்குக் கூட்டிப் போங்கள். ஒருவர் தொல்லியல் ஆய்வாளர். இன்னொருவர் ஆறு வயது குழந்தை. ஒரே பழம்பொருளின் முன் நிற்க வையுங்கள். தொல்லியல் ஆய்வாளர் ராஜ்ஜியங்களைப் பார்க்கிறார், வணிகப் பாதைகளை, போர்களை, களிமண்ணும் நெருப்பும் சேர்ந்த ஒரு முழு தொழில்நுட்பத்தை. குழந்தை ஒரு பழைய பானையைப் பார்க்கிறது. பானையில் எதுவும் மாறவில்லை. புரிதல் மட்டுமே மாறியது. அதனால் அவர்கள் எடுத்துச் சென்றதும் மாறியது.</span></p>
+
+  <div class="widget reveal">
+    <h3><span class="L en">The same pot, two pairs of eyes</span><span class="L ta">அதே பானை, இரண்டு ஜோடி கண்கள்</span></h3>
+    <div>
+      <button class="wbtn alt active" id="wMchild" type="button"><span class="L en">A child's eyes</span><span class="L ta">குழந்தையின் கண்</span></button>
+      <button class="wbtn alt" id="wMarch" type="button"><span class="L en">Archaeologist's eyes</span><span class="L ta">தொல்லியலாளர் கண்</span></button>
+    </div>
+    <div id="wMstage" style="position:relative;height:200px;max-width:440px;margin:.6rem auto 0">
+      <svg viewBox="0 0 120 110" style="width:112px;position:absolute;left:50%;top:52%;transform:translate(-50%,-50%)" aria-hidden="true">
+        <path d="M35 20 q25 -14 50 0 q8 30 -6 62 q-19 10 -38 0 q-14 -32 -6 -62" fill="#C0603A" stroke="#2B2118" stroke-width="4"/>
+        <path d="M35 20 q25 10 50 0" fill="none" stroke="#2B2118" stroke-width="4"/>
+        <path d="M44 58 q16 8 32 0" fill="none" stroke="#F7F0E1" stroke-width="3" opacity=".7"/>
+      </svg>
+      <span class="mtag" style="left:2%;top:10%"><span class="L en">kingdoms</span><span class="L ta">ராஜ்ஜியங்கள்</span></span>
+      <span class="mtag" style="right:1%;top:22%"><span class="L en">trade routes</span><span class="L ta">வணிகப் பாதைகள்</span></span>
+      <span class="mtag" style="left:4%;bottom:16%"><span class="L en">wars</span><span class="L ta">போர்கள்</span></span>
+      <span class="mtag" style="right:3%;bottom:8%"><span class="L en">clay + fire</span><span class="L ta">களிமண் + நெருப்பு</span></span>
+      <span class="mtag child" style="left:50%;top:2%;transform:translateX(-50%)"><span class="L en">"an old pot."</span><span class="L ta">"பழைய பானை."</span></span>
+    </div>
+    <p class="note" id="wMnote"></p>
+  </div>
+  
+  <p class="reveal"><span class="L en">Play the same film song to two listeners. One hears a nice tune. The other hears the raga underneath it, the place where the singer bends a note the way her guru once did, a small phrase quietly bowing to a song from fifty years ago. Same three minutes. One took home a tune. The other took home a hundred years of music.</span><span class="L ta">ஒரே சினிமாப் பாட்டை இருவருக்குப் போடுங்கள். ஒருவருக்கு இனிமையான மெட்டு. இன்னொருவருக்கு அதன் அடியில் ஓடும் ராகம், பாடகி தன் குரு வளைத்தது போல் ஒரு ஸ்வரத்தை வளைக்கும் இடம், ஐம்பது ஆண்டு முந்தைய பாட்டுக்கு அமைதியாகத் தலைவணங்கும் ஒரு சிறு இசைத்துணுக்கு. அதே மூன்று நிமிடங்கள். ஒருவர் ஒரு மெட்டை எடுத்துச் சென்றார். இன்னொருவர் நூறு ஆண்டு இசையை.</span></p>
+
+  <div class="widget reveal">
+    <h3><span class="L en">Play the same song three times</span><span class="L ta">அதே பாட்டை மூன்று முறை கேளுங்கள்</span></h3>
+    <div>
+      <button class="wbtn alt active" data-listen="1" type="button"><span class="L en">1st listen</span><span class="L ta">முதல் முறை</span></button>
+      <button class="wbtn alt" data-listen="2" type="button"><span class="L en">2nd listen</span><span class="L ta">இரண்டாம் முறை</span></button>
+      <button class="wbtn alt" data-listen="3" type="button"><span class="L en">3rd listen</span><span class="L ta">மூன்றாம் முறை</span></button>
+    </div>
+    <svg viewBox="0 0 340 100" style="max-width:340px;margin-top:.8rem" aria-hidden="true">
+      <path d="M10 42 q20 -26 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" fill="none" stroke="#2B2118" stroke-width="3.5"/>
+      <g id="wSl2" style="opacity:0;transition:opacity .6s"><path d="M10 62 q20 -18 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" fill="none" stroke="#2E6E6A" stroke-width="3" stroke-dasharray="6 5"/></g>
+      <g id="wSl3" style="opacity:0;transition:opacity .6s"><path d="M10 80 q20 -12 40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0 t40 0" fill="none" stroke="#E5A33C" stroke-width="3" stroke-dasharray="2 6"/><text x="288" y="97" font-size="14" fill="#E5A33C">♫ ♫ ♫</text></g>
+    </svg>
+    <p class="note" id="wSnote"></p>
+  </div>
+  
+  <p class="reveal"><span class="L en">This is the wider law. We do not consume what is in front of us. We consume what we can understand of it. A painting, a contract, a diagnosis, a marriage, a market, a night sky. Each gives back exactly as much as you can understand of it. Not one drop more.</span><span class="L ta">இது தான் பரந்த விதி. நம் முன் இருப்பதை நாம் நுகர்வதில்லை. அதில் நாம் எதைப் புரிந்துகொண்டோமோ அதை மட்டுமே நுகர்கிறோம். ஓவியம், ஒப்பந்தம், மருத்துவ அறிக்கை, திருமணம், சந்தை, இரவு வானம். ஒவ்வொன்றும் நீங்கள் புரிந்த அளவே உங்களுக்குத் திருப்பித் தருகிறது. ஒரு துளி கூட அதிகம் இல்லை.</span></p>
+  <p class="thesis"><span class="L en">What we can comprehend is what we can consume.</span><span class="L ta">நாம் புரிந்துகொள்வதே நாம் நுகர்வது.</span></p>
+  <p class="reveal"><span class="L en">Which means the most valuable thing you can ever hand a person is not more things. It is a better pair of eyes.</span><span class="L ta">அதனால், ஒருவருக்கு நீங்கள் தரக்கூடிய மிக மதிப்பான பொருள், மேலும் பொருட்கள் இல்லை. இன்னும் நல்ல கண்கள்.</span></p>
+</section>
+
+<div class="kolamdiv" aria-hidden="true"><span></span><span></span><span></span></div>
+
+<!-- ============ FIVE ============ -->
+<section class="chapter">
+  <div class="eyebrow"><span class="num"><span class="L ta">௫</span><span class="L en">5</span></span><span class="sep"></span><span class="label"><span class="L en">Chapter Five</span><span class="L ta">அத்தியாயம் ஐந்து</span></span></div>
+  <h2><span class="L en">The Teacher in the Pocket</span><span class="L ta">பாக்கெட்டில் ஒரு ஆசிரியர்</span></h2>
+
+  <p class="reveal"><span class="L en">Now the auto driver's son.</span><span class="L ta">இப்போது ஆட்டோ ஓட்டுநரின் மகன்.</span></p>
+  <p class="reveal"><span class="L en">He has a phone that cost eight thousand rupees, and a data pack that costs less than a cup of filter coffee a day. And on that phone, for free, is something that would have made a king cry with envy.</span><span class="L ta">எட்டாயிரம் ரூபாய் போன். நாள் ஒன்றுக்கு ஒரு டம்ளர் பில்டர் காபியை விடக் குறைந்த விலையில் டேட்டா பேக். அந்த போனில், இலவசமாக, ஒரு அரசனையே பொறாமையில் அழ வைக்கும் ஒன்று.</span></p>
+  <p class="reveal"><span class="L en">A tutor that never runs out of patience.</span><span class="L ta">பொறுமை தீராத ஒரு ஆசிரியர்.</span></p>
+  <p class="reveal"><span class="L en">He types: explain compound interest like I am twelve, and in Tamil. It does. He types: now explain it like I am an expert. It does that too, in the same breath, without a sigh, without making him feel small for asking. At two in the morning, when the one master in the village would have been asleep for six hours, it is awake. When the English wall rises, it walks him through the gate in his own language, and never even mentions the wall.</span><span class="L ta">அவன் டைப் செய்கிறான்: கூட்டு வட்டியை எனக்குப் பன்னிரண்டு வயது என்று நினைத்து, தமிழில் விளக்கு. அது விளக்குகிறது. அடுத்து: இப்போது நான் நிபுணன் என்று நினைத்து விளக்கு. அதையும் அதே மூச்சில் செய்கிறது. பெருமூச்சு விடவில்லை. கேட்டதற்காக அவனைச் சிறுமைப்படுத்தவில்லை. இரவு இரண்டு மணிக்கு, ஊரின் ஒரே வாத்தியார் தூங்கி ஆறு மணி நேரம் ஆன பிறகு, இது விழித்திருக்கிறது. ஆங்கிலச் சுவர் எழும்பும் போது, அவன் மொழியிலேயே வாசல் வழியாக அழைத்துச் செல்கிறது. சுவரைப் பற்றிப் பேசவே இல்லை.</span></p>
+
+  <figure class="reveal">
+    <img src="images/06-teacher-in-pocket.jpeg" alt="A young man on a mat at night, his phone's glow rising in a teal stream that becomes a well of water above him.">
+    <figcaption><span class="L en">Two in the morning. The teacher is awake.</span><span class="L ta">இரவு இரண்டு மணி. ஆசிரியர் விழித்திருக்கிறார்.</span></figcaption>
+  </figure>
+
+  <div class="widget reveal">
+    <h3><span class="L en">Ask the same question, three ways</span><span class="L ta">ஒரே கேள்வி, மூன்று விதம்</span></h3>
+    <div class="chips">
+      <button class="wbtn alt" data-chip="kid" type="button"><span class="L en">Like I'm 12</span><span class="L ta">12 வயது போல</span></button>
+      <button class="wbtn alt" data-chip="pro" type="button"><span class="L en">Like an expert</span><span class="L ta">நிபுணர் போல</span></button>
+      <button class="wbtn alt" data-chip="again" type="button"><span class="L en">One more time</span><span class="L ta">இன்னொரு முறை</span></button>
+    </div>
+    <div class="answer" id="w6answer"><span class="L en">"Explain compound interest…" Pick a way of asking.</span><span class="L ta">"கூட்டு வட்டியை விளக்கு…" எப்படிக் கேட்பது என்று தேர்வு செய்யுங்கள்.</span></div>
+    <p class="note"><span class="L en">No sigh. No small feeling. Ever.</span><span class="L ta">பெருமூச்சு இல்லை. சிறுமை உணர்வு இல்லை. எப்போதும்.</span></p>
+  </div>
+
+  <p class="reveal"><span class="L en">Read that against everything before it.</span><span class="L ta">இதற்கு முன் சொன்ன எல்லாவற்றோடும் இதை வைத்துப் படியுங்கள்.</span></p>
+  <p class="reveal"><span class="L en">The intelligence the grandmother had, and could not release. The teacher the village could afford only one of. The language wall that stopped the quick boy at the door. All three, the locked door, the shortage, the wall, are beginning to crack. Against a thing that fits in a pocket, and asks nothing about your caste, your money, or your address.</span><span class="L ta">பாட்டிக்கு இருந்த, வெளியே வர முடியாத புத்தி. ஊருக்கு ஒன்றே ஒன்றாகக் கிடைத்த வாத்தியார். சுட்டிப் பையனை வாசலில் நிறுத்திய மொழிச்சுவர். மூன்றும், பூட்டிய கதவு, பற்றாக்குறை, சுவர் என மூன்றும் விரிசல் விடத் தொடங்கியிருக்கின்றன. பாக்கெட்டில் அடங்கும், உங்கள் சாதி, பணம், முகவரி எதையும் கேட்காத ஒன்றின் முன்.</span></p>
+  <p class="reveal"><span class="L en">It has not erased them. Walls this old do not fall in a decade. But for the first time, they are no longer impossible to move.</span><span class="L ta">அவை அழிந்துவிடவில்லை. இவ்வளவு பழைய சுவர்கள் பத்து ஆண்டில் விழாது. ஆனால் முதல் முறையாக, அவை அசைக்கவே முடியாதவை இல்லை.</span></p>
+  <p class="reveal"><span class="L en">This is not a small upgrade to search.</span><span class="L ta">இது தேடலுக்கு ஒரு சின்ன மேம்பாடு இல்லை.</span></p>
+
+  <p class="breath"><span class="L en">Search hands you the sea and lets you drown.<br>This meets you where you are and lifts you one step.</span><span class="L ta">தேடல் கடலைக் கையில் கொடுத்து மூழ்க விடுகிறது.<br>இது நீங்கள் நிற்கும் இடத்துக்கு வந்து, ஒரு படி தூக்கி விடுகிறது.</span></p>
+
+  <p class="reveal"><span class="L en">It does the exact thing the god-like teacher of the old line did. It takes what you do not understand, and says it again, for you, until you do. The difference is that it will do this for anyone, at any hour, in almost any tongue. And it does not care who your father was.</span><span class="L ta">வெற்றிவேற்கையின் முதல் வரியில் வரும் தெய்வ ஆசிரியர் செய்த அதே வேலையைச் செய்கிறது. உங்களுக்குப் புரியாததை எடுத்து, உங்களுக்காக, புரியும் வரை, மறுபடி சொல்கிறது. வித்தியாசம்: இதை யாருக்கும் செய்யும், எந்த நேரத்திலும், கிட்டத்தட்ட எந்த மொழியிலும். உங்கள் அப்பா யார் என்று அது கவலைப்படாது.</span></p>
+  <p class="reveal"><span class="L en">For the first time, the tool that grows understanding is not something you must be born rich, or born lucky, to reach.</span><span class="L ta">முதல் முறையாக, புரிதலை வளர்க்கும் கருவி, பணக்காரனாகவோ அதிர்ஷ்டசாலியாகவோ பிறந்தவர்களுக்கு மட்டும் இல்லை.</span></p>
+  <p class="reveal"><span class="L en">The well is no longer guarded. Everyone was handed a mambatti, the iron hoe.</span><span class="L ta">கிணற்றுக்கு இனி காவல் இல்லை. எல்லார் கையிலும் ஒரு மண்வெட்டி.</span></p>
+</section>
+
+<div class="kolamdiv" aria-hidden="true"><span></span><span></span><span></span></div>
+
+<!-- ============ SIX ============ -->
+<section class="chapter">
+  <div class="eyebrow"><span class="num"><span class="L ta">௬</span><span class="L en">6</span></span><span class="sep"></span><span class="label"><span class="L en">Chapter Six</span><span class="L ta">அத்தியாயம் ஆறு</span></span></div>
+  <h2><span class="L en">Appa, What Is Quantum Computing?</span><span class="L ta">அப்பா, குவாண்டம் கம்ப்யூட்டிங் என்றால் என்ன?</span></h2>
+
+  <p class="reveal"><span class="L en">Something quieter changes too. Not just what we learn, but who we learn it beside.</span><span class="L ta">இன்னும் அமைதியான ஒன்றும் மாறுகிறது. நாம் என்ன கற்கிறோம் என்பது மட்டும் இல்லை. யார் பக்கத்தில் அமர்ந்து கற்கிறோம் என்பதும்.</span></p>
+  <p class="reveal"><span class="L en">A mechanic's daughter looks up from her book. Appa, what is quantum computing?</span><span class="L ta">மெக்கானிக்கின் மகள் தன் புத்தகத்தைப் பார்த்துவிட்டு நிமிர்ந்து கேட்கிறாள். அப்பா, குவாண்டம் கம்ப்யூட்டிங் என்றால் என்ன?</span></p>
+
+  <div class="widget reveal">
+    <h3><span class="L en">The same question, twenty years apart</span><span class="L ta">அதே கேள்வி, இருபது ஆண்டு இடைவெளியில்</span></h3>
+    <div>
+      <button class="wbtn alt active" id="w7then" type="button"><span class="L en">20 years ago</span><span class="L ta">20 ஆண்டுகளுக்கு முன்</span></button>
+      <button class="wbtn alt" id="w7now" type="button"><span class="L en">Tonight</span><span class="L ta">இன்று இரவு</span></button>
+    </div>
+    <div class="answer" id="w7answer">
+      <span class="L en">"I don't know, kanna. Ask your teacher." <em>The conversation closes. The question goes home to die.</em></span>
+      <span class="L ta">"தெரியாது கண்ணா. உன் டீச்சரைக் கேள்." <em>உரையாடல் மூடுகிறது. கேள்வி வீட்டிலேயே சாகிறது.</em></span>
+    </div>
+  </div>
+
+  <p class="reveal"><span class="L en">Twenty years ago that sentence had one ending. I don't know, kanna. Ask your teacher. The conversation closed. The father, an expert in a hundred real things, was made small by the one question he could not answer. And the child learned early that home was where certain questions went to die.</span><span class="L ta">இருபது ஆண்டுகளுக்கு முன் அந்த வாக்கியத்துக்கு ஒரே முடிவு. தெரியாது கண்ணா. உன் டீச்சரைக் கேள். உரையாடல் மூடியது. நூறு உண்மையான விஷயங்களில் நிபுணரான அப்பா, பதில் தெரியாத ஒரே கேள்வியால் சிறியவரானார். சில கேள்விகள் சாக வீடு தான் இடம் என்று குழந்தை சீக்கிரமே கற்றுக்கொண்டது.</span></p>
+  <p class="reveal"><span class="L en">Tonight, he does not close it. He picks up the phone, and the two of them ask together. He does not understand all of it. Neither does she, yet. But they are leaning over the same small screen, working it out side by side. And something has shifted that is far bigger than quantum computing.</span><span class="L ta">இன்று இரவு, அவர் அதை மூடவில்லை. போனை எடுக்கிறார். இருவரும் சேர்ந்து கேட்கிறார்கள். அவருக்கு எல்லாம் புரியவில்லை. அவளுக்கும், இன்னும். ஆனால் ஒரே சின்னத் திரையை இருவரும் பார்த்து, பக்கம் அமர்ந்து விடையை அவிழ்த்துக் கொண்டிருக்கிறார்கள். குவாண்டம் கம்ப்யூட்டிங்கை விடப் பெரிய ஏதோ ஒரு மாற்றம் நிகழ்ந்திருக்கிறது.</span></p>
+  <p class="reveal"><span class="L en">The parent no longer has to know everything. He only has to know how to ask.</span><span class="L ta">பெற்றோருக்கு இனி எல்லாம் தெரிய வேண்டியதில்லை. எப்படிக் கேட்பது என்று தெரிந்தால் மட்டும் போதும்.</span></p>
+
+  <figure class="reveal">
+    <img src="images/07-appa-question.jpeg" alt="A father with grease-marked arms and his daughter leaning over one glowing phone, a question mark blooming into a kolam flower above them.">
+    <figcaption><span class="L en">He only has to know how to ask.</span><span class="L ta">எப்படிக் கேட்பது என்று தெரிந்தால் போதும்.</span></figcaption>
+  </figure>
+
+  <p class="reveal"><span class="L en">That is a new kind of respect. Not the one who holds all the answers. The one who is not afraid of the question. A child who grows up watching a parent stay curious in front of the unknown learns the most important lesson of this century, long before she learns the syllabus.</span><span class="L ta">இது புதிய வகை மரியாதை. எல்லாப் பதில்களையும் வைத்திருப்பவர் இல்லை. கேள்விக்குப் பயப்படாதவர். தெரியாததின் முன் ஆர்வத்தோடு நிற்கும் பெற்றோரைப் பார்த்து வளரும் குழந்தை, பாடத்திட்டத்துக்கு முன்பே இந்த நூற்றாண்டின் மிக முக்கியமான பாடத்தைக் கற்கிறது.</span></p>
+  <p class="reveal"><span class="L en">Now multiply that one kitchen table by a few hundred million homes.</span><span class="L ta">இந்த ஒரு சமையலறை மேசையை சில நூறு மில்லியன் வீடுகளால் பெருக்குங்கள்.</span></p>
+  <p class="reveal"><span class="L en">You are no longer looking at a clever product. You are looking at the world quietly changing how it passes understanding from one generation to the next.</span><span class="L ta">நீங்கள் பார்ப்பது ஒரு புத்திசாலி ப்ராடக்ட் இல்லை. தலைமுறையிலிருந்து தலைமுறைக்குப் புரிதலைக் கடத்தும் விதத்தை உலகம் அமைதியாக மாற்றுவதைப் பார்க்கிறீர்கள்.</span></p>
+</section>
+
+<div class="kolamdiv" aria-hidden="true"><span></span><span></span><span></span></div>
+
+<!-- ============ SEVEN ============ -->
+<section class="chapter">
+  <div class="eyebrow"><span class="num"><span class="L ta">௭</span><span class="L en">7</span></span><span class="sep"></span><span class="label"><span class="L en">Chapter Seven</span><span class="L ta">அத்தியாயம் ஏழு</span></span></div>
+  <h2><span class="L en">The Strange Kindness of a Race</span><span class="L ta">ஒரு பந்தயத்தின் விசித்திரக் கருணை</span></h2>
+
+  <p class="reveal"><span class="L en">Now the uncomfortable, wonderful question. Why is it nearly free?</span><span class="L ta">இப்போது சங்கடமான, அதே சமயம் அற்புதமான கேள்வி. ஏன் இது கிட்டத்தட்ட இலவசமாக இருக்கிறது?</span></p>
+  <p class="reveal"><span class="L en">Because a race is on. A handful of the most powerful companies on earth are in a sprint. And to win a sprint like this, you need people. Millions of them. Using your model, trusting your model, building a daily habit of your model. So the thing that would once have been the most expensive tutor in the world is being handed out at, or below, what it costs to run.</span><span class="L ta">ஏனென்றால் ஒரு பந்தயம் நடக்கிறது. உலகின் மிகச் சக்திவாய்ந்த நிறுவனங்களில் ஒரு சில ஓட்டத்தில் இருக்கின்றன. இப்படிப்பட்ட ஓட்டத்தில் வெல்ல, மனிதர்கள் வேண்டும். மில்லியன் கணக்கில். அவர்களின் மாடலைப் பயன்படுத்த, நம்ப, தினமும் பழக. அதனால், ஒரு காலத்தில் உலகின் மிக விலை உயர்ந்ததாக இருந்திருந்த ஒன்றை, அதை இயக்குவதற்கு எவ்வளவு செலவாகுமோ அதற்க்கோ, அல்லது அதற்குக் கீழேயோ கொடுக்கப்படுகிறது.</span></p>
+  <p class="reveal"><span class="L en">Let us be honest about the reason. This is not charity. It is competition. But for an ordinary household, the effect feels almost exactly like a gift.</span><span class="L ta">காரணத்தைப் பற்றி நேர்மையாக பேசுவோம். இது தொண்டு அல்ல. இது போட்டி. ஆனால் ஒரு சாதாரண குடும்பத்திற்கு, இதன் விளைவு கிட்டத்தட்ட பரிசு போலவே இருக்கிறது.</span></p>
+  <p class="reveal"><span class="L en">The same auto driver's mother, who dropped out of school at 11, holds up a hospital discharge summary and finally understands what was done to her body, and what the next thirty days require. She reads the fine print of a loan and sees the trap before she signs. No thumbprint. No blind trust in a stranger's honesty. A government form stops being a wall and becomes a conversation.</span><span class="L ta">அதே ஆட்டோ ஓட்டுநரின் அம்மா, பதினொன்றாம் வயதில் பள்ளியை விட்டவர், மருத்துவமனை டிஸ்சார்ஜ் சம்மரியை கையில் வைத்துக்கொண்டு, தன் உடலுக்கு என்ன செய்யப்பட்டது, அடுத்த முப்பது நாட்கள் என்ன செய்ய வேண்டும் என்று இறுதியாகப் புரிந்துகொள்கிறார். கடன் பத்திரத்தின் சின்ன எழுத்துக்களைப் படித்து, கையெழுத்திடும் முன்பே அதில் இருக்கும் சூட்சுமத்தைப் பார்க்கிறார். கட்டை விரல் ரேகை இல்லை. அந்நியரின் நேர்மையில் குருட்டு நம்பிக்கை இல்லை. அரசுப் படிவம் சுவராக இல்லாமல் உரையாடலாக மாறுகிறது.</span></p>
+  <p class="reveal"><span class="L en">Let us be just as honest about the tutor itself. It is not always right. It can be wrong with full confidence. It can invent things. It can flatten a delicate truth into a smooth lie that sounds correct. A calm teacher who is sometimes wrong is still, wrong. So understanding must always travel with its old companion, judgement. The mambatti digs the well. You still have to look at the water before you drink.</span><span class="L ta">ஆசிரியரைப் பற்றியும் அதே நேர்மையோடு பேசுவோம். இது எப்போதும் சரியாக இருப்பதில்லை. முழு நம்பிக்கையோடு தவறாகச் சொல்லும். இல்லாத விஷயங்களை உருவாக்கும். ஒரு நுட்பமான உண்மையை சரியானதென நாம் நம்பக்கூடிய பொய்யாக மாற்றும். சில சமயங்களில் தவறாக இருக்கும் ஒரு அமைதியான ஆசிரியர், தவறு செய்வதில்லை என்று கருத முடியாது. அதனால் புரிதல் எப்போதும் தன் பழைய துணையோடுதான் பயணிக்க வேண்டும். விவேகம். மண்வெட்டி கிணற்றைத் தோண்டும். குடிக்கும் முன் நீரை நீங்கள்தான் பார்க்க வேண்டும்.</span></p>
+  <p class="reveal"><span class="L en">That warning does not undo the change. It only asks us to be careful with it.</span><span class="L ta">அந்த எச்சரிக்கை மாற்றத்தை தடுப்பதற்கு அல்ல. கவனமாக இருக்கச் சொல்கிறது, அவ்வளவே.</span></p>
+  <p class="reveal"><span class="L en">And there is a second worry worth saying out loud. Today, competition has put extraordinary ability within reach of millions. Whether it stays there is not promised. Prices change. Business plans harden. What is given away to win a market can quietly become a luxury once the market is won.</span><span class="L ta">வெளிப்படையாகச் சொல்ல வேண்டிய இரண்டாவது கவலையும் உண்டு. இன்று, போட்டி அசாதாரண திறனை மில்லியன் கணக்கானோர் கைக்குக் கொண்டு வந்திருக்கிறது. அது அங்கேயே இருக்கும் என்பதற்கு எந்த உத்தரவாதமும் இல்லை. விலைகள் மாறும். வணிகத் திட்டங்கள் இறுகும். சந்தையை வெல்ல இலவசமாகக் கொடுத்தது, சந்தை வென்ற பிறகு அமைதியாக ஆடம்பரப் பொருளாகலாம்.</span></p>
+  <p class="reveal"><span class="L en">So let me state a hope, rather than a prediction.</span><span class="L ta">அதனால் ஒரு கணிப்பை விட, ஒரு நம்பிக்கையைச் சொல்கிறேன்.</span></p>
+  <p class="reveal"><span class="L en">That the race stays crowded and generous. That the best models remain within reach of people who count their rupees, through an honest free tier or a small and fair fee, instead of hiding behind a price only a few can pay. Because the moment the well gets a lid, the people who only just learned to drink from it will be the first to go thirsty.</span><span class="L ta">பந்தயம் நெரிசலாகவும் தாராளமாகவும் இருக்கட்டும். சிறந்த மாடல்கள், ரூபாயை எண்ணிச் செலவழிப்பவர்களின் கைக்கு எட்டும் தூரத்தில் இருக்கட்டும். நேர்மையான இலவச அடுக்கிலோ, சிறிய நியாயமான கட்டணத்திலோ கிடைக்கட்டும். ஒரு சிலரே கொடுக்கக்கூடிய விலைக்குப் பின்னால் ஒளியாமல். ஏனென்றால் கிணற்றுக்கு மூடி வந்த கணம், குடிக்கக் கற்றுக்கொண்டவர்கள்தான் முதலில் தாகத்தில் நிற்பார்கள்.</span></p>
+  <p class="reveal"><span class="L en">A race can be an ugly thing. This one, for now, is doing something close to beautiful. Long may it run. Long may it stay kind.</span><span class="L ta">போட்டி என்பது எப்போதும் நல்லதையே உருவாக்காது. இது, இப்போதைக்கு, மனிதகுலத்திற்கு ஒரு அழகான வாய்ப்பை உருவாக்கிக் கொண்டிருக்கிறது. இது நீண்ட காலம் தொடரட்டும். இந்தப் பெருந்தன்மையும், அனைவரையும் அரவணைக்கும் மனப்பான்மையும் மாறாமல் இருக்கட்டும்.</span></p>
+
+  <figure class="reveal">
+    <img src="images/08-race-of-lamps.jpeg" alt="Five traditional Tamil oil lamps racing forward, their separate glows merging into one shared pool of light where small figures sit reading.">
+    <figcaption><span class="L en">The race is theirs. The light is ours.</span><span class="L ta">பந்தயம் அவர்களுடையது. ஒளி நம்முடையது.</span></figcaption>
+  </figure>
+
+  <div class="widget reveal">
+    <h3><span class="L en">Add lamps to the race</span><span class="L ta">பந்தயத்தில் விளக்குகளைச் சேருங்கள்</span></h3>
+    <div class="lamprow" id="w8row"></div>
+    <div class="pool" id="w8pool" style="width:80px"></div>
+    <input id="w8range" type="range" min="1" max="5" value="1" aria-label="Number of lamps">
+    <p class="note" id="w8note"></p>
+  </div>
+</section>
+
+<div class="kolamdiv" aria-hidden="true"><span></span><span></span><span></span></div>
+
+<!-- ============ EIGHT ============ -->
+<section class="chapter">
+  <div class="eyebrow"><span class="num"><span class="L ta">௮</span><span class="L en">8</span></span><span class="sep"></span><span class="label"><span class="L en">Chapter Eight</span><span class="L ta">அத்தியாயம் எட்டு</span></span></div>
+  <h2><span class="L en">The Well Fills As You Dig</span><span class="L ta">தோண்டத் தோண்ட ஊறும் கிணறு</span></h2>
+
+  <p class="reveal"><span class="L en">Come back to Valluvar, and to the sand.</span><span class="L ta">வள்ளுவரிடம், மணலிடம், திரும்பி வாருங்கள்.</span></p>
+
+  <div class="kural reveal">
+    <span class="verse" lang="ta">தொட்டனைத் தூறும் மணற்கேணி மாந்தர்க்குக்<br>கற்றனைத் தூறும் அறிவு</span>
+    <span class="ref L ta">திருக்குறள் 396 · கல்வி அதிகாரம்</span><span class="ref L en">Thirukkural 396 · Chapter 40: Education</span>
+    <span class="meaning L en">Dig a well in sand, and water rises to meet your digging. Learn, and wisdom rises to meet your learning.</span>
+    <span class="meaning L ta">மணலில் தோண்டத் தோண்ட நீர் ஊறும். கற்கக் கற்க அறிவு ஊறும்.</span>
+
+  </div>
+
+  <p class="reveal"><span class="L en">The more you dig, the more rises to meet you. That was always true. What was never true, until now, is that nearly everyone could afford a mambatti.</span><span class="L ta">தோண்டத் தோண்ட, அதிகம் ஊறும். அது எப்போதும் உண்மை. இப்போது வரை உண்மை இல்லாதது: கிட்டத்தட்ட எல்லாராலும் ஒரு மண்வெட்டி வாங்க முடியும் என்பது.</span></p>
+  <p class="reveal"><span class="L en">So ask the question that matters. When understanding stops being the barrier, what does a society finally get to consume?</span><span class="L ta">அப்படியென்றால், முக்கியமான கேள்வியைக் கேளுங்கள். புரிதல் தடையாக இல்லாத போது, ஒரு சமூகம் இறுதியாக எதை நுகர்கிறது?</span></p>
+  <p class="reveal"><span class="L en">Not just facts. Facts were never the point.</span><span class="L ta">வெறும் தகவல்கள் இல்லை. தகவல்கள் ஒருபோதும் நோக்கம் இல்லை.</span></p>
+  <p class="reveal"><span class="L en">It gets to consume its own power to act.</span><span class="L ta">அது தன் சொந்த செயல் திறனையே நுகர்கிறது.</span></p>
+  <p class="reveal"><span class="L en">The patient who can finally question the doctor, instead of nodding along to words she was never allowed to understand.</span><span class="L ta">புரிந்துகொள்ள முடியாத (புரிய அனுமதிக்கப்படாத) சொற்களுக்குத் தலையாட்டாமல், இறுதியாக மருத்துவரை நோக்கி கேள்வி கேட்கும் நோயாளி.</span></p>
+  <p class="reveal"><span class="L en">The tenant who reads the agreement before he signs it, and sees the clause built to trap him.</span><span class="L ta">ஒப்பந்தத்தில் கையெழுத்திடும் முன் அதைப் படித்து, அவரை சிக்க வைப்பதற்காக கட்டப்பட்ட விதியைப் பார்க்கும் வாடகைதாரர்.</span></p>
+  <p class="reveal"><span class="L en">The girl in the small town who learns the thing her school never taught, and becomes the thing her town never imagined.</span><span class="L ta">பள்ளி கற்பிக்காததைக் கற்று, ஊர் கற்பனை செய்யாததாக மாறும் சிறு நகரத்துப் பெண்.</span></p>
+  <p class="reveal"><span class="L en">The farmer who reads the soil science. The citizen who reads the form. The boy who no longer stops at the English wall.</span><span class="L ta">மண்ணின் அறிவியலைப் படிக்கும் விவசாயி. அரசுப் படிவத்தைப் புரிந்துகொள்ளும் குடிமகன். ஆங்கிலம் என்ற சுவரை இனி தடையாகக் கருதாத சிறுவன்.</span></p>
+  <p class="reveal"><span class="L en">Valluvar again, on what kind of wealth this is.</span><span class="L ta">இது எந்த வகைச் செல்வம் என்று வள்ளுவர் கூற்றுப்படி.</span></p>
+
+  <div class="kural reveal">
+    <span class="verse" lang="ta">கேடில் விழுச்செல்வம் கல்வி ஒருவற்கு<br>மாடல்ல மற்றை யவை</span>
+    <span class="ref L ta">திருக்குறள் 400 · கல்வி அதிகாரம்</span><span class="ref L en">Thirukkural 400 · Chapter 40: Education</span>
+    <span class="meaning L en">Learning is the wealth that cannot rot and cannot be stolen. Everything else you call wealth is not.</span>
+    <span class="meaning L ta">கல்வி தான் அழியாத, திருட முடியாத செல்வம். மற்றவை செல்வமே இல்லை.</span>
+  </div>
+
+  <p class="reveal"><span class="L en">And here is the strangest thing about that wealth.</span><span class="L ta">அந்தச் செல்வத்தின் மிக விசித்திரமான குணம் இது.</span></p>
+  <p class="reveal"><span class="L en">Most wealth is a fight over a fixed pile. Land. Gold. Power. Titles. If I hold more, you hold less. That is the whole rule of it.</span><span class="L ta">பெரும்பாலான செல்வம் என்பது ஒரு குறிப்பிட்ட அளவைக் கைப்பற்றுவதற்கான சண்டை. நிலம். தங்கம். அதிகாரம். பட்டங்கள். நான் அதிகம் வைத்திருந்தால், நீங்கள் குறைவாக வைத்திருப்பீர்கள். அதன் மொத்த விதியும் அது தான்.</span></p>
+  <p class="reveal"><span class="L en">Understanding does not follow that rule. When one child understands algebra, mine does not become slower. When one farmer understands his soil, the farmer across the field loses nothing. Understanding is the rare wealth that grows without taking a single grain from anyone.</span><span class="L ta">புரிதல் அந்த விதிக்குக் கட்டுப்படாது. ஒரு குழந்தைக்கு அல்ஜீப்ரா புரிந்தால், என் குழந்தை மந்தமாகாது. ஒரு விவசாயிக்கு மண் புரிந்தால், இன்னொரு விவசாயி எதையும் இழப்பதில்லை. யாருடைய களஞ்சியத்திலிருந்தும் ஒரு மணியைக் கூட பறிக்காமல், அனைவரிடமும் பெருகிக் கொண்டே இருக்கும் அரிய செல்வம், புரிதல்.</span></p>
+  <p class="thesis"><span class="L en">A society that understands is the one economy where everybody can win at once.</span><span class="L ta">புரிந்துகொள்ளும் சமூகம் தான், எல்லாரும் ஒரே நேரத்தில் ஜெயிக்கக்கூடிய ஒரே பொருளாதாரம்.</span></p>
+
+  <div class="widget reveal">
+    <h3><span class="L en">Try to run out of understanding</span><span class="L ta">புரிதலைத் தீர்த்துவிட முயன்று பாருங்கள். முடியாது.</span></h3>
+    <div id="wGgrid"></div>
+    <p class="note" id="wGnote"></p>
+  </div>
+  <p class="reveal"><span class="L en">The grandmother pressed her thumb because the door was locked, and no one had ever handed her the key. Her great-grandchild types a question at midnight, in Tamil, and the door simply opens.</span><span class="L ta">கதவு பூட்டியிருந்ததால், சாவியை யாரும் தராததால், பாட்டி கட்டை விரலை அழுத்தினாள். அவள் கொள்ளுப்பேத்தி நள்ளிரவில், தமிழில், ஒரு கேள்வியை டைப் செய்கிறாள். கதவு திறக்கிறது.</span></p>
+  <p class="reveal"><span class="L en">For thousands of years, the world has created knowledge far faster than most of us could ever understand it. We built libraries we could not read, and archives we could not enter. AI may turn out to be the first tool that lets the world finally understand what it already knows.</span><span class="L ta">ஆயிரக்கணக்கான ஆண்டுகளாக, உலகம் நம்மில் பெரும்பாலோர் புரிந்துகொள்ளக்கூடியதை விட வேகமாக அறிவை உருவாக்கியது. படிக்க முடியாத நூலகங்களைக் கட்டினோம். நுழைய முடியாத ஆவணக் காப்பகங்களை. உலகம் ஏற்கனவே அறிந்ததை இறுதியாகப் புரிந்துகொள்ள வைக்கும் முதல் கருவியாக AI அமையலாம்.</span></p>
+  <p class="reveal"><span class="L en">The water was always beneath the sand.</span><span class="L ta">நீர் எப்போதும் மணலுக்கு அடியில் தான் இருந்தது.</span></p>
+  <p class="reveal"><span class="L en">We finally handed everyone a mambatti.</span><span class="L ta">இறுதியாக, எல்லார் கையிலும் ஒரு மண்வெட்டி.</span></p>
+
+  <p class="dig reveal" id="digWord"><span class="L en">Dig.</span><span class="L ta">தோண்டு.</span></p>
+
+  <div class="widget reveal">
+    <button class="wbtn alt wreset" id="w9reset" type="button"><span class="L en">Reset</span><span class="L ta">மீண்டும்</span></button>
+    <h3><span class="L en">One last thing. Hold to dig.</span><span class="L ta">கடைசியாக ஒன்று. அழுத்திப் பிடித்துத் தோண்டுங்கள்.</span></h3>
+    <svg id="finalWell" viewBox="0 0 150 120" aria-hidden="true">
+      <path d="M5 25 H40 M110 25 H145" stroke="#2B2118" stroke-width="4" stroke-linecap="round"/>
+      <path d="M40 25 L52 108 L98 108 L110 25" fill="#F7F0E1" stroke="#2B2118" stroke-width="4" stroke-linejoin="round"/>
+      <clipPath id="w9clip"><path d="M40 25 L52 108 L98 108 L110 25 Z"/></clipPath>
+      <rect id="w9water" x="38" y="108" width="74" height="0" fill="#2E6E6A" clip-path="url(#w9clip)"/>
+    </svg>
+    <div style="min-height: 45px; display: flex; align-items: center; justify-content: center;">
+      <button class="wbtn" id="w9btn" type="button"><span class="L en">Hold to dig</span><span class="L ta">அழுத்திப் பிடி</span></button>
+    </div>
+    <p class="note" id="w9note"></p>
+  </div>
+
+  <figure class="reveal">
+    <img src="images/09-dig-many-wells.jpeg" alt="Many hand-dug wells across the sand, each with risen water; men, women, a child and an elder at their own wells under one sun.">
+  </figure>
+</section>
+
+</article>
+
+<footer>
+  <p class="share">
+    <span class="L en">If this resonated, share it with someone who was once told a thing was too hard for them.<br>It was never too hard. It was only ever unexplained.</span>
+    <span class="L ta">இது மனதைத் தொட்டால், "உனக்கு இது கடினம்" என்று சொல்லப்பட்ட ஒருவரிடம் பகிருங்கள்.<br>அது ஒருபோதும் கடினம் இல்லை. விளக்கப்படாமல் இருந்தது, அவ்வளவே.</span>
+  </p>
+  <p><a href="https://hariprav.in">hariprav.in</a> &nbsp;·&nbsp; <a href="https://haripravin.medium.com">Medium</a></p>
+  
+  <div style="margin-top: 2.2rem; display: flex; justify-content: center;">
+    <img src="https://api.visitorbadge.io/api/visitors?path=hariprav.in%2Fcomprehend-consume&countColor=%232E6E6A" alt="Visitor Count">
+  </div>
+</footer>
+
+<!-- reading well gauge -->
+<div id="gauge" aria-hidden="true">
+  <svg viewBox="0 0 46 76">
+    <path d="M0 8 H10 M36 8 H46" stroke="#2B2118" stroke-width="3" stroke-linecap="round"/>
+    <path d="M8 8 L12 70 L34 70 L38 8" fill="#F7F0E1" stroke="#2B2118" stroke-width="3" stroke-linejoin="round"/>
+    <clipPath id="gclip"><path d="M8 8 L12 70 L34 70 L38 8 Z"/></clipPath>
+    <rect id="gwater" x="6" y="70" width="34" height="0" fill="#2E6E6A" clip-path="url(#gclip)"/>
+  </svg>
+  <div class="glabel"><span class="L en">DIG</span><span class="L ta">தோண்டு</span></div>
+</div>
+
+<!-- support tea floating button -->
+<a href="https://www.chai4.me/hari" target="_blank" id="supportTea">
+  <span class="emoji-large">☕</span>
+  <span class="line1"><span class="L en">Enjoying? Support</span><span class="L ta">பிடித்திருக்கிறதா?</span></span>
+  <span class="line2"><span class="L en">with a tea ☕</span><span class="L ta">ஒரு தேநீர் வாங்கிக் கொடுங்கள் ☕</span></span>
+</a>
+
+<script>
+(function(){
+  var TA_WORDS = ['அறிவு','கல்வி','கனவு','மருந்து','சட்டம்','விலை','மண்','நீர்','வானம்','கணக்கு','வேலை','உரிமை'];
+  var GIBBERISH = ['Ħø§γ','βĿΞ q','ĐπΛ ю','ЖفΨ','ΩŦҐ м','ξÐβ à','ЩλФ','ŊΞħ','ГΨĐ s','ΦЂΛ','ĿЖΩ è','ЯξŦ'];
+
+  // ---------- language ----------
+  var body = document.body, btnEn = document.getElementById('btnEn'), btnTa = document.getElementById('btnTa');
+  function setLang(l){
+    body.classList.toggle('lang-en', l==='en');
+    body.classList.toggle('lang-ta', l==='ta');
+    if(btnEn) btnEn.classList.toggle('active', l==='en');
+    if(btnTa) btnTa.classList.toggle('active', l==='ta');
+    document.documentElement.lang = l;
+    try{ localStorage.setItem('hp-lang', l); }catch(e){}
+    
+    // safe update of URL param for sharing
+    try {
+      var url = new URL(window.location);
+      url.searchParams.set('lang', l);
+      window.history.replaceState({}, '', url);
+    } catch(err) {
+      // Ignored for restricted sandboxes
+    }
+  }
+  if(btnEn) btnEn.addEventListener('click', function(){ setLang('en'); });
+  if(btnTa) btnTa.addEventListener('click', function(){ setLang('ta'); });
+  
+  // check URL parameters first for language, then fallback to localStorage
+  try{ 
+    var urlParams = new URLSearchParams(window.location.search);
+    var langParam = urlParams.get('lang');
+    if(langParam === 'ta' || langParam === 'en') {
+      setLang(langParam);
+    } else {
+      var saved = localStorage.getItem('hp-lang'); 
+      if(saved==='ta') setLang('ta');
+    }
+  }catch(e){}
+
+  // ---------- reveals ----------
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:0.08});
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+  document.querySelectorAll('.thesis').forEach(function(el){ el.classList.add('in'); });
+
+  // ---------- reading gauge ----------
+  var gwater = document.getElementById('gwater');
+  function gscroll(){
+    if(!gwater) return;
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    var p = max>0 ? Math.min(1, h.scrollTop/max) : 0;
+    var hh = 60*p;
+    gwater.setAttribute('y', 70-hh); gwater.setAttribute('height', hh);
+  }
+  document.addEventListener('scroll', gscroll, {passive:true}); gscroll();
+
+  // ---------- W1 prologue dig ----------
+  var w1d=0, w1water=document.getElementById('w1water'), w1note=document.getElementById('w1note'), w1reset=document.getElementById('w1reset');
+  var w1btn = document.getElementById('w1btn');
+  if(w1btn) {
+      w1btn.addEventListener('click', function(){
+        if(w1d<8){ w1d++; if(w1d===8) confetti(this.closest('.widget')); }
+        var hh = 13*w1d;
+        if(w1water) { w1water.setAttribute('y', 150-hh); w1water.setAttribute('height', hh); }
+        var en = w1d<8 ? 'Depth: '+w1d+' hand-spans. The water keeps rising to meet you.' : 'You dug. It rose. That is the whole law.';
+        var ta = w1d<8 ? 'ஆழம்: '+w1d+' சாண். நீர் உங்களை நோக்கி ஊறிக்கொண்டே இருக்கிறது.' : 'நீங்கள் தோண்டினீர்கள். அது ஊறியது. விதி இவ்வளவு தான்.';
+        if(w1note) w1note.innerHTML = '<span class="L en">'+en+'</span><span class="L ta">'+ta+'</span>';
+        if(w1d > 0 && w1reset) w1reset.style.display = 'block';
+      });
+  }
+  if(w1reset) {
+      w1reset.addEventListener('click', function(){
+        w1d = 0;
+        if(w1water) { w1water.setAttribute('y', 150); w1water.setAttribute('height', 0); }
+        if(w1note) w1note.innerHTML = '<span class="L en">Each dig makes the well deeper. Watch what the water does.</span><span class="L ta">ஒவ்வொரு தோண்டலுக்கும் கிணறு ஆழமாகும். நீர் என்ன செய்கிறது என்று பாருங்கள்.</span>';
+        this.style.display = 'none';
+      });
+  }
+
+  // ---------- W2 thumbprint hold ----------
+  var w2area=document.getElementById('w2area'), w2btn=document.getElementById('w2btn'), w2note=document.getElementById('w2note'), w2reset=document.getElementById('w2reset');
+  var w2timer=null, w2count=0, COLORS=['#C0603A','#2E6E6A','#2B2118'];
+  function w2spawn(){
+    if(w2count>=56) return;
+    w2count++;
+    if(w2count === 1 && w2reset) w2reset.style.display = 'block';
+    
+    var d=document.createElement('span');
+    var ang=Math.random()*6.283, r=52+Math.random()*130;
+    d.style.cssText='position:absolute;width:8px;height:8px;border-radius:50%;left:calc(50% + '+(Math.cos(ang)*r)+'px);top:calc(50% + '+(Math.sin(ang)*r*0.55)+'px);background:'+COLORS[w2count%3]+';';
+    if(w2area) w2area.appendChild(d);
+    if(w2count===40 && w2note){
+      w2note.innerHTML='<span class="L en">It was overflowing.</span><span class="L ta">நிரம்பி வழிந்தது.</span>';
+    }
+  }
+  function w2start(e){ e.preventDefault(); if(!w2timer) w2timer=setInterval(w2spawn,90); }
+  function w2stop(){ clearInterval(w2timer); w2timer=null; }
+  
+  if(w2btn) {
+      w2btn.addEventListener('pointerdown', w2start);
+      ['pointerup','pointerleave','pointercancel'].forEach(function(ev){ w2btn.addEventListener(ev, w2stop); });
+      w2btn.addEventListener('keydown', function(e){ if(e.key===' '||e.key==='Enter'){ for(var i=0;i<8;i++) w2spawn(); }});
+  }
+  if(w2reset) {
+      w2reset.addEventListener('click', function(){
+        if(w2timer) { clearInterval(w2timer); w2timer=null; }
+        w2count = 0;
+        if(w2area) {
+          var dots = w2area.querySelectorAll('span');
+          dots.forEach(function(d){ d.remove(); });
+        }
+        if(w2note) w2note.innerHTML = '<span class="L en">Hold it, and watch what was inside her all along.</span><span class="L ta">பிடித்திருங்கள். அவளுக்குள் எப்போதும் இருந்ததைப் பாருங்கள்.</span>';
+        this.style.display = 'none';
+      });
+  }
+
+  // ---------- W3 lamp reach ----------
+  var w3svg=document.getElementById('w3svg'), w3glow=document.getElementById('w3glow'), w3note=document.getElementById('w3note'), w3range=document.getElementById('w3range');
+  var figs=[];
+  if(w3svg && w3glow && w3note && w3range) {
+      for(var i=0;i<26;i++){
+        var x = 30+ (i*21.5)%540 + (i%3)*6, y = 40+((i*53)%130);
+        if(Math.abs(x-300)<40 && Math.abs(y-95)<40){ x+=90; }
+        var c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+        c.setAttribute('cx',x); c.setAttribute('cy',y); c.setAttribute('r',4.5);
+        c.setAttribute('fill','#D9C79E');
+        w3svg.appendChild(c); figs.push(c);
+      }
+      function w3update(){
+        var v=+w3range.value;
+        var r=34+v*1.5;
+        w3glow.setAttribute('r', r);
+        var lit=0;
+        figs.forEach(function(c){
+          var dx=c.getAttribute('cx')-300, dy=c.getAttribute('cy')-95;
+          var inside = Math.sqrt(dx*dx+dy*dy) < r;
+          c.setAttribute('fill', inside?'#2B2118':'#D9C79E');
+          if(inside) lit++;
+        });
+        var en, ta;
+        if(v<100){ en='In the light: '+lit+' of '+figs.length+'.'; ta='ஒளியில்: '+figs.length+'ல் '+lit+' பேர்.'; }
+        else { en='Even at its brightest: '+lit+' of '+figs.length+'. One lamp cannot reach a whole village.'; ta='முழு ஒளியிலும்: '+figs.length+'ல் '+lit+' பேர் தான். ஒரு விளக்கு ஒரு ஊரை எட்டாது.'; }
+        w3note.innerHTML='<span class="L en">'+en+'</span><span class="L ta">'+ta+'</span>';
+      }
+      w3range.addEventListener('input', w3update); w3update();
+  }
+
+  // ---------- W4 wall bricks (language-aware) ----------
+  var EN_WORDS=['KNOWLEDGE','SCHOOL','DREAM','MEDICINE','LAW','PRICE','SOIL','WATER','SKY','MATHS','WORK','RIGHTS'];
+  var FLIPC=['#2E6E6A','#E5A33C','#4E5AA8','#C0603A'];
+  var w4wrap=document.getElementById('w4bricks'), w4door=document.getElementById('w4door');
+  var w4flipped=0, w4list=[];
+  function w4word(i){ return body.classList.contains('lang-ta') ? TA_WORDS[i] : EN_WORDS[i]; }
+  if(w4wrap && w4door) {
+      GIBBERISH.forEach(function(g,idx){
+        var b=document.createElement('button');
+        b.type='button'; b.className='brick'; b.textContent=g;
+        b.addEventListener('click', function(){
+          if(b.classList.contains('flipped')) return;
+          b.classList.add('flipped'); b.textContent=w4word(idx);
+          b.style.background=FLIPC[idx%4]; b.style.borderColor=FLIPC[idx%4];
+          w4flipped++;
+          if(w4flipped===6){ w4door.classList.add('open'); confetti(w4wrap.closest('.widget')); }
+        });
+        w4list.push(b); w4wrap.appendChild(b);
+      });
+      [btnEn,btnTa].forEach(function(bt){ 
+          if(bt) bt.addEventListener('click', function(){
+             w4list.forEach(function(b,i){ if(b.classList.contains('flipped')) b.textContent=w4word(i); });
+          });
+      });
+  }
+
+  // ---------- W5 match eyes ----------
+  var w5a=document.getElementById('w5a'), w5b=document.getElementById('w5b');
+  var w5c=document.getElementById('w5casual'), w5k=document.getElementById('w5coach'), w5note=document.getElementById('w5note');
+  function w5set(coach){
+    if(w5a) w5a.style.display=coach?'none':'';
+    if(w5b) w5b.style.display=coach?'':'none';
+    if(w5c) w5c.classList.toggle('active',!coach); 
+    if(w5k) w5k.classList.toggle('active',coach);
+    if(w5note) {
+        w5note.innerHTML = coach
+          ? '<span class="L en">The leg-spinner waits. The long boundary is guarded. The trap is set.</span><span class="L ta">லெக்-ஸ்பின்னர் காத்திருக்கிறார். நீளமான பவுண்டரி காக்கப்படுகிறது. பொறி தயார்.</span>'
+          : '<span class="L en">Fireworks. Noise. A scoreboard in a hurry.</span><span class="L ta">வாணவேடிக்கை. சத்தம். அவசர ஸ்கோர்போர்டு.</span>';
+    }
+  }
+  if(w5c) w5c.addEventListener('click', function(){ w5set(false); });
+  if(w5k) w5k.addEventListener('click', function(){ w5set(true); });
+
+  // ---------- W6 patience chat ----------
+  var ANSWERS={
+    kid:{en:'"Imagine your money is a small snowball rolling downhill. Year one, your 100 earns 10. Year two, the whole 110 earns, not just the 100. The snow it gathered also gathers snow. That is compound interest."',
+         ta:'"உன் பணம் மலையிலிருந்து உருளும் சின்னப் பனிப்பந்து என்று வைத்துக்கொள். முதல் வருடம், உன் 100க்கு 10 கிடைக்கிறது. அடுத்த வருடம், 100க்கு மட்டும் இல்லை, மொத்த 110க்கும் கிடைக்கிறது. பந்து சேர்த்த பனியும் பனியைச் சேர்க்கிறது. இது தான் கூட்டு வட்டி."'},
+    pro:{en:'"A = P(1 + r/n)^(nt). Interest is periodically capitalised into principal, so growth is exponential in time, not linear. Rough doubling time: 72 divided by the rate."',
+         ta:'"A = P(1 + r/n)^(nt). வட்டி குறிப்பிட்ட இடைவெளியில் முதலோடு சேர்கிறது. அதனால் வளர்ச்சி நேர்கோடு இல்லை, அடுக்குக்குறி. தோராயமான இரட்டிப்பு காலம்: 72ஐ வட்டி விகிதத்தால் வகுக்கவும்."'},
+    again:{en:'"Of course. As many times as you need. That is the whole point of me."',
+           ta:'"கண்டிப்பாக. எத்தனை முறை வேண்டுமானாலும். அதற்குத் தான் நான் இருக்கிறேன்."'}
+  };
+  var w6ans=document.getElementById('w6answer');
+  if(w6ans) {
+      document.querySelectorAll('[data-chip]').forEach(function(chip){
+        chip.addEventListener('click', function(){
+          document.querySelectorAll('[data-chip]').forEach(function(c){ c.classList.remove('active'); });
+          chip.classList.add('active');
+          var a=ANSWERS[chip.getAttribute('data-chip')];
+          w6ans.innerHTML='<span class="L en">'+a.en+'</span><span class="L ta">'+a.ta+'</span>';
+        });
+      });
+  }
+
+  // ---------- W7 then/now ----------
+  var w7t=document.getElementById('w7then'), w7n=document.getElementById('w7now'), w7a=document.getElementById('w7answer');
+  function w7set(now){
+    if(w7t) w7t.classList.toggle('active',!now); 
+    if(w7n) w7n.classList.toggle('active',now);
+    if(w7a) {
+        w7a.innerHTML = now
+          ? '<span class="L en">"Come, let\'s ask together." <em>Two heads. One glowing screen. The question lives.</em></span><span class="L ta">"வா, சேர்ந்து கேட்போம்." <em>இரண்டு தலைகள். ஒரே ஒளிரும் திரை. கேள்வி உயிரோடு இருக்கிறது.</em></span>'
+          : '<span class="L en">"I don\'t know, kanna. Ask your teacher." <em>The conversation closes. The question goes home to die.</em></span><span class="L ta">"தெரியாது கண்ணா. உன் டீச்சரைக் கேள்." <em>உரையாடல் மூடுகிறது. கேள்வி வீட்டிலேயே சாகிறது.</em></span>';
+    }
+  }
+  if(w7t) w7t.addEventListener('click', function(){ w7set(false); });
+  if(w7n) w7n.addEventListener('click', function(){ w7set(true); });
+
+  // ---------- W8 race lamps ----------
+  var w8row=document.getElementById('w8row'), w8pool=document.getElementById('w8pool'), w8note=document.getElementById('w8note'), w8range=document.getElementById('w8range');
+  if(w8row && w8pool && w8note && w8range) {
+      function w8update(){
+        var n=+w8range.value;
+        w8row.innerHTML='';
+        for(var i=0;i<n;i++){
+          w8row.insertAdjacentHTML('beforeend',
+            '<svg class="lamp" viewBox="0 0 26 60"><rect x="10" y="20" width="6" height="30" rx="2" fill="#C0603A"/><rect x="4" y="50" width="18" height="6" rx="3" fill="#C0603A"/><ellipse cx="13" cy="18" rx="9" ry="4" fill="#C0603A"/><path d="M13 6 q5 6 0 12 q-5 -6 0 -12" fill="#2E6E6A"/></svg>');
+        }
+        w8pool.style.width=(60+n*70)+'px';
+        var readers=n*40;
+        w8note.innerHTML='<span class="L en">Reading in the shared light: '+readers+' million. The lamps compete. The light is common.</span><span class="L ta">பொது ஒளியில் படிப்பவர்கள்: '+readers+' மில்லியன். விளக்குகள் போட்டியிடுகின்றன. ஒளி எல்லாருக்கும்.</span>';
+      }
+      w8range.addEventListener('input', w8update); w8update();
+  }
+
+  // ---------- W9 final hold-to-dig ----------
+  var w9p=0, w9timer=null, w9water=document.getElementById('w9water'), w9note=document.getElementById('w9note'), w9done=false, w9reset=document.getElementById('w9reset');
+  var w9btn=document.getElementById('w9btn');
+  function w9tick(){
+    if(w9p<100){ w9p+=2.2;
+      var hh=Math.min(83, 83*w9p/100);
+      if(w9water) { w9water.setAttribute('y',108-hh); w9water.setAttribute('height',hh); }
+      if(w9p>0 && w9reset) w9reset.style.display = 'block';
+    } else if(!w9done){
+      w9done=true; clearInterval(w9timer); w9timer=null;
+      if(w9note) w9note.innerHTML='<span class="L en">The water came. It was waiting for you all along.</span><span class="L ta">நீர் வந்தது. உங்களுக்காகவே காத்திருந்தது.</span>';
+      if(w9btn) confetti(w9btn.closest('.widget'), 28);
+    }
+  }
+  
+  if(w9btn) {
+      w9btn.addEventListener('pointerdown', function(e){ e.preventDefault(); if(!w9timer && !w9done) w9timer=setInterval(w9tick,50); });
+      ['pointerup','pointerleave','pointercancel'].forEach(function(ev){ w9btn.addEventListener(ev, function(){ if(!w9done){ clearInterval(w9timer); w9timer=null; } }); });
+      w9btn.addEventListener('keydown', function(e){ if((e.key===' '||e.key==='Enter') && !w9done){ for(var i=0;i<10;i++) w9tick(); }});
+  }
+  if(w9reset) {
+      w9reset.addEventListener('click', function(){
+        if(w9timer) { clearInterval(w9timer); w9timer = null; }
+        w9p = 0; w9done = false;
+        if(w9water) { w9water.setAttribute('y', 108); w9water.setAttribute('height', 0); }
+        if(w9note) w9note.innerHTML = '';
+        this.style.display = 'none';
+      });
+  }
+  
+  // ---------- kolam confetti ----------
+  function confetti(host, n){
+    if(!host) return;
+    if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    n = n || 18;
+    var C=['#C0603A','#2E6E6A','#E5A33C','#4E5AA8'];
+    for(var i=0;i<n;i++){
+      var d=document.createElement('span');
+      d.className='kdot'; d.style.background=C[i%4];
+      d.style.setProperty('--dx', (Math.random()*240-120)+'px');
+      d.style.setProperty('--dy', (Math.random()*180-130)+'px');
+      host.appendChild(d);
+      (function(el){ setTimeout(function(){ el.remove(); }, 1300); })(d);
+    }
+  }
+
+  // ---------- museum: two pairs of eyes ----------
+  var wMc=document.getElementById('wMchild'), wMa=document.getElementById('wMarch');
+  if(wMc){
+    var mtags=[].slice.call(document.querySelectorAll('#wMstage .mtag'));
+    var wMnote=document.getElementById('wMnote');
+    var wMset=function(arch){
+      wMc.classList.toggle('active',!arch); if(wMa) wMa.classList.toggle('active',arch);
+      mtags.forEach(function(t,i){
+        var isChild=t.classList.contains('child');
+        var show = arch ? !isChild : isChild;
+        setTimeout(function(){ t.classList.toggle('show', show); }, (arch&&!isChild)? i*150 : 0);
+      });
+      if(wMnote) {
+          wMnote.innerHTML = arch
+            ? '<span class="L en">Same pot. Suddenly it is a library.</span><span class="L ta">அதே பானை. திடீரென்று அது ஒரு நூலகம்.</span>'
+            : '<span class="L en">"An old pot." Sweet. True. Tiny.</span><span class="L ta">"பழைய பானை." அழகு. உண்மை. சின்னது.</span>';
+      }
+    };
+    wMc.addEventListener('click',function(){wMset(false)});
+    if(wMa) wMa.addEventListener('click',function(){wMset(true)});
+    wMset(false);
+  }
+
+  // ---------- song: listen three times ----------
+  var wS=[].slice.call(document.querySelectorAll('[data-listen]'));
+  if(wS.length){
+    var wSnote=document.getElementById('wSnote');
+    var wSset=function(n){
+      wS.forEach(function(b){ b.classList.toggle('active', +b.getAttribute('data-listen')===n); });
+      var sl2 = document.getElementById('wSl2'); if(sl2) sl2.style.opacity = n>=2?1:0;
+      var sl3 = document.getElementById('wSl3'); if(sl3) sl3.style.opacity = n>=3?1:0;
+      var m = {1:['A nice tune.','இனிமையான மெட்டு.'],
+               2:['Now you hear the raga underneath.','இப்போது அடியில் ஓடும் ராகம் கேட்கிறது.'],
+               3:['A hundred years of music, in three minutes.','மூன்று நிமிடத்தில் நூறு ஆண்டு இசை.']}[n];
+      if(wSnote) wSnote.innerHTML='<span class="L en">'+m[0]+'</span><span class="L ta">'+m[1]+'</span>';
+    };
+    wS.forEach(function(b){ b.addEventListener('click', function(){ wSset(+b.getAttribute('data-listen')); }); });
+    wSset(1);
+  }
+
+  // ---------- share the light grid ----------
+  var wG=document.getElementById('wGgrid');
+  if(wG){
+    var COLS=8, ROWS=3, cells=[], wGnote=document.getElementById('wGnote'), wGdone=false;
+    var wGupdate=function(){
+      var lit=wG.querySelectorAll('.lit').length, total=COLS*ROWS;
+      if(lit>=total){
+        if(wGnote) wGnote.innerHTML='<span class="L en">All '+total+' are lit. And the first lamp lost nothing. That is this wealth.</span><span class="L ta">'+total+' பேருக்கும் ஒளி. முதல் விளக்கு எதையும் இழக்கவில்லை. இது தான் இந்தச் செல்வம்.</span>';
+        if(!wGdone){ wGdone=true; confetti(wG.closest('.widget'), 26); }
+      } else {
+        if(wGnote) wGnote.innerHTML='<span class="L en">Lit: '+lit+' of '+total+'. Tap any lit lamp to share what it knows. Notice: sharing never dims it.</span><span class="L ta">ஒளியில்: '+total+'ல் '+lit+'. ஒளிரும் விளக்கைத் தட்டிப் பகிருங்கள். பகிர்ந்தால் அது மங்குவதே இல்லை.</span>';
+      }
+    };
+    for(var gi=0; gi<COLS*ROWS; gi++){
+      (function(i){
+        var d=document.createElement('button'); d.type='button'; d.className='gdot';
+        d.setAttribute('aria-label','lamp '+(i+1));
+        d.addEventListener('click', function(){
+          if(!d.classList.contains('lit')) return;
+          var r=Math.floor(i/COLS), c=i%COLS;
+          [[r-1,c],[r+1,c],[r,c-1],[r,c+1]].forEach(function(p){
+            if(p[0]>=0 && p[0]<ROWS && p[1]>=0 && p[1]<COLS) cells[p[0]*COLS+p[1]].classList.add('lit');
+          });
+          wGupdate();
+        });
+        cells.push(d); wG.appendChild(d);
+      })(gi);
+    }
+    cells[12].classList.add('lit');
+    wGupdate();
+  }
+})();
+</script>
+</body>
+</html>
