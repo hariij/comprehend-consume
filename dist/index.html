@@ -28,8 +28,6 @@
 <meta name="twitter:description" content="For most of history, understanding belonged to a few. Then, almost quietly, a patient teacher came within everyone's reach. An interactive, bilingual essay by Hari Pravin.">
 <meta name="twitter:image" content="https://hariprav.in/comprehend-consume/images/01-hero-sand-well-og.jpg">
 
-<!-- Favicon -->
-<!-- <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💧</text></svg>"> -->
 <!-- Favicon: Digging Mambatti -->
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><path d=%22M75 10 Q60 15 50 30%22 fill=%22none%22 stroke=%22%23E9D8B4%22 stroke-width=%223%22 stroke-dasharray=%224 4%22 stroke-linecap=%22round%22/><path d=%22M85 15 L38 58%22 stroke=%22%237A4B3A%22 stroke-width=%228%22 stroke-linecap=%22round%22/><circle cx=%2238%22 cy=%2258%22 r=%225%22 fill=%22%235D6D7E%22/><path d=%22M28 50 Q38 45 46 50 L40 82 Q28 88 16 82 Z%22 fill=%22%2395A5A6%22 stroke=%22%235D6D7E%22 stroke-width=%222%22 stroke-linejoin=%22round%22/><path d=%22M-5 100 Q20 70 40 100 Z%22 fill=%22%23E5A33C%22/><path d=%22M15 100 Q40 60 60 100 Z%22 fill=%22%23E9D8B4%22/><path d=%22M35 100 Q55 75 75 100 Z%22 fill=%22%23C0603A%22/><circle cx=%2212%22 cy=%2265%22 r=%224%22 fill=%22%23E5A33C%22/><circle cx=%2255%22 cy=%2262%22 r=%225%22 fill=%22%23E9D8B4%22/><circle cx=%2230%22 cy=%2258%22 r=%223%22 fill=%22%23E9D8B4%22/><circle cx=%2248%22 cy=%2278%22 r=%223.5%22 fill=%22%23C0603A%22/><circle cx=%2268%22 cy=%2282%22 r=%223%22 fill=%22%23E5A33C%22/></svg>">
 
@@ -79,6 +77,32 @@
   }
   #langToggle button.active{background:var(--ink); color:var(--paper)}
   #langToggle button:focus-visible{outline:3px solid var(--teal); outline-offset:-3px}
+
+  /* chapter navigation scroller */
+  #chapNav {
+    position: fixed; right: 18px; top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 12px; z-index: 25;
+  }
+  .navdot {
+    width: 8px; height: 8px; border-radius: 50%; background: rgba(43,33,24,.25);
+    transition: all 0.3s ease; position: relative; text-decoration: none;
+  }
+  .navdot.active { background: var(--teal); transform: scale(1.4); }
+  .navdot:hover { transform: scale(1.4); background: var(--terra); }
+  .navdot span {
+    position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+    background: var(--ink); color: var(--paper); padding: 5px 10px; border-radius: 6px;
+    font-size: 0.75rem; white-space: nowrap; opacity: 0; pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  .navdot:hover span { opacity: 1; transform: translateY(-50%) translateX(-4px); }
+  body.lang-ta .navdot span { font-family: var(--tamil); }
+
+  @media(max-width: 768px) {
+    #chapNav { right: 10px; gap: 10px; }
+    .navdot { width: 6px; height: 6px; }
+    .navdot span { display: none; } /* hide tooltips on small mobile */
+  }
 
   /* hero */
   .hero{max-width:900px;margin:0 auto;padding:5rem 1.6rem 0;text-align:center}
@@ -174,13 +198,6 @@
   .wbtn.alt{background:var(--paper); color:var(--ink); border:2px solid var(--ink)}
   .wbtn.alt.active{background:var(--ink); color:var(--paper)}
   .wbtn:focus-visible{outline:3px solid var(--teal); outline-offset:2px}
-  
-  /* Absolute Reset Button for Widgets */
-  .wreset {
-    display: none; position: absolute; top: 12px; right: 12px;
-    padding: 0.3rem 0.8rem; font-size: 0.75rem; z-index: 10;
-  }
-  
   .widget input[type=range]{width:min(320px,80%); accent-color:var(--teal); margin:.6rem 0}
   .widget svg{max-width:100%; height:auto; display:block; margin:0 auto}
 
@@ -208,9 +225,6 @@
   .lamp{width:26px}
   .pool{height:14px; background:radial-gradient(ellipse at center, rgba(233,216,180,1), rgba(233,216,180,0)); border-radius:50%; margin:6px auto 0; transition:width .5s ease}
 
-  /* final dig */
-  #finalWell{width:150px}
-
   /* reading well gauge */
   #gauge{
     position:fixed; right:14px; bottom:14px; z-index:15;
@@ -222,7 +236,7 @@
   #gauge .glabel{font-size:.66rem; letter-spacing:.1em; color:var(--terra); margin-top:4px; font-family:var(--tamil)}
   @media(max-width:640px){#gauge{right:8px;bottom:8px;padding:8px 9px 6px}#gauge svg{width:26px;height:46px}}
 
-  /* floating tea button (3 lines) */
+  /* floating tea button */
   #supportTea {
     position: fixed; left: 14px; bottom: 14px; z-index: 15;
     background: rgba(247,240,225,.92); border: 1.5px solid rgba(43,33,24,.25);
@@ -277,6 +291,18 @@
   <button id="btnTa" type="button">தமிழ்</button>
 </div>
 
+<nav id="chapNav" aria-label="Chapter Navigation">
+  <a href="#ch0" class="navdot" aria-label="Prologue"><span class="L en">Prologue</span><span class="L ta">முன்னுரை</span></a>
+  <a href="#ch1" class="navdot" aria-label="Chapter 1"><span class="L en">1. The Woman</span><span class="L ta">1. படிக்கத் தெரியாமல்</span></a>
+  <a href="#ch2" class="navdot" aria-label="Chapter 2"><span class="L en">2. One Master</span><span class="L ta">2. ஒரே வாத்தியார்</span></a>
+  <a href="#ch3" class="navdot" aria-label="Chapter 3"><span class="L en">3. Word Wall</span><span class="L ta">3. சொற்களால் சுவர்</span></a>
+  <a href="#ch4" class="navdot" aria-label="Chapter 4"><span class="L en">4. Same Match</span><span class="L ta">4. அதே ஆட்டம்</span></a>
+  <a href="#ch5" class="navdot" aria-label="Chapter 5"><span class="L en">5. Pocket Teacher</span><span class="L ta">5. பாக்கெட்டில் ஆசிரியர்</span></a>
+  <a href="#ch6" class="navdot" aria-label="Chapter 6"><span class="L en">6. Appa, What Is...</span><span class="L ta">6. அப்பா...</span></a>
+  <a href="#ch7" class="navdot" aria-label="Chapter 7"><span class="L en">7. Strange Kindness</span><span class="L ta">7. விசித்திரக் கருணை</span></a>
+  <a href="#ch8" class="navdot" aria-label="Chapter 8"><span class="L en">8. Well Fills</span><span class="L ta">8. தோண்ட ஊறும்</span></a>
+</nav>
+
 <header class="hero">
   <h1>
     <span class="L en">What We Can <em>Comprehend</em><br>Is What We Can <em>Consume</em></span>
@@ -297,11 +323,11 @@
 <article>
 
 <figure class="reveal">
-  <img src="images/01-hero-sand-well.jpg" alt="A hand-dug well in sand with teal water risen inside, a mambatti resting beside the dug-out heap of sand.">
+  <img src="images/01-hero-sand-well.jpg" alt="A hand-dug well in sand with teal water risen inside, a mambatti resting beside the dug-out heap of sand." onerror="this.src='https://placehold.co/800x450/E9D8B4/2B2118?text=Image+Loading...'">
 </figure>
 
 <!-- ============ PROLOGUE ============ -->
-<section class="chapter">
+<section class="chapter" id="ch0">
   <div class="eyebrow"><span class="sep"></span><span class="label"><span class="L en">Prologue</span><span class="L ta">முன்னுரை</span></span><span class="sep"></span></div>
   <h2><span class="L en">The Sand Well</span><span class="L ta">மணற்கேணி</span></h2>
 
@@ -317,18 +343,34 @@
   <p class="reveal"><span class="L en">Valluvar was not writing a pretty line. He was describing a law. The water is always there, under the sand, waiting. How much you get to drink depends on how deep you are able to dig.</span><span class="L ta">வள்ளுவர் இதை அழகுக்காக எழுதவில்லை. ஒரு விதியை எழுதினார். நீர் எப்போதும் அங்கேதான் இருக்கிறது, மணலுக்கு அடியில், காத்துக்கொண்டு. எவ்வளவு நீரைப் பருகுகிறோம் என்பது, நாம் எவ்வளவு ஆழம் தோண்டுகிறோம் என்பதைப் பொறுத்தது.</span></p>
 
   <div class="widget reveal">
-    <button class="wbtn alt wreset" id="w1reset" type="button"><span class="L en">Reset</span><span class="L ta">மீண்டும்</span></button>
     <h3><span class="L en">Try it yourself</span><span class="L ta">நீங்களே தோண்டிப் பாருங்கள்</span></h3>
     <svg viewBox="0 0 240 170" width="240" aria-hidden="true">
+      <!-- Background Sand -->
+      <rect x="10" y="42" width="220" height="118" fill="#E9D8B4"/>
+      <!-- Top lines -->
       <path d="M10 40 H80 M160 40 H230" stroke="#2B2118" stroke-width="4" stroke-linecap="round"/>
-      <path id="w1shaft" d="M80 40 L92 150 L148 150 L160 40" fill="#F7F0E1" stroke="#2B2118" stroke-width="4" stroke-linejoin="round"/>
-      <clipPath id="w1clip"><path d="M80 40 L92 150 L148 150 L160 40 Z"/></clipPath>
-      <rect id="w1water" x="78" y="150" width="84" height="0" fill="#2E6E6A" clip-path="url(#w1clip)"/>
-      <rect x="10" y="42" width="70" height="118" fill="#E9D8B4"/>
-      <rect x="160" y="42" width="70" height="118" fill="#E9D8B4"/>
+      
+      <!-- Clip Path mimicking the shape of the dug well -->
+      <clipPath id="w1clip">
+        <path d="M80 40 L92 150 L148 150 L160 40 Z"/>
+      </clipPath>
+
+      <g clip-path="url(#w1clip)">
+        <!-- Empty Hole space (Paper color) -->
+        <rect x="0" y="0" width="240" height="170" fill="#F7F0E1"/>
+        <!-- Inner outline so sand doesn't spill -->
+        <path d="M80 40 L92 150 L148 150 L160 40 Z" fill="none" stroke="#2B2118" stroke-width="8" stroke-linejoin="round"/>
+        <!-- The Sand that covers the hole, to be moved down visually -->
+        <rect id="w1sand" x="0" y="40" width="240" height="150" fill="#E9D8B4" />
+        <!-- The Water that rises -->
+        <rect id="w1water" x="0" y="150" width="240" height="0" fill="#2E6E6A" />
+      </g>
+      <!-- Final stroke around the well -->
+      <path d="M80 40 L92 150 L148 150 L160 40" fill="none" stroke="#2B2118" stroke-width="4" stroke-linejoin="round"/>
     </svg>
-    <div style="min-height: 45px; display: flex; align-items: center; justify-content: center;">
+    <div style="min-height: 45px; display: flex; align-items: center; justify-content: center; margin-top: 0.5rem;">
       <button class="wbtn" id="w1btn" type="button"><span class="L en">Dig</span><span class="L ta">தோண்டு</span></button>
+      <button class="wbtn alt" id="w1reset" type="button" style="display:none;"><span class="L en">Reset</span><span class="L ta">மீண்டும்</span></button>
     </div>
     <p class="note" id="w1note"><span class="L en">Each dig makes the well deeper. Watch what the water does.</span><span class="L ta">ஒவ்வொரு தோண்டலுக்கும் கிணறு ஆழமாகும். நீர் என்ன செய்கிறது என்று பாருங்கள்.</span></p>
   </div>
@@ -344,7 +386,7 @@
 <div class="kolamdiv" aria-hidden="true"><span></span><span></span><span></span></div>
 
 <!-- ============ ONE ============ -->
-<section class="chapter">
+<section class="chapter" id="ch1">
   <div class="eyebrow"><span class="num"><span class="L ta">௧</span><span class="L en">1</span></span><span class="sep"></span><span class="label"><span class="L en">Chapter One</span><span class="L ta">அத்தியாயம் ஒன்று</span></span></div>
   <h2><span class="L en">The Woman Who Ran a House She Could Not Read</span><span class="L ta">படிக்கத் தெரியாமல் வீட்டை நடத்திய பெண்</span></h2>
 
@@ -354,16 +396,18 @@
   <p class="reveal"><span class="L en">She was the grandmother who ran the house.</span><span class="L ta">அந்த வீட்டை நடத்திய பாட்டி அவள்தான்.</span></p>
 
   <figure class="reveal">
-    <img src="images/02-thumbprint.jpg" alt="A terracotta thumbprint on a signature line, its ridge lines flowing outward into a blooming kolam.">
+    <img src="images/02-thumbprint.jpg" alt="A terracotta thumbprint on a signature line, its ridge lines flowing outward into a blooming kolam." onerror="this.src='https://placehold.co/800x450/E9D8B4/2B2118?text=Image+Loading...'">
     <figcaption><span class="L en">One thumbprint. Two hundred songs.</span><span class="L ta">ஒரு கைரேகை. இருநூறு பாட்டுகள்.</span></figcaption>
   </figure>
 
   <div class="widget reveal">
-    <button class="wbtn alt wreset" id="w2reset" type="button"><span class="L en">Reset</span><span class="L ta">மீண்டும்</span></button>
     <h3><span class="L en">Press and hold the thumbprint</span><span class="L ta">கைரேகையை அழுத்திப் பிடியுங்கள்</span></h3>
     <div id="w2area" style="position:relative;height:170px;max-width:420px;margin:0 auto;">
       <button id="w2btn" class="wbtn" type="button" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:74px;height:92px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:var(--terra);font-size:.75rem;">
         <span class="L en">hold</span><span class="L ta">பிடி</span>
+      </button>
+      <button id="w2reset" class="wbtn alt" type="button" style="display:none; position:absolute;left:50%;top:50%;transform:translate(-50%,-50%); z-index: 10;">
+        <span class="L en">Reset</span><span class="L ta">மீண்டும்</span>
       </button>
     </div>
     <p class="note" id="w2note"><span class="L en">Hold it, and watch what was inside her all along.</span><span class="L ta">பிடித்திருங்கள். அவளுக்குள் எப்போதும் இருந்ததைப் பாருங்கள்.</span></p>
@@ -387,7 +431,7 @@
 <div class="kolamdiv" aria-hidden="true"><span></span><span></span><span></span></div>
 
 <!-- ============ TWO ============ -->
-<section class="chapter">
+<section class="chapter" id="ch2">
   <div class="eyebrow"><span class="num"><span class="L ta">௨</span><span class="L en">2</span></span><span class="sep"></span><span class="label"><span class="L en">Chapter Two</span><span class="L ta">அத்தியாயம் இரண்டு</span></span></div>
   <h2><span class="L en">The One Master in the Village</span><span class="L ta">ஊருக்கு ஒரே வாத்தியார்</span></h2>
 
@@ -396,7 +440,7 @@
   <p class="reveal"><span class="L en">There was one master in the village, if there was one at all. There was one bundle of palm leaves, kept dry, kept close, read aloud to a chosen circle. Whether you got near it depended on your caste, your money, and where you happened to be born. Learning did not travel to you. You travelled to it, if they let you in.</span><span class="L ta">ஊருக்கு ஒரே வாத்தியார், அதுவும் இருந்தால். ஒரே ஒரு ஓலைச்சுவடிக் கட்டு, ஈரம் படாமல், பத்திரமாக, தேர்ந்தெடுக்கப்பட்ட சிலருக்கு மட்டுமே வாசிக்கப்பட்டது. அதன் அருகில் போக முடியுமா என்பது உங்கள் சாதி, உங்கள் பணம், நீங்கள் பிறந்த இடம் இவற்றைப் பொறுத்தே அமைந்தது. கல்வி உங்களிடம் வரவில்லை. நீங்கள் தான் அதனிடம் போனீர்கள், அவர்கள் உங்களை அனுமதித்தால்.</span></p>
 
   <figure class="reveal">
-    <img src="images/03-village-master.jpg" alt="A single teacher on a platform reading palm leaves by one lamp to a small circle, while faint figures watch from far outside the light.">
+    <img src="images/03-village-master.jpg" alt="A single teacher on a platform reading palm leaves by one lamp to a small circle, while faint figures watch from far outside the light." onerror="this.src='https://placehold.co/800x450/E9D8B4/2B2118?text=Image+Loading...'">
     <figcaption><span class="L en">One master. One lamp. One small circle.</span><span class="L ta">ஒரு வாத்தியார். ஒரு விளக்கு. ஒரு சிறிய வட்டம்.</span></figcaption>
   </figure>
 
@@ -429,7 +473,7 @@
 <div class="kolamdiv" aria-hidden="true"><span></span><span></span><span></span></div>
 
 <!-- ============ THREE ============ -->
-<section class="chapter">
+<section class="chapter" id="ch3">
   <div class="eyebrow"><span class="num"><span class="L ta">௩</span><span class="L en">3</span></span><span class="sep"></span><span class="label"><span class="L en">Chapter Three</span><span class="L ta">அத்தியாயம் மூன்று</span></span></div>
   <h2><span class="L en">The Wall Made of Words</span><span class="L ta">சொற்களால் ஆன சுவர்</span></h2>
 
@@ -441,7 +485,7 @@
   <p class="breath"><span class="L en">Technology speaks English.<br>Life does not.</span><span class="L ta">தொழில்நுட்பம் ஆங்கிலம் பேசுகிறது.<br>வாழ்க்கை பேசுவதில்லை.</span></p>
 
   <figure class="reveal">
-    <img src="images/04-english-wall.jpg" alt="A boy with a school bag stands before a brick wall of unreadable English text, while a teal doorway cracks open toward books, a river, and the sun.">
+    <img src="images/04-english-wall.jpg" alt="A boy with a school bag stands before a brick wall of unreadable English text, while a teal doorway cracks open toward books, a river, and the sun." onerror="this.src='https://placehold.co/800x450/E9D8B4/2B2118?text=Image+Loading...'">
   </figure>
 
   <div class="widget reveal">
@@ -457,7 +501,7 @@
 <div class="kolamdiv" aria-hidden="true"><span></span><span></span><span></span></div>
 
 <!-- ============ FOUR ============ -->
-<section class="chapter">
+<section class="chapter" id="ch4">
   <div class="eyebrow"><span class="num"><span class="L ta">௪</span><span class="L en">4</span></span><span class="sep"></span><span class="label"><span class="L en">Chapter Four</span><span class="L ta">அத்தியாயம் நான்கு</span></span></div>
   <h2><span class="L en">Same Match, Different Game</span><span class="L ta">அதே ஆட்டம், வேறு பார்வை</span></h2>
 
@@ -465,7 +509,7 @@
   <p class="reveal"><span class="L en">Two people watch the same T20 Cricket match. One sees sixes, noise, and a scoreboard in a hurry. The other sees the leg-spinner saved for the new left-hander. The long boundary guarded by one quiet field change. A dot ball in the nineteenth over that is worth more than a boundary in the fifth. Same match. One is watching fireworks. The other is watching a puzzle being solved at full speed.</span><span class="L ta">இருவர் ஒரே T20 போட்டியைப் பார்க்கிறார்கள். ஒருவர் சிக்ஸர்களையும், சத்தத்தையும், ஸ்கோர்போர்டையும் பார்க்கிறார். இன்னொருவர், புது இடதுகை பேட்ஸ்மேனுக்காக லெக்-ஸ்பின்னரைக் காத்து வைத்திருப்பதை, ஒரே ஒரு அமைதியான ஃபீல்டிங் மாற்றத்தால் நீண்ட பவுண்டரி காக்கப்படுவதை, ஐந்தாவது ஓவரின் பவுண்டரியை விட, பத்தொன்பதாவது ஓவரின் டாட் பாலுக்கு மதிப்பு அதிகம் என்பதை எல்லாம் பார்க்கிறார். அதே போட்டிதான். ஒருவர் வாணவேடிக்கை பார்க்கிறார். இன்னொருவர் முழு வேகத்தில் அவிழ்க்கப்படும் புதிரைப் பார்க்கிறார்.</span></p>
 
   <figure class="reveal">
-    <img src="images/05-same-match.jpg" alt="The same cricket ground drawn twice: fireworks and scattered figures on the left, tactical arrows and hidden strategy on the right.">
+    <img src="images/05-same-match.jpg" alt="The same cricket ground drawn twice: fireworks and scattered figures on the left, tactical arrows and hidden strategy on the right." onerror="this.src='https://placehold.co/800x450/E9D8B4/2B2118?text=Image+Loading...'">
     <figcaption><span class="L en">Same match. Two ways of seeing.</span><span class="L ta">அதே போட்டி. இரண்டு பார்வைகள்.</span></figcaption>
   </figure>
 
@@ -544,7 +588,7 @@
 <div class="kolamdiv" aria-hidden="true"><span></span><span></span><span></span></div>
 
 <!-- ============ FIVE ============ -->
-<section class="chapter">
+<section class="chapter" id="ch5">
   <div class="eyebrow"><span class="num"><span class="L ta">௫</span><span class="L en">5</span></span><span class="sep"></span><span class="label"><span class="L en">Chapter Five</span><span class="L ta">அத்தியாயம் ஐந்து</span></span></div>
   <h2><span class="L en">The Teacher in the Pocket</span><span class="L ta">பாக்கெட்டில் ஒரு ஆசிரியர்</span></h2>
 
@@ -554,7 +598,7 @@
   <p class="reveal"><span class="L en">He types: explain compound interest like I am twelve, and in Tamil. It does. He types: now explain it like I am an expert. It does that too, in the same breath, without a sigh, without making him feel small for asking. At two in the morning, when the one master in the village would have been asleep for six hours, it is awake. When the English wall rises, it walks him through the gate in his own language, and never even mentions the wall.</span><span class="L ta">அவன் டைப் செய்கிறான்: கூட்டு வட்டியை எனக்குப் பன்னிரண்டு வயது என்று நினைத்து, தமிழில் விளக்கு. அது விளக்குகிறது. அடுத்து: இப்போது நான் நிபுணன் என்று நினைத்து விளக்கு. அதையும் அதே மூச்சில் செய்கிறது. பெருமூச்சு விடவில்லை. கேட்டதற்காக அவனைச் சிறுமைப்படுத்தவில்லை. இரவு இரண்டு மணிக்கு, ஊரின் ஒரே வாத்தியார் தூங்கி ஆறு மணி நேரம் ஆன பிறகு, இது விழித்திருக்கிறது. ஆங்கிலச் சுவர் எழும்பும் போது, அவன் மொழியிலேயே வாசல் வழியாக அழைத்துச் செல்கிறது. சுவரைப் பற்றிப் பேசவே இல்லை.</span></p>
 
   <figure class="reveal">
-    <img src="images/06-teacher-in-pocket.jpg" alt="A young man on a mat at night, his phone's glow rising in a teal stream that becomes a well of water above him.">
+    <img src="images/06-teacher-in-pocket.jpg" alt="A young man on a mat at night, his phone's glow rising in a teal stream that becomes a well of water above him." onerror="this.src='https://placehold.co/800x450/E9D8B4/2B2118?text=Image+Loading...'">
     <figcaption><span class="L en">Two in the morning. The teacher is awake.</span><span class="L ta">இரவு இரண்டு மணி. ஆசிரியர் விழித்திருக்கிறார்.</span></figcaption>
   </figure>
 
@@ -584,7 +628,7 @@
 <div class="kolamdiv" aria-hidden="true"><span></span><span></span><span></span></div>
 
 <!-- ============ SIX ============ -->
-<section class="chapter">
+<section class="chapter" id="ch6">
   <div class="eyebrow"><span class="num"><span class="L ta">௬</span><span class="L en">6</span></span><span class="sep"></span><span class="label"><span class="L en">Chapter Six</span><span class="L ta">அத்தியாயம் ஆறு</span></span></div>
   <h2><span class="L en">Appa, What Is Quantum Computing?</span><span class="L ta">அப்பா, குவாண்டம் கம்ப்யூட்டிங் என்றால் என்ன?</span></h2>
 
@@ -608,7 +652,7 @@
   <p class="reveal"><span class="L en">The parent no longer has to know everything. He only has to know how to ask.</span><span class="L ta">பெற்றோருக்கு இனி எல்லாம் தெரிய வேண்டியதில்லை. எப்படிக் கேட்பது என்று தெரிந்தால் மட்டும் போதும்.</span></p>
 
   <figure class="reveal">
-    <img src="images/07-appa-question.jpg" alt="A father with grease-marked arms and his daughter leaning over one glowing phone, a question mark blooming into a kolam flower above them.">
+    <img src="images/07-appa-question.jpg" alt="A father with grease-marked arms and his daughter leaning over one glowing phone, a question mark blooming into a kolam flower above them." onerror="this.src='https://placehold.co/800x450/E9D8B4/2B2118?text=Image+Loading...'">
     <figcaption><span class="L en">He only has to know how to ask.</span><span class="L ta">எப்படிக் கேட்பது என்று தெரிந்தால் போதும்.</span></figcaption>
   </figure>
 
@@ -620,7 +664,7 @@
 <div class="kolamdiv" aria-hidden="true"><span></span><span></span><span></span></div>
 
 <!-- ============ SEVEN ============ -->
-<section class="chapter">
+<section class="chapter" id="ch7">
   <div class="eyebrow"><span class="num"><span class="L ta">௭</span><span class="L en">7</span></span><span class="sep"></span><span class="label"><span class="L en">Chapter Seven</span><span class="L ta">அத்தியாயம் ஏழு</span></span></div>
   <h2><span class="L en">The Strange Kindness of a Race</span><span class="L ta">ஒரு பந்தயத்தின் விசித்திரக் கருணை</span></h2>
 
@@ -636,7 +680,7 @@
   <p class="reveal"><span class="L en">A race can be an ugly thing. This one, for now, is doing something close to beautiful. Long may it run. Long may it stay kind.</span><span class="L ta">போட்டி என்பது எப்போதும் நல்லதையே உருவாக்காது. இது, இப்போதைக்கு, மனிதகுலத்திற்கு ஒரு அழகான வாய்ப்பை உருவாக்கிக் கொண்டிருக்கிறது. இது நீண்ட காலம் தொடரட்டும். இந்தப் பெருந்தன்மையும், அனைவரையும் அரவணைக்கும் மனப்பான்மையும் மாறாமல் இருக்கட்டும்.</span></p>
 
   <figure class="reveal">
-    <img src="images/08-race-of-lamps.jpg" alt="Five traditional Tamil oil lamps racing forward, their separate glows merging into one shared pool of light where small figures sit reading.">
+    <img src="images/08-race-of-lamps.jpg" alt="Five traditional Tamil oil lamps racing forward, their separate glows merging into one shared pool of light where small figures sit reading." onerror="this.src='https://placehold.co/800x450/E9D8B4/2B2118?text=Image+Loading...'">
     <figcaption><span class="L en">The race is theirs. The light is ours.</span><span class="L ta">பந்தயம் அவர்களுடையது. ஒளி நம்முடையது.</span></figcaption>
   </figure>
 
@@ -652,7 +696,7 @@
 <div class="kolamdiv" aria-hidden="true"><span></span><span></span><span></span></div>
 
 <!-- ============ EIGHT ============ -->
-<section class="chapter">
+<section class="chapter" id="ch8">
   <div class="eyebrow"><span class="num"><span class="L ta">௮</span><span class="L en">8</span></span><span class="sep"></span><span class="label"><span class="L en">Chapter Eight</span><span class="L ta">அத்தியாயம் எட்டு</span></span></div>
   <h2><span class="L en">The Well Fills As You Dig</span><span class="L ta">தோண்டத் தோண்ட ஊறும் கிணறு</span></h2>
 
@@ -663,7 +707,6 @@
     <span class="ref L ta">திருக்குறள் 396 · கல்வி அதிகாரம்</span><span class="ref L en">Thirukkural 396 · Chapter 40: Education</span>
     <span class="meaning L en">Dig a well in sand, and water rises to meet your digging. Learn, and wisdom rises to meet your learning.</span>
     <span class="meaning L ta">மணலில் தோண்டத் தோண்ட நீர் ஊறும். கற்கக் கற்க அறிவு ஊறும்.</span>
-
   </div>
 
   <p class="reveal"><span class="L en">The more you dig, the more rises to meet you. That was always true. What was never true, until now, is that nearly everyone could afford a mambatti.</span><span class="L ta">தோண்டத் தோண்ட, அதிகம் ஊறும். அது எப்போதும் உண்மை. இப்போது வரை உண்மை இல்லாதது: கிட்டத்தட்ட எல்லாராலும் ஒரு மண்வெட்டி வாங்க முடியும் என்பது.</span></p>
@@ -701,22 +744,38 @@
   <p class="dig reveal" id="digWord"><span class="L en">Dig.</span><span class="L ta">தோண்டு.</span></p>
 
   <div class="widget reveal">
-    <button class="wbtn alt wreset" id="w9reset" type="button"><span class="L en">Reset</span><span class="L ta">மீண்டும்</span></button>
     <h3><span class="L en">One last thing. Hold to dig.</span><span class="L ta">கடைசியாக ஒன்று. அழுத்திப் பிடித்துத் தோண்டுங்கள்.</span></h3>
     <svg id="finalWell" viewBox="0 0 150 120" aria-hidden="true">
+      <!-- Background Sand -->
+      <rect x="0" y="27" width="150" height="93" fill="#E9D8B4" />
       <path d="M5 25 H40 M110 25 H145" stroke="#2B2118" stroke-width="4" stroke-linecap="round"/>
-      <path d="M40 25 L52 108 L98 108 L110 25" fill="#F7F0E1" stroke="#2B2118" stroke-width="4" stroke-linejoin="round"/>
-      <clipPath id="w9clip"><path d="M40 25 L52 108 L98 108 L110 25 Z"/></clipPath>
-      <rect id="w9water" x="38" y="108" width="74" height="0" fill="#2E6E6A" clip-path="url(#w9clip)"/>
+      
+      <!-- Clip Path mirroring the hole shape -->
+      <clipPath id="w9clip">
+        <path d="M40 25 L52 108 L98 108 L110 25 Z"/>
+      </clipPath>
+
+      <g clip-path="url(#w9clip)">
+        <!-- Empty paper background -->
+        <rect x="0" y="0" width="150" height="120" fill="#F7F0E1"/>
+        <path d="M40 25 L52 108 L98 108 L110 25 Z" fill="none" stroke="#2B2118" stroke-width="8" stroke-linejoin="round"/>
+        <!-- The Sand to be dug away -->
+        <rect id="w9sand" x="0" y="25" width="150" height="100" fill="#E9D8B4" />
+        <!-- Water to smoothly follow -->
+        <rect id="w9water" x="0" y="108" width="150" height="0" fill="#2E6E6A" />
+      </g>
+      <!-- Outer Stroke -->
+      <path d="M40 25 L52 108 L98 108 L110 25" fill="none" stroke="#2B2118" stroke-width="4" stroke-linejoin="round"/>
     </svg>
-    <div style="min-height: 45px; display: flex; align-items: center; justify-content: center;">
+    <div style="min-height: 45px; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 0.5rem;">
       <button class="wbtn" id="w9btn" type="button"><span class="L en">Hold to dig</span><span class="L ta">அழுத்திப் பிடி</span></button>
+      <button class="wbtn alt" id="w9reset" type="button" style="display:none;"><span class="L en">Reset</span><span class="L ta">மீண்டும்</span></button>
     </div>
     <p class="note" id="w9note"></p>
   </div>
 
   <figure class="reveal">
-    <img src="images/09-dig-many-wells.jpg" alt="Many hand-dug wells across the sand, each with risen water; men, women, a child and an elder at their own wells under one sun.">
+    <img src="images/09-dig-many-wells.jpg" alt="Many hand-dug wells across the sand, each with risen water; men, women, a child and an elder at their own wells under one sun." onerror="this.src='https://placehold.co/800x450/E9D8B4/2B2118?text=Image+Loading...'">
   </figure>
 </section>
 
@@ -791,6 +850,23 @@
     }
   }catch(e){}
 
+  // ---------- chapter navigation active state ----------
+  var sections = document.querySelectorAll('.chapter');
+  var navdots = document.querySelectorAll('.navdot');
+  if('IntersectionObserver' in window && sections.length && navdots.length){
+    var chapObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          var id = e.target.getAttribute('id');
+          navdots.forEach(function(dot){
+            dot.classList.toggle('active', dot.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, { rootMargin: '-40% 0px -40% 0px' });
+    sections.forEach(function(sec){ chapObserver.observe(sec); });
+  }
+
   // ---------- reveals ----------
   if('IntersectionObserver' in window){
     var io = new IntersectionObserver(function(es){
@@ -815,25 +891,51 @@
   document.addEventListener('scroll', gscroll, {passive:true}); gscroll();
 
   // ---------- W1 prologue dig ----------
-  var w1d=0, w1water=document.getElementById('w1water'), w1note=document.getElementById('w1note'), w1reset=document.getElementById('w1reset');
-  var w1btn = document.getElementById('w1btn');
+  var w1d=0, w1water=document.getElementById('w1water'), w1sand=document.getElementById('w1sand');
+  var w1note=document.getElementById('w1note'), w1reset=document.getElementById('w1reset'), w1btn = document.getElementById('w1btn');
   if(w1btn) {
       w1btn.addEventListener('click', function(){
-        if(w1d<8){ w1d++; if(w1d===8) confetti(this.closest('.widget')); }
-        var hh = 13*w1d;
-        if(w1water) { w1water.setAttribute('y', 150-hh); w1water.setAttribute('height', hh); }
+        if(w1d<8){ 
+          w1d++; 
+          var depth = w1d * 13.75; // 8 * 13.75 = 110 max depth
+          
+          // Digging happens first (sand moves down to reveal hole)
+          w1sand.style.transition = 'y 0.3s ease';
+          w1sand.setAttribute('y', 40 + depth);
+
+          // Water rises slightly after
+          setTimeout(function() {
+            if(w1water) { 
+              w1water.style.transition = 'all 0.6s ease';
+              w1water.setAttribute('y', 150 - depth); 
+              w1water.setAttribute('height', depth); 
+            }
+          }, 350);
+
+          if(w1d===8) {
+            confetti(this.closest('.widget'));
+            w1btn.style.display = 'none'; // Swap button in place
+            if(w1reset) w1reset.style.display = 'block';
+          }
+        }
         var en = w1d<8 ? 'Depth: '+w1d+' hand-spans. The water keeps rising to meet you.' : 'You dug. It rose. That is the whole law.';
         var ta = w1d<8 ? 'ஆழம்: '+w1d+' சாண். நீர் உங்களை நோக்கி ஊறிக்கொண்டே இருக்கிறது.' : 'நீங்கள் தோண்டினீர்கள். அது ஊறியது. விதி இவ்வளவு தான்.';
         if(w1note) w1note.innerHTML = '<span class="L en">'+en+'</span><span class="L ta">'+ta+'</span>';
-        if(w1d > 0 && w1reset) w1reset.style.display = 'block';
       });
   }
   if(w1reset) {
       w1reset.addEventListener('click', function(){
         w1d = 0;
-        if(w1water) { w1water.setAttribute('y', 150); w1water.setAttribute('height', 0); }
+        w1sand.style.transition = 'none';
+        w1water.style.transition = 'none';
+        w1sand.setAttribute('y', 40);
+        w1water.setAttribute('y', 150); 
+        w1water.setAttribute('height', 0);
+        
         if(w1note) w1note.innerHTML = '<span class="L en">Each dig makes the well deeper. Watch what the water does.</span><span class="L ta">ஒவ்வொரு தோண்டலுக்கும் கிணறு ஆழமாகும். நீர் என்ன செய்கிறது என்று பாருங்கள்.</span>';
-        this.style.display = 'none';
+        
+        w1reset.style.display = 'none';
+        w1btn.style.display = 'block'; // Bring action button back
       });
   }
 
@@ -841,9 +943,13 @@
   var w2area=document.getElementById('w2area'), w2btn=document.getElementById('w2btn'), w2note=document.getElementById('w2note'), w2reset=document.getElementById('w2reset');
   var w2timer=null, w2count=0, COLORS=['#C0603A','#2E6E6A','#2B2118'];
   function w2spawn(){
-    if(w2count>=56) return;
+    if(w2count>=56) {
+      w2stop();
+      if(w2btn) w2btn.style.display = 'none';
+      if(w2reset) w2reset.style.display = 'block';
+      return;
+    }
     w2count++;
-    if(w2count === 1 && w2reset) w2reset.style.display = 'block';
     
     var d=document.createElement('span');
     var ang=Math.random()*6.283, r=52+Math.random()*130;
@@ -853,7 +959,7 @@
       w2note.innerHTML='<span class="L en">It was overflowing.</span><span class="L ta">நிரம்பி வழிந்தது.</span>';
     }
   }
-  function w2start(e){ e.preventDefault(); if(!w2timer) w2timer=setInterval(w2spawn,90); }
+  function w2start(e){ e.preventDefault(); if(!w2timer && w2count < 56) w2timer=setInterval(w2spawn,90); }
   function w2stop(){ clearInterval(w2timer); w2timer=null; }
   
   if(w2btn) {
@@ -866,11 +972,13 @@
         if(w2timer) { clearInterval(w2timer); w2timer=null; }
         w2count = 0;
         if(w2area) {
-          var dots = w2area.querySelectorAll('span');
+          var dots = w2area.querySelectorAll('span:not(.L)');
           dots.forEach(function(d){ d.remove(); });
         }
         if(w2note) w2note.innerHTML = '<span class="L en">Hold it, and watch what was inside her all along.</span><span class="L ta">பிடித்திருங்கள். அவளுக்குள் எப்போதும் இருந்ததைப் பாருங்கள்.</span>';
-        this.style.display = 'none';
+        
+        w2reset.style.display = 'none';
+        w2btn.style.display = 'block';
       });
   }
 
@@ -1001,17 +1109,34 @@
   }
 
   // ---------- W9 final hold-to-dig ----------
-  var w9p=0, w9timer=null, w9water=document.getElementById('w9water'), w9note=document.getElementById('w9note'), w9done=false, w9reset=document.getElementById('w9reset');
+  var w9p=0, w9timer=null, w9water=document.getElementById('w9water'), w9sand=document.getElementById('w9sand');
+  var w9note=document.getElementById('w9note'), w9done=false, w9reset=document.getElementById('w9reset');
   var w9btn=document.getElementById('w9btn');
+  
+  // Set the CSS transition for water to smoothly lag behind the dig
+  if(w9water) w9water.style.transition = 'all 0.8s ease';
+
   function w9tick(){
-    if(w9p<100){ w9p+=2.2;
+    if(w9p<100){ 
+      w9p+=2.2;
       var hh=Math.min(83, 83*w9p/100);
-      if(w9water) { w9water.setAttribute('y',108-hh); w9water.setAttribute('height',hh); }
-      if(w9p>0 && w9reset) w9reset.style.display = 'block';
+      
+      // Sand moves instantly (digging)
+      if(w9sand) w9sand.setAttribute('y', 25 + hh);
+      
+      // Water smoothly trails behind
+      if(w9water) { 
+        w9water.setAttribute('y', 108-hh); 
+        w9water.setAttribute('height', hh); 
+      }
     } else if(!w9done){
       w9done=true; clearInterval(w9timer); w9timer=null;
       if(w9note) w9note.innerHTML='<span class="L en">The water came. It was waiting for you all along.</span><span class="L ta">நீர் வந்தது. உங்களுக்காகவே காத்திருந்தது.</span>';
-      if(w9btn) confetti(w9btn.closest('.widget'), 28);
+      if(w9btn) {
+        confetti(w9btn.closest('.widget'), 28);
+        w9btn.style.display = 'none';
+      }
+      if(w9reset) w9reset.style.display = 'block';
     }
   }
   
@@ -1024,9 +1149,19 @@
       w9reset.addEventListener('click', function(){
         if(w9timer) { clearInterval(w9timer); w9timer = null; }
         w9p = 0; w9done = false;
-        if(w9water) { w9water.setAttribute('y', 108); w9water.setAttribute('height', 0); }
+        
+        w9water.style.transition = 'none';
+        if(w9sand) w9sand.setAttribute('y', 25);
+        if(w9water) { 
+          w9water.setAttribute('y', 108); 
+          w9water.setAttribute('height', 0); 
+        }
+        // Restore transition after reset
+        setTimeout(function(){ if(w9water) w9water.style.transition = 'all 0.8s ease'; }, 50);
+
         if(w9note) w9note.innerHTML = '';
-        this.style.display = 'none';
+        w9reset.style.display = 'none';
+        w9btn.style.display = 'block';
       });
   }
   
