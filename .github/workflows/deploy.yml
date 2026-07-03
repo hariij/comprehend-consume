@@ -36,7 +36,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3 # Fully updated artifact action
         with:
           # Upload entire repository
-          path: '.'
+          path: './dist'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4 # Fully updated deployment engine
