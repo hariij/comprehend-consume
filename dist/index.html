@@ -95,7 +95,7 @@
     font-size: 0.75rem; white-space: nowrap; opacity: 0; pointer-events: none;
     transition: opacity 0.2s ease, transform 0.2s ease;
   }
-  .navdot:hover span { opacity: 1; transform: translateY(-50%) translateX(-4px); }
+  @media (hover:hover){ .navdot:hover span { opacity: 1; transform: translateY(-50%) translateX(-4px); } }
   body.lang-ta .navdot span { font-family: var(--tamil); }
 
   @media(max-width: 768px) {
@@ -327,7 +327,7 @@
   .share-line:hover{opacity:1;text-decoration:underline}
   #hpShareRow{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin-top:1.6rem}
   #hpToast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--paper);
-    padding:.6rem 1.2rem;border-radius:999px;font-size:.85rem;opacity:0;transition:all .35s ease;z-index:60;pointer-events:none}
+    padding:.6rem 1.2rem;border-radius:999px;font-size:.85rem;opacity:0;transition:all .35s ease;z-index:95;pointer-events:none}
   #hpToast.show{opacity:1;transform:translateX(-50%)}
   #wsPlay{margin-top:.7rem}
   #hpScrim{position:fixed;inset:0;background:rgba(43,33,24,.35);z-index:39;display:none}
@@ -378,6 +378,23 @@
     padding:.35rem .7rem;border-radius:8px;display:inline-block;margin:.2rem 0 .6rem;color:var(--ink)}
   body.lamplight #hpTea .upiid{background:rgba(241,231,207,.12)}
   #hpTea .tip{font-size:.78rem;opacity:.75;line-height:1.6;margin:.6rem 0}
+  .widget{padding-top:2.6rem}
+  .wchip{position:absolute;top:14px;left:50%;transform:translateX(-50%);background:var(--terra);color:#F7F0E1;
+    font-size:.6rem;letter-spacing:.1em;padding:.2rem .8rem;border-radius:999px;text-transform:uppercase;white-space:nowrap}
+  .widget.hilite{outline:3px solid var(--gold);outline-offset:4px}
+  .wbtn,.brick,.gdot{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;touch-action:manipulation}
+  .gdot{position:relative;overflow:visible}
+  .gdot::after{content:'';position:absolute;left:50%;top:-8px;transform:translateX(-50%);
+    width:8px;height:11px;border-radius:50% 50% 50% 50%/62% 62% 38% 38%;background:rgba(43,33,24,.18)}
+  .gdot.lit::after{background:var(--teal)}
+  #wGgrid:not(.started) .gdot.lit{animation:glowPulse 1.5s ease-in-out infinite}
+  @keyframes glowPulse{50%{box-shadow:0 0 20px rgba(229,163,60,.95);transform:scale(1.12)}}
+  body.lamplight .gdot::after{background:rgba(241,231,207,.28)}
+  body.lamplight .gdot.lit::after{background:#7CC1B9}
+  body.lamplight .navdot{background:rgba(241,231,207,.4)}
+  .navdot.showlbl span{opacity:1;transform:translateY(-50%) translateX(-4px)}
+  #hpResetAll{margin-top:1.1rem;font-size:.78rem;opacity:.75;width:100%}
+  @media (prefers-reduced-motion: reduce){#wGgrid:not(.started) .gdot.lit{animation:none}}
 </style>
 <link rel="alternate" hreflang="en" href="https://hariprav.in/comprehend-consume/">
 <link rel="alternate" hreflang="ta" href="https://hariprav.in/comprehend-consume/?lang=ta">
@@ -1199,7 +1216,7 @@
       });
       var w4rst=document.createElement('button');
       w4rst.type='button'; w4rst.className='wbtn alt wreset';
-      w4rst.innerHTML='<span class="L en">\u21ba Reset</span><span class="L ta">\u21ba மீட்டமை</span>';
+      w4rst.innerHTML='<span class="L en">↺ Reset</span><span class="L ta">↺ மீண்டும் தொடங்கு</span>';
       w4wrap.closest('.widget').appendChild(w4rst);
       w4rst.addEventListener('click', function(){
         w4flipped=0; if(w4door) w4door.classList.remove('open');
@@ -1539,6 +1556,7 @@
     <button class="wbtn" id="hpShareAch" type="button"><span class="L en">Share achievement</span><span class="L ta">சாதனையைப் பகிர</span></button>
     <button class="wbtn alt" id="hpDlCard" type="button"><span class="L en">Share card image</span><span class="L ta">அட்டையைப் பகிர</span></button>
   </div>
+  <button id="hpResetAll" class="wbtn alt" type="button"><span class="L en">↺ Reset everything</span><span class="L ta">↺ அனைத்தையும் மீண்டும் தொடங்கு</span></button>
 </div>
 <div id="hpBloom"><div class="inner">
   <h4><span class="L en">The well is full.</span><span class="L ta">கிணறு நிறைந்தது.</span></h4>
@@ -1590,7 +1608,7 @@
       var el=document.querySelector('[data-art="'+k+'"]');
       if(el) el.classList.toggle('got', !!got[k]);
     });
-    if(n===ARTS.length){ $('hpCardBox').classList.add('show'); }
+    var cb=$('hpCardBox'); if(cb) cb.classList.toggle('show', n===ARTS.length);
   }
   function collect(k){
     if(got[k]) return;
@@ -1638,7 +1656,9 @@
   document.querySelectorAll('[data-listen="3"]').forEach(function(b){
     b.addEventListener('click',function(){ collect('raga'); });
   });
-  var wG=$('wGgrid'); if(wG) wG.addEventListener('click',function(){
+  var wG=$('wGgrid'); if(wG) wG.addEventListener('click',function(e){
+    var g = e.target && e.target.classList && e.target.classList.contains('gdot') ? e.target : null;
+    if(g && g.classList.contains('lit')) wG.classList.add('started');
     setTimeout(function(){
       var all=wG.querySelectorAll('.gdot').length, lit=wG.querySelectorAll('.lit').length;
       if(all>0 && lit>=all) collect('sharing');
@@ -1688,7 +1708,7 @@
         +'<a class="wbtn alt" id="smX" target="_blank" rel="noopener">X (Twitter)</a>'
         +'<a class="wbtn alt" id="smLi" target="_blank" rel="noopener">LinkedIn</a>'
         +'<a class="wbtn alt" id="smFb" target="_blank" rel="noopener">Facebook</a>'
-        +'<button class="wbtn alt" id="smCopy" type="button">'+dual('Copy link','இணைப்பை நகல்')+'</button></div>';
+        +'<button class="wbtn alt" id="smCopy" type="button">'+dual('Copy link','இணைப்பை நகலெடுக்க')+'</button></div>';
       document.body.appendChild(smenu);
       $('hpSmClose').addEventListener('click',function(){ smenu.classList.remove('show'); });
       smenu.addEventListener('click',function(e){ if(e.target===smenu) smenu.classList.remove('show'); });
@@ -1724,7 +1744,7 @@
       '<a class="wbtn alt" id="hpXBtn" target="_blank" rel="noopener">X</a>'+
       '<a class="wbtn alt" id="hpLiBtn" target="_blank" rel="noopener">LinkedIn</a>'+
       '<a class="wbtn alt" id="hpFbBtn" target="_blank" rel="noopener">Facebook</a>'+
-      '<button class="wbtn alt" id="hpCopyBtn" type="button">'+dual('Copy link','இணைப்பை நகல்')+'</button>';
+      '<button class="wbtn alt" id="hpCopyBtn" type="button">'+dual('Copy link','இணைப்பை நகலெடுக்க')+'</button>';
     footer.insertBefore(row, footer.querySelector('div'));
     function shareText(){
       return isTa() ? 'நாம் புரிந்துகொள்வதே நாம் நுகர்வது. ஓர் ஊடாடும் கட்டுரை:' : 'What we can comprehend is what we can consume. An interactive essay:';
@@ -1757,45 +1777,37 @@
 
   /* ================= completion card ================= */
   function makeCard(){
-    var cv=$('hpCanvas'), x=cv.getContext('2d'), W=1200;
-    var ta=isTa();
-    x.fillStyle='#F7F0E1'; x.fillRect(0,0,W,W);
-    // kolam dot border
+    var cv=$('hpCanvas'), x=cv.getContext('2d'), ta=isTa();
+    var name=''; try{ name=localStorage.getItem('hp-name')||''; }catch(e){}
+    x.setTransform(1,0,0,1,0,0); x.clearRect(0,0,1200,1200);
+    x.fillStyle='#F7F0E1'; x.fillRect(0,0,1200,1200);
     var C=['#C0603A','#2E6E6A','#E5A33C','#4E5AA8'];
-    for(var i=0;i<28;i++){
-      var t=i/28*Math.PI*2;
-      x.beginPath(); x.arc(600+Math.cos(t)*520, 600+Math.sin(t)*520, 10, 0, 7);
-      x.fillStyle=C[i%4]; x.fill();
+    for(var i=0;i<28;i++){ var t=i/28*Math.PI*2;
+      x.beginPath(); x.arc(600+Math.cos(t)*528, 600+Math.sin(t)*528, 10, 0, 7);
+      x.fillStyle=C[i%4]; x.fill(); }
+    function T(txt,y,size,style,color,tamil){
+      var fam = tamil ? '"Noto Serif Tamil", serif' : 'Georgia, serif';
+      x.fillStyle=color; x.textAlign='center'; x.textBaseline='alphabetic';
+      var s=size;
+      x.font=style+s+'px '+fam;
+      while(x.measureText(txt).width>960 && s>18){ s=Math.floor(s*0.93); x.font=style+s+'px '+fam; }
+      x.fillText(txt,600,y);
     }
-    // well
-    x.strokeStyle='#2B2118'; x.lineWidth=14; x.lineJoin='round';
-    x.beginPath(); x.moveTo(480,430); x.lineTo(510,700); x.lineTo(690,700); x.lineTo(720,430); x.stroke();
+    T('hariprav.in',150,26,'','#2E6E6A',false);
+    var head = name ? (ta? name+' தோண்டினார்.' : name+' dug the well.')
+                    : (ta? 'நான் தோண்டினேன்.' : 'I dug the well.');
+    T(head,295,64, ta?'600 ':'italic 600 ', '#2B2118', ta);
+    T(ta?'12 / 12 பொக்கிஷங்கள் சேர்ந்தன':'12 / 12 artifacts collected',362,32,'','#C0603A',ta);
+    x.strokeStyle='#2B2118'; x.lineWidth=14; x.lineJoin='round'; x.lineCap='round';
+    x.beginPath(); x.moveTo(330,445); x.lineTo(470,445); x.moveTo(730,445); x.lineTo(870,445); x.stroke();
+    x.beginPath(); x.moveTo(480,445); x.lineTo(510,715); x.lineTo(690,715); x.lineTo(720,445); x.stroke();
     x.fillStyle='#2E6E6A'; x.beginPath();
-    x.moveTo(496,480); x.lineTo(514,693); x.lineTo(686,693); x.lineTo(704,480); x.closePath(); x.fill();
+    x.moveTo(497,505); x.lineTo(515,708); x.lineTo(685,708); x.lineTo(703,505); x.closePath(); x.fill();
     x.strokeStyle='#F7F0E1'; x.lineWidth=6;
-    x.beginPath(); x.moveTo(560,545); x.quadraticCurveTo(600,528,640,545); x.stroke();
-    x.strokeStyle='#2B2118'; x.lineWidth=10;
-    x.beginPath(); x.moveTo(330,430); x.lineTo(470,430); x.moveTo(730,430); x.lineTo(870,430); x.stroke();
-    // text
-    x.fillStyle='#2B2118'; x.textAlign='center';
-    x.font = ta ? '600 64px "Noto Serif Tamil", serif' : 'italic 600 64px Georgia, serif';
-    x.fillText(ta?'நான் தோண்டினேன்.':'I dug the well.', 600, 300);
-    x.fillStyle='#C0603A';
-    x.font = ta ? '34px "Noto Serif Tamil", serif' : '34px Georgia, serif';
-    x.fillText(ta?'12 / 12 பொக்கிஷங்கள்':'12 / 12 artifacts collected', 600, 360);
-    var nm=''; try{ nm = localStorage.getItem('hp-name') || ''; }catch(e){}
-    if(nm){
-      x.fillStyle='#4E5AA8';
-      x.font = ta ? '38px "Noto Serif Tamil", serif' : 'italic 38px Georgia, serif';
-      x.fillText('\u2014 '+nm+' \u2014', 600, 418);
-    }
-    x.fillStyle='#2B2118';
-    x.font = ta ? '30px "Noto Serif Tamil", serif' : 'italic 30px Georgia, serif';
-    var q1 = ta?'அது ஒருபோதும் கடினம் இல்லை.':'It was never too hard.';
-    var q2 = ta?'விளக்கப்படாமல் இருந்தது, அவ்வளவே.':'It was only ever unexplained.';
-    x.fillText(q1, 600, 810); x.fillText(q2, 600, 856);
-    x.fillStyle='#2E6E6A'; x.font='28px Georgia, serif';
-    x.fillText('hariprav.in/comprehend-consume', 600, 960);
+    x.beginPath(); x.moveTo(560,570); x.quadraticCurveTo(600,553,640,570); x.stroke();
+    T(ta?'அது ஒருபோதும் கடினம் இல்லை.':'It was never too hard.',815,30, ta?'':'italic ', '#2B2118', ta);
+    T(ta?'விளக்கப்படாமல் இருந்தது, அவ்வளவே.':'It was only ever unexplained.',865,30, ta?'':'italic ', '#2B2118', ta);
+    T('hariprav.in/comprehend-consume',968,28,'','#2E6E6A',false);
     return cv;
   }
   function achieveText(){
@@ -1806,17 +1818,20 @@
   function shareAchievement(){ doShare(achieveText(), pageUrl()); }
   function downloadCard(){
     ensureName(function(){
-      makeCard().toBlob(function(blob){
-        var f = new File([blob],'i-dug-the-well.png',{type:'image/png'});
-        if(navigator.canShare && navigator.canShare({files:[f]})){
-          navigator.share({files:[f], text: achieveText()+' '+pageUrl()}).catch(function(){});
-        } else {
-          var a=document.createElement('a');
-          a.href=URL.createObjectURL(blob); a.download='i-dug-the-well.png';
-          document.body.appendChild(a); a.click(); a.remove();
-          toast('Card saved. Attach it when you share!','அட்டை சேமிக்கப்பட்டது. பகிரும் போது இணைக்கவும்!');
-        }
-      },'image/png');
+      var go=function(){
+        makeCard().toBlob(function(blob){
+          var f=new File([blob],'i-dug-the-well.png',{type:'image/png'});
+          if(navigator.canShare && navigator.canShare({files:[f]})){
+            navigator.share({files:[f], text: achieveText()+' '+pageUrl()}).catch(function(){});
+          } else {
+            var a=document.createElement('a');
+            a.href=URL.createObjectURL(blob); a.download='i-dug-the-well.png';
+            document.body.appendChild(a); a.click(); a.remove();
+            toast('Card saved. Attach it when you share!','அட்டை சேமிக்கப்பட்டது. பகிரும் போது இணைக்கவும்!');
+          }
+        },'image/png');
+      };
+      if(document.fonts && document.fonts.ready) document.fonts.ready.then(go); else go();
     });
   }
   [['hpShareAch',shareAchievement],['hpDlCard',downloadCard],['hpBloomShare',shareAchievement],['hpBloomDl',downloadCard]].forEach(function(p){
@@ -1904,6 +1919,11 @@
     try{ pref=localStorage.getItem('hp-theme'); }catch(e){}
     if(pref==='lamp') setTheme(true,false);
     else if(pref===null && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) setTheme(true,false);
+    if(window.matchMedia){
+      var mq=matchMedia('(prefers-color-scheme: dark)');
+      var onOS=function(ev){ var p=null; try{p=localStorage.getItem('hp-theme');}catch(_e){} if(p===null) setTheme(ev.matches,false); };
+      if(mq.addEventListener) mq.addEventListener('change',onOS); else if(mq.addListener) mq.addListener(onOS);
+    }
   }
 
   /* ================= resets for all widgets ================= */
@@ -1913,7 +1933,7 @@
       var w = el.closest('.widget'); if(!w || w.querySelector('.wreset')) return;
       var b=document.createElement('button');
       b.type='button'; b.className='wbtn alt wreset';
-      b.innerHTML='<span class="L en">\u21ba Reset</span><span class="L ta">\u21ba மீட்டமை</span>';
+      b.innerHTML='<span class="L en">↺ Reset</span><span class="L ta">↺ மீண்டும் தொடங்கு</span>';
       w.appendChild(b); b.addEventListener('click', fn);
     }
     function fire(el){ el.dispatchEvent(new Event('input',{bubbles:true})); }
@@ -1930,10 +1950,11 @@
     var l1=document.querySelector('[data-listen="1"]'); addReset(l1, function(){ l1.click(); });
     var wg=$('wGgrid');
     addReset(wg, function(){
+      wg.classList.remove('started');
       var dots=[].slice.call(wg.querySelectorAll('.gdot'));
       dots.forEach(function(d){ d.classList.remove('lit'); });
       if(dots.length) dots[Math.floor(dots.length/2)].classList.add('lit');
-      var n=$('wGnote'); if(n) n.innerHTML=dual('Reset. Tap the lit lamp to begin again.','மீட்டமைக்கப்பட்டது. மீண்டும் தொடங்க ஒளிரும் விளக்கைத் தட்டுங்கள்.');
+      var n=$('wGnote'); if(n) n.innerHTML=dual('Reset. Tap the lit lamp to begin again.','மீண்டும் தொடக்கம். ஒரு விளக்கு மட்டும் ஒளிர்கிறது. அதைத் தட்டுங்கள்.');
     });
   })();
 
@@ -1979,35 +2000,101 @@
   paintName();
 
   /* ================= tea / UPI support ================= */
-  var teaA=$('supportTea'), teaM=null;
-  if(teaA){
-    teaA.addEventListener('click',function(e){
-      e.preventDefault();
-      if(!teaM){
-        teaM=document.createElement('div'); teaM.id='hpTea';
-        teaM.style.cssText='position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:75;background:rgba(43,33,24,.45);padding:1rem';
-        teaM.innerHTML='<div class="inner" style="background:var(--paper);border-radius:16px;padding:1.6rem 1.4rem;max-width:330px;width:100%;text-align:center;position:relative;max-height:92vh;overflow-y:auto">'
-          +'<button id="hpTeaClose" type="button" aria-label="Close" style="position:absolute;top:8px;right:12px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--ink)">×</button>'
-          +'<h5 style="font-family:var(--tamil);color:var(--terra);margin-bottom:.8rem">'+dual('Buy me a tea \u2615','ஒரு தேநீர் \u2615')+'</h5>'
-          +'<img class="qr" src="images/upi-qr.jpeg" alt="UPI QR code for Hari Pravin" loading="lazy">'
-          +'<div><span class="upiid" id="hpUpiId">hariij@okhdfcbank</span></div>'
-          +'<button class="wbtn alt" id="hpUpiCopy" type="button" style="font-size:.8rem;padding:.35rem 1rem">'+dual('Copy UPI ID','UPI ஐடியை நகல்')+'</button>'
-          +'<a class="wbtn" style="display:block;margin:.7rem auto .2rem;max-width:230px" href="upi://pay?pa=hariij@okhdfcbank&pn=Hari%20Pravin&cu=INR">'+dual('Open in UPI app','UPI ஆப்பில் திற')+'</a>'
-          +'<p class="tip">'+dual('Scan with any UPI app. On this phone? Long-press the QR to save it, then use "Scan from gallery" in GPay.','எந்த UPI ஆப்பிலும் ஸ்கேன் செய்யலாம். இதே போனில் இருந்தால், QR-ஐ நீண்ட அழுத்திச் சேமித்து, GPay-இல் "கேலரியிலிருந்து ஸ்கேன்" மூலம் தேர்வு செய்யுங்கள்.')+'</p>'
-          +'<a href="https://www.chai4.me/hari" target="_blank" rel="noopener" style="color:var(--teal);font-size:.85rem">'+dual('or pay via chai4.me/hari \u2192','அல்லது chai4.me/hari வழியாக \u2192')+'</a>'
-          +'</div>';
-        document.body.appendChild(teaM);
-        $('hpTeaClose').addEventListener('click',function(){ teaM.style.display='none'; });
-        teaM.addEventListener('click',function(ev){ if(ev.target===teaM) teaM.style.display='none'; });
-        $('hpUpiCopy').addEventListener('click',function(){
-          if(navigator.clipboard) navigator.clipboard.writeText('hariij@okhdfcbank').then(function(){
-            toast('UPI ID copied','UPI ஐடி நகலெடுக்கப்பட்டது');
-          });
+  var teaM=null;
+  function openTea(){
+    if(!teaM){
+      teaM=document.createElement('div'); teaM.id='hpTea';
+      teaM.style.cssText='position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:80;background:rgba(43,33,24,.45);padding:1rem';
+      teaM.innerHTML='<div class="inner" style="background:var(--paper);border-radius:16px;padding:1.6rem 1.4rem;max-width:330px;width:100%;text-align:center;position:relative;max-height:92vh;overflow-y:auto">'
+        +'<button id="hpTeaClose" type="button" aria-label="Close" style="position:absolute;top:8px;right:12px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--ink)">×</button>'
+        +'<h5 style="font-family:var(--tamil);color:var(--terra);margin-bottom:.5rem">'+dual('Buy me a tea ☕','ஒரு தேநீர் ☕')+'</h5>'
+        +'<p class="tip" style="margin-top:0">'+dual('One tea ₹25 · two ₹50 · twenty ₹500 · two hundred ₹5000. However many teas you feel this essay deserves 😄','ஒரு டீ ₹25 · இரண்டு ₹50 · இருபது ₹500 · இருநூறு ₹5000. கட்டுரைக்கு எத்தனை டீ தகுதி என்று நீங்களே முடிவு செய்யுங்கள் 😄')+'</p>'
+        +'<img class="qr" src="images/upi-qr.jpeg" alt="UPI QR code for Hari Pravin" loading="lazy">'
+        +'<div><span class="upiid" id="hpUpiId">hariij@okhdfcbank</span></div>'
+        +'<button class="wbtn alt" id="hpUpiCopy" type="button" style="font-size:.8rem;padding:.35rem 1rem">'+dual('Copy UPI ID','UPI ஐடியை நகலெடுக்க')+'</button>'
+        +'<p class="tip">'+dual('Scan with any UPI app. Reading on this phone? Long-press the QR to save it, then use "Scan from gallery" inside GPay or any UPI app.','எந்த UPI ஆப்பிலும் ஸ்கேன் செய்யலாம். இதே போனில் படிக்கிறீர்களா? QR-ஐ நீண்ட அழுத்திச் சேமித்து, GPay அல்லது எந்த UPI ஆப்பிலும் "கேலரியிலிருந்து ஸ்கேன்" மூலம் தேர்வு செய்யுங்கள்.')+'</p>'
+        +'<a href="https://www.chai4.me/hari" target="_blank" rel="noopener" style="color:var(--teal);font-size:.85rem">'+dual('or pay online via chai4.me/hari →','அல்லது chai4.me/hari வழியாக →')+'</a>'
+        +'</div>';
+      document.body.appendChild(teaM);
+      $('hpTeaClose').addEventListener('click',function(){ teaM.style.display='none'; });
+      teaM.addEventListener('click',function(ev){ if(ev.target===teaM) teaM.style.display='none'; });
+      $('hpUpiCopy').addEventListener('click',function(){
+        if(navigator.clipboard) navigator.clipboard.writeText('hariij@okhdfcbank').then(function(){
+          toast('UPI ID copied','UPI ஐடி நகலெடுக்கப்பட்டது');
         });
+      });
+    }
+    teaM.style.display='flex';
+  }
+  var teaA=$('supportTea');
+  if(teaA){ teaA.setAttribute('href','#'); teaA.removeAttribute('target'); }
+  document.addEventListener('click',function(e){
+    var t=e.target.closest ? e.target.closest('#supportTea') : null;
+    if(t){ e.preventDefault(); e.stopPropagation(); openTea(); }
+  }, true);
+
+  /* ================= discoverability chips ================= */
+  document.querySelectorAll('.widget').forEach(function(w){
+    if(w.querySelector('.wchip')) return;
+    var c=document.createElement('div'); c.className='wchip';
+    c.innerHTML=dual('👆 tap to play','👆 தட்டி விளையாடுங்கள்');
+    w.insertBefore(c, w.firstChild);
+  });
+
+  /* ================= long-press suppression ================= */
+  document.addEventListener('contextmenu',function(e){
+    if(e.target.closest && e.target.closest('.wbtn,.brick,.gdot')) e.preventDefault();
+  });
+
+  /* ================= pouch: locked artifact -> go to its widget ================= */
+  var ART2W={dig:'w1btn',thumb:'w2btn',lamp:'w3range',brick:'w4bricks',match:'w5casual',
+             pot:'wMchild',question:'w7then',race:'w8range',sharing:'wGgrid',well:'w9btn'};
+  document.querySelectorAll('.art').forEach(function(a){
+    a.style.cursor='pointer';
+    a.addEventListener('click',function(){
+      if(a.classList.contains('got')) return;
+      var k=a.getAttribute('data-art'), el=null;
+      if(k==='raga') el=document.querySelector('[data-listen]');
+      else if(k==='patience') el=document.querySelector('[data-chip]');
+      else el=$(ART2W[k]);
+      if(!el) return;
+      var w=el.closest('.widget')||el;
+      $('hpDrawer').classList.remove('open');
+      if(w.scrollIntoView) w.scrollIntoView({behavior:'smooth',block:'center'});
+      w.classList.add('hilite');
+      setTimeout(function(){ w.classList.remove('hilite'); },1800);
+    });
+  });
+
+  /* ================= reset everything ================= */
+  var raBtn=$('hpResetAll'), raArm=false, raT=null;
+  if(raBtn){
+    var raLbl=raBtn.innerHTML;
+    raBtn.addEventListener('click',function(){
+      if(!raArm){
+        raArm=true;
+        raBtn.innerHTML=dual('Tap again to confirm','உறுதிக்கு மீண்டும் தட்டவும்');
+        raT=setTimeout(function(){ raArm=false; raBtn.innerHTML=raLbl; },3000);
+        return;
       }
-      teaM.style.display='flex';
+      clearTimeout(raT); raArm=false; raBtn.innerHTML=raLbl;
+      ['w1reset','w2reset','w9reset'].forEach(function(id){ var b=$(id); if(b) b.click(); });
+      document.querySelectorAll('.wreset').forEach(function(b){ b.click(); });
+      got={}; celebrated=false;
+      try{ localStorage.removeItem('hp-arts'); localStorage.removeItem('hp-celebrated'); }catch(e){}
+      paint();
+      $('hpDrawer').classList.remove('open');
+      toast('Everything reset. Dig again!','அனைத்தும் மீண்டும் தொடக்கம். மீண்டும் தோண்டுங்கள்!');
     });
   }
+
+  /* ================= chapter nav labels: tap shows briefly ================= */
+  document.querySelectorAll('#chapNav .navdot').forEach(function(d){
+    d.addEventListener('click',function(){
+      d.classList.add('showlbl');
+      setTimeout(function(){ d.classList.remove('showlbl'); if(d.blur) d.blur(); },1100);
+    });
+  });
 
   /* ================= service worker ================= */
   if('serviceWorker' in navigator && location.protocol==='https:'){

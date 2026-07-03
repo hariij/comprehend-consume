@@ -1,4 +1,4 @@
-const CACHE = 'hp-cc-v3';
+const CACHE = 'hp-cc-v4';
 const CORE = ['./', './index.html', './manifest.json'];
 self.addEventListener('install', e => {
   self.skipWaiting();
