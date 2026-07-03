@@ -198,6 +198,12 @@
   .wbtn.alt{background:var(--paper); color:var(--ink); border:2px solid var(--ink)}
   .wbtn.alt.active{background:var(--ink); color:var(--paper)}
   .wbtn:focus-visible{outline:3px solid var(--teal); outline-offset:2px}
+  
+  /* Reset Button specific styling */
+  .wreset {
+    display: none; padding: 0.4rem 1rem; font-size: 0.85rem;
+  }
+  
   .widget input[type=range]{width:min(320px,80%); accent-color:var(--teal); margin:.6rem 0}
   .widget svg{max-width:100%; height:auto; display:block; margin:0 auto}
 
@@ -225,6 +231,9 @@
   .lamp{width:26px}
   .pool{height:14px; background:radial-gradient(ellipse at center, rgba(233,216,180,1), rgba(233,216,180,0)); border-radius:50%; margin:6px auto 0; transition:width .5s ease}
 
+  /* final dig */
+  #finalWell{width:150px}
+
   /* reading well gauge */
   #gauge{
     position:fixed; right:14px; bottom:14px; z-index:15;
@@ -236,7 +245,7 @@
   #gauge .glabel{font-size:.66rem; letter-spacing:.1em; color:var(--terra); margin-top:4px; font-family:var(--tamil)}
   @media(max-width:640px){#gauge{right:8px;bottom:8px;padding:8px 9px 6px}#gauge svg{width:26px;height:46px}}
 
-  /* floating tea button */
+  /* floating tea button (3 lines) */
   #supportTea {
     position: fixed; left: 14px; bottom: 14px; z-index: 15;
     background: rgba(247,240,225,.92); border: 1.5px solid rgba(43,33,24,.25);
@@ -345,32 +354,32 @@
   <div class="widget reveal">
     <h3><span class="L en">Try it yourself</span><span class="L ta">நீங்களே தோண்டிப் பாருங்கள்</span></h3>
     <svg viewBox="0 0 240 170" width="240" aria-hidden="true">
-      <!-- Background Sand -->
-      <rect x="10" y="42" width="220" height="118" fill="#E9D8B4"/>
-      <!-- Top lines -->
+      <!-- Solid background sand -->
+      <rect x="0" y="40" width="240" height="130" fill="#E9D8B4" />
+      
+      <!-- The dug hole (revealing paper color) -->
+      <path id="w1shaft" d="M80 40 L80 40 L160 40 L160 40" fill="#F7F0E1" stroke="#2B2118" stroke-width="4" stroke-linejoin="round"/>
+      
+      <!-- Mask to keep water exactly inside the dug hole -->
+      <clipPath id="w1clip"><path id="w1clipPath" d="M80 40 L80 40 L160 40 L160 40 Z"/></clipPath>
+      <rect id="w1water" x="0" y="40" width="240" height="0" fill="#2E6E6A" clip-path="url(#w1clip)"/>
+      
+      <!-- Surface ground lines overlapping the top edges -->
       <path d="M10 40 H80 M160 40 H230" stroke="#2B2118" stroke-width="4" stroke-linecap="round"/>
       
-      <!-- Clip Path mimicking the shape of the dug well -->
-      <clipPath id="w1clip">
-        <path d="M80 40 L92 150 L148 150 L160 40 Z"/>
-      </clipPath>
-
-      <g clip-path="url(#w1clip)">
-        <!-- Empty Hole space (Paper color) -->
-        <rect x="0" y="0" width="240" height="170" fill="#F7F0E1"/>
-        <!-- Inner outline so sand doesn't spill -->
-        <path d="M80 40 L92 150 L148 150 L160 40 Z" fill="none" stroke="#2B2118" stroke-width="8" stroke-linejoin="round"/>
-        <!-- The Sand that covers the hole, to be moved down visually -->
-        <rect id="w1sand" x="0" y="40" width="240" height="150" fill="#E9D8B4" />
-        <!-- The Water that rises -->
-        <rect id="w1water" x="0" y="150" width="240" height="0" fill="#2E6E6A" />
+      <!-- Mambatti Animation Group -->
+      <g id="w1mambattiGrp" style="opacity: 0; transition: opacity 0.3s ease;">
+        <g id="w1mambatti" transform="translate(120, 40)">
+          <!-- Wooden Handle -->
+          <path d="M 25 -40 L 0 0" stroke="#7A4B3A" stroke-width="5" stroke-linecap="round"/>
+          <!-- Steel Blade -->
+          <path d="M -10 -6 Q 0 -10 10 -6 L 6 12 Q -10 18 -14 12 Z" fill="#95A5A6" stroke="#5D6D7E" stroke-width="2" stroke-linejoin="round"/>
+        </g>
       </g>
-      <!-- Final stroke around the well -->
-      <path d="M80 40 L92 150 L148 150 L160 40" fill="none" stroke="#2B2118" stroke-width="4" stroke-linejoin="round"/>
     </svg>
-    <div style="min-height: 45px; display: flex; align-items: center; justify-content: center; margin-top: 0.5rem;">
+    <div style="min-height: 45px; display: flex; align-items: center; justify-content: center; gap: 10px;">
       <button class="wbtn" id="w1btn" type="button"><span class="L en">Dig</span><span class="L ta">தோண்டு</span></button>
-      <button class="wbtn alt" id="w1reset" type="button" style="display:none;"><span class="L en">Reset</span><span class="L ta">மீண்டும்</span></button>
+      <button class="wbtn alt wreset" id="w1reset" type="button"><span class="L en">Reset</span><span class="L ta">மீண்டும்</span></button>
     </div>
     <p class="note" id="w1note"><span class="L en">Each dig makes the well deeper. Watch what the water does.</span><span class="L ta">ஒவ்வொரு தோண்டலுக்கும் கிணறு ஆழமாகும். நீர் என்ன செய்கிறது என்று பாருங்கள்.</span></p>
   </div>
@@ -403,12 +412,10 @@
   <div class="widget reveal">
     <h3><span class="L en">Press and hold the thumbprint</span><span class="L ta">கைரேகையை அழுத்திப் பிடியுங்கள்</span></h3>
     <div id="w2area" style="position:relative;height:170px;max-width:420px;margin:0 auto;">
-      <button id="w2btn" class="wbtn" type="button" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:74px;height:92px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:var(--terra);font-size:.75rem;">
+      <button id="w2btn" class="wbtn" type="button" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:74px;height:92px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:var(--terra);font-size:.75rem; z-index: 5;">
         <span class="L en">hold</span><span class="L ta">பிடி</span>
       </button>
-      <button id="w2reset" class="wbtn alt" type="button" style="display:none; position:absolute;left:50%;top:50%;transform:translate(-50%,-50%); z-index: 10;">
-        <span class="L en">Reset</span><span class="L ta">மீண்டும்</span>
-      </button>
+      <button class="wbtn alt wreset" id="w2reset" type="button" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%); z-index: 5;"><span class="L en">Reset</span><span class="L ta">மீண்டும்</span></button>
     </div>
     <p class="note" id="w2note"><span class="L en">Hold it, and watch what was inside her all along.</span><span class="L ta">பிடித்திருங்கள். அவளுக்குள் எப்போதும் இருந்ததைப் பாருங்கள்.</span></p>
   </div>
@@ -746,30 +753,25 @@
   <div class="widget reveal">
     <h3><span class="L en">One last thing. Hold to dig.</span><span class="L ta">கடைசியாக ஒன்று. அழுத்திப் பிடித்துத் தோண்டுங்கள்.</span></h3>
     <svg id="finalWell" viewBox="0 0 150 120" aria-hidden="true">
-      <!-- Background Sand -->
-      <rect x="0" y="27" width="150" height="93" fill="#E9D8B4" />
+      <rect x="0" y="25" width="150" height="95" fill="#E9D8B4" />
+      <path id="w9shaft" d="M40 25 L40 25 L110 25 L110 25" fill="#F7F0E1" stroke="#2B2118" stroke-width="4" stroke-linejoin="round"/>
+      <clipPath id="w9clip"><path id="w9clipPath" d="M40 25 L40 25 L110 25 L110 25 Z"/></clipPath>
+      <rect id="w9water" x="0" y="25" width="150" height="0" fill="#2E6E6A" clip-path="url(#w9clip)"/>
       <path d="M5 25 H40 M110 25 H145" stroke="#2B2118" stroke-width="4" stroke-linecap="round"/>
       
-      <!-- Clip Path mirroring the hole shape -->
-      <clipPath id="w9clip">
-        <path d="M40 25 L52 108 L98 108 L110 25 Z"/>
-      </clipPath>
-
-      <g clip-path="url(#w9clip)">
-        <!-- Empty paper background -->
-        <rect x="0" y="0" width="150" height="120" fill="#F7F0E1"/>
-        <path d="M40 25 L52 108 L98 108 L110 25 Z" fill="none" stroke="#2B2118" stroke-width="8" stroke-linejoin="round"/>
-        <!-- The Sand to be dug away -->
-        <rect id="w9sand" x="0" y="25" width="150" height="100" fill="#E9D8B4" />
-        <!-- Water to smoothly follow -->
-        <rect id="w9water" x="0" y="108" width="150" height="0" fill="#2E6E6A" />
+      <!-- Mambatti Animation Group -->
+      <g id="w9mambattiGrp" style="opacity: 0; transition: opacity 0.3s ease;">
+        <g id="w9mambatti" transform="translate(75, 25)">
+          <!-- Wooden Handle -->
+          <path d="M 18 -28 L 0 0" stroke="#7A4B3A" stroke-width="4" stroke-linecap="round"/>
+          <!-- Steel Blade -->
+          <path d="M -7 -4 Q 0 -7 7 -4 L 4 8 Q -7 12 -10 8 Z" fill="#95A5A6" stroke="#5D6D7E" stroke-width="1.5" stroke-linejoin="round"/>
+        </g>
       </g>
-      <!-- Outer Stroke -->
-      <path d="M40 25 L52 108 L98 108 L110 25" fill="none" stroke="#2B2118" stroke-width="4" stroke-linejoin="round"/>
     </svg>
-    <div style="min-height: 45px; display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 0.5rem;">
+    <div style="min-height: 45px; display: flex; align-items: center; justify-content: center; gap: 10px;">
       <button class="wbtn" id="w9btn" type="button"><span class="L en">Hold to dig</span><span class="L ta">அழுத்திப் பிடி</span></button>
-      <button class="wbtn alt" id="w9reset" type="button" style="display:none;"><span class="L en">Reset</span><span class="L ta">மீண்டும்</span></button>
+      <button class="wbtn alt wreset" id="w9reset" type="button"><span class="L en">Reset</span><span class="L ta">மீண்டும்</span></button>
     </div>
     <p class="note" id="w9note"></p>
   </div>
@@ -825,29 +827,19 @@
     if(btnTa) btnTa.classList.toggle('active', l==='ta');
     document.documentElement.lang = l;
     try{ localStorage.setItem('hp-lang', l); }catch(e){}
-    
-    // safe update of URL param for sharing
     try {
       var url = new URL(window.location);
       url.searchParams.set('lang', l);
       window.history.replaceState({}, '', url);
-    } catch(err) {
-      // Ignored for restricted sandboxes
-    }
+    } catch(err) {}
   }
   if(btnEn) btnEn.addEventListener('click', function(){ setLang('en'); });
   if(btnTa) btnTa.addEventListener('click', function(){ setLang('ta'); });
-  
-  // check URL parameters first for language, then fallback to localStorage
   try{ 
     var urlParams = new URLSearchParams(window.location.search);
     var langParam = urlParams.get('lang');
-    if(langParam === 'ta' || langParam === 'en') {
-      setLang(langParam);
-    } else {
-      var saved = localStorage.getItem('hp-lang'); 
-      if(saved==='ta') setLang('ta');
-    }
+    if(langParam === 'ta' || langParam === 'en') { setLang(langParam); } 
+    else { var saved = localStorage.getItem('hp-lang'); if(saved==='ta') setLang('ta'); }
   }catch(e){}
 
   // ---------- chapter navigation active state ----------
@@ -890,52 +882,119 @@
   }
   document.addEventListener('scroll', gscroll, {passive:true}); gscroll();
 
-  // ---------- W1 prologue dig ----------
-  var w1d=0, w1water=document.getElementById('w1water'), w1sand=document.getElementById('w1sand');
-  var w1note=document.getElementById('w1note'), w1reset=document.getElementById('w1reset'), w1btn = document.getElementById('w1btn');
+  // ---------- W1 prologue dynamic geometric dig ----------
+  var w1d = 0, w1_holeP = 0, w1_waterP = 0, w1_targetP = 0;
+  var w1_animating = false, w1_hit_t = 0, w1_r = 60;
+  var w1shaft = document.getElementById('w1shaft');
+  var w1clipPath = document.getElementById('w1clipPath');
+  var w1water = document.getElementById('w1water');
+  var w1btn = document.getElementById('w1btn');
+  var w1reset = document.getElementById('w1reset');
+  var w1note = document.getElementById('w1note');
+  var w1mambattiGrp = document.getElementById('w1mambattiGrp');
+  var w1mambatti = document.getElementById('w1mambatti');
+
+  function w1Loop() {
+      var changed = false;
+      
+      // 1. Hole digs down moderately fast
+      if (w1_holeP < w1_targetP) {
+          w1_holeP += 0.04;
+          if (w1_holeP > w1_targetP) w1_holeP = w1_targetP;
+          changed = true;
+      } else if (w1_holeP > w1_targetP) { // reset backwards
+          w1_holeP -= 0.1;
+          if (w1_holeP < w1_targetP) w1_holeP = w1_targetP;
+          changed = true;
+      }
+
+      // 2. Water slowly seeps up ONLY after the current dig stroke creates the hole space
+      if (w1_holeP === w1_targetP && w1_waterP < w1_targetP) {
+          w1_waterP += 0.015;
+          if (w1_waterP > w1_targetP) w1_waterP = w1_targetP;
+          changed = true;
+      } else if (w1_waterP > w1_targetP) { 
+          w1_waterP -= 0.1;
+          if (w1_waterP < w1_targetP) w1_waterP = w1_targetP;
+          changed = true;
+      }
+
+      // 3. Mambatti Swing Animation (60deg down to -20deg back to 60deg)
+      if (w1_hit_t > 0) {
+          w1_hit_t -= 0.08;
+          if (w1_hit_t < 0) w1_hit_t = 0;
+          w1_r = 60 - Math.sin((1 - w1_hit_t) * Math.PI) * 80;
+          changed = true;
+      }
+
+      // Draw Depth from 0 to 110px (Y goes 40 to 150)
+      var currY = 40 + w1_holeP * 110;
+      var currL = 80 + w1_holeP * 12; // Top L 80 to Bot L 92
+      var currR = 160 - w1_holeP * 12; // Top R 160 to Bot R 148
+      
+      var dPath = 'M80 40 L'+currL+' '+currY+' L'+currR+' '+currY+' L160 40';
+      if(w1shaft) w1shaft.setAttribute('d', dPath);
+      if(w1clipPath) w1clipPath.setAttribute('d', dPath + ' Z');
+
+      // Water sits exactly at the bottom of hole, rising to 95px height max
+      var waterH = w1_waterP * 95;
+      if(w1water) {
+          w1water.setAttribute('y', currY - waterH);
+          w1water.setAttribute('height', waterH);
+      }
+
+      // Position and rotate mambatti hitting the exact bottom of the hole
+      if(w1mambatti) {
+          w1mambatti.setAttribute('transform', 'translate(120, ' + currY + ') rotate(' + w1_r + ', 25, -40)');
+      }
+
+      // Handle Mambatti Opacity
+      if (w1_targetP > 0 && w1_targetP < 1) {
+          if(w1mambattiGrp) w1mambattiGrp.style.opacity = 1;
+      } else if (w1_targetP === 1 && w1_holeP === 1 && w1_hit_t === 0) {
+          if(w1mambattiGrp) w1mambattiGrp.style.opacity = 0;
+      } else if (w1_targetP === 0) {
+          if(w1mambattiGrp) w1mambattiGrp.style.opacity = 0;
+      }
+
+      if (changed) {
+          requestAnimationFrame(w1Loop);
+      } else {
+          w1_animating = false;
+      }
+  }
+
   if(w1btn) {
       w1btn.addEventListener('click', function(){
-        if(w1d<8){ 
-          w1d++; 
-          var depth = w1d * 13.75; // 8 * 13.75 = 110 max depth
-          
-          // Digging happens first (sand moves down to reveal hole)
-          w1sand.style.transition = 'y 0.3s ease';
-          w1sand.setAttribute('y', 40 + depth);
+          if(w1d < 8) {
+              w1d++;
+              w1_targetP = w1d / 8;
+              w1_hit_t = 1; // trigger swing
+              if(w1mambattiGrp) w1mambattiGrp.style.opacity = 1;
+              if (!w1_animating) { w1_animating = true; w1Loop(); }
+              
+              var en = w1d<8 ? 'Depth: '+w1d+' hand-spans. The water keeps rising to meet you.' : 'You dug. It rose. That is the whole law.';
+              var ta = w1d<8 ? 'ஆழம்: '+w1d+' சாண். நீர் உங்களை நோக்கி ஊறிக்கொண்டே இருக்கிறது.' : 'நீங்கள் தோண்டினீர்கள். அது ஊறியது. விதி இவ்வளவு தான்.';
+              if(w1note) w1note.innerHTML = '<span class="L en">'+en+'</span><span class="L ta">'+ta+'</span>';
 
-          // Water rises slightly after
-          setTimeout(function() {
-            if(w1water) { 
-              w1water.style.transition = 'all 0.6s ease';
-              w1water.setAttribute('y', 150 - depth); 
-              w1water.setAttribute('height', depth); 
-            }
-          }, 350);
-
-          if(w1d===8) {
-            confetti(this.closest('.widget'));
-            w1btn.style.display = 'none'; // Swap button in place
-            if(w1reset) w1reset.style.display = 'block';
+              if (w1d === 8 && w1reset) {
+                  confetti(this.closest('.widget'));
+                  setTimeout(function() {
+                      w1btn.style.display = 'none';
+                      w1reset.style.display = 'block';
+                  }, 1200); // wait for water to finish filling before swap
+              }
           }
-        }
-        var en = w1d<8 ? 'Depth: '+w1d+' hand-spans. The water keeps rising to meet you.' : 'You dug. It rose. That is the whole law.';
-        var ta = w1d<8 ? 'ஆழம்: '+w1d+' சாண். நீர் உங்களை நோக்கி ஊறிக்கொண்டே இருக்கிறது.' : 'நீங்கள் தோண்டினீர்கள். அது ஊறியது. விதி இவ்வளவு தான்.';
-        if(w1note) w1note.innerHTML = '<span class="L en">'+en+'</span><span class="L ta">'+ta+'</span>';
       });
   }
+
   if(w1reset) {
       w1reset.addEventListener('click', function(){
-        w1d = 0;
-        w1sand.style.transition = 'none';
-        w1water.style.transition = 'none';
-        w1sand.setAttribute('y', 40);
-        w1water.setAttribute('y', 150); 
-        w1water.setAttribute('height', 0);
-        
-        if(w1note) w1note.innerHTML = '<span class="L en">Each dig makes the well deeper. Watch what the water does.</span><span class="L ta">ஒவ்வொரு தோண்டலுக்கும் கிணறு ஆழமாகும். நீர் என்ன செய்கிறது என்று பாருங்கள்.</span>';
-        
-        w1reset.style.display = 'none';
-        w1btn.style.display = 'block'; // Bring action button back
+          w1d = 0; w1_targetP = 0; w1_hit_t = 0;
+          if (!w1_animating) { w1_animating = true; w1Loop(); }
+          if(w1note) w1note.innerHTML = '<span class="L en">Each dig makes the well deeper. Watch what the water does.</span><span class="L ta">ஒவ்வொரு தோண்டலுக்கும் கிணறு ஆழமாகும். நீர் என்ன செய்கிறது என்று பாருங்கள்.</span>';
+          this.style.display = 'none';
+          if(w1btn) w1btn.style.display = 'inline-block';
       });
   }
 
@@ -976,9 +1035,8 @@
           dots.forEach(function(d){ d.remove(); });
         }
         if(w2note) w2note.innerHTML = '<span class="L en">Hold it, and watch what was inside her all along.</span><span class="L ta">பிடித்திருங்கள். அவளுக்குள் எப்போதும் இருந்ததைப் பாருங்கள்.</span>';
-        
-        w2reset.style.display = 'none';
-        w2btn.style.display = 'block';
+        this.style.display = 'none';
+        if(w2btn) w2btn.style.display = 'block';
       });
   }
 
@@ -1108,60 +1166,145 @@
       w8range.addEventListener('input', w8update); w8update();
   }
 
-  // ---------- W9 final hold-to-dig ----------
-  var w9p=0, w9timer=null, w9water=document.getElementById('w9water'), w9sand=document.getElementById('w9sand');
-  var w9note=document.getElementById('w9note'), w9done=false, w9reset=document.getElementById('w9reset');
-  var w9btn=document.getElementById('w9btn');
-  
-  // Set the CSS transition for water to smoothly lag behind the dig
-  if(w9water) w9water.style.transition = 'all 0.8s ease';
+  // ---------- W9 final hold-to-dig dynamic geometric ----------
+  var w9_holeP = 0, w9_waterP = 0, w9_targetP = 0, w9_animating = false, w9_done = false;
+  var w9_is_holding = false, w9_swing_time = 0, w9_r = 60;
+  var w9shaft = document.getElementById('w9shaft');
+  var w9clipPath = document.getElementById('w9clipPath');
+  var w9water = document.getElementById('w9water');
+  var w9btn = document.getElementById('w9btn');
+  var w9reset = document.getElementById('w9reset');
+  var w9note = document.getElementById('w9note');
+  var w9mambattiGrp = document.getElementById('w9mambattiGrp');
+  var w9mambatti = document.getElementById('w9mambatti');
 
-  function w9tick(){
-    if(w9p<100){ 
-      w9p+=2.2;
-      var hh=Math.min(83, 83*w9p/100);
-      
-      // Sand moves instantly (digging)
-      if(w9sand) w9sand.setAttribute('y', 25 + hh);
-      
-      // Water smoothly trails behind
-      if(w9water) { 
-        w9water.setAttribute('y', 108-hh); 
-        w9water.setAttribute('height', hh); 
+  function w9Loop() {
+      var changed = false;
+
+      // Hole opens up downward
+      if (w9_holeP < w9_targetP) {
+          w9_holeP += 0.03;
+          if(w9_holeP > w9_targetP) w9_holeP = w9_targetP;
+          changed = true;
+      } else if (w9_holeP > w9_targetP) {
+          w9_holeP -= 0.1;
+          if(w9_holeP < w9_targetP) w9_holeP = w9_targetP;
+          changed = true;
       }
-    } else if(!w9done){
-      w9done=true; clearInterval(w9timer); w9timer=null;
-      if(w9note) w9note.innerHTML='<span class="L en">The water came. It was waiting for you all along.</span><span class="L ta">நீர் வந்தது. உங்களுக்காகவே காத்திருந்தது.</span>';
-      if(w9btn) {
-        confetti(w9btn.closest('.widget'), 28);
-        w9btn.style.display = 'none';
+
+      // Water slightly lags behind the hole creation
+      if (w9_holeP === w9_targetP && w9_waterP < w9_targetP) {
+          w9_waterP += 0.01;
+          if(w9_waterP > w9_targetP) w9_waterP = w9_targetP;
+          changed = true;
+      } else if (w9_waterP > w9_targetP) {
+          w9_waterP -= 0.1;
+          if(w9_waterP < w9_targetP) w9_waterP = w9_targetP;
+          changed = true;
       }
-      if(w9reset) w9reset.style.display = 'block';
-    }
+
+      // Mambatti continuous swing while holding
+      if (w9_is_holding && w9_holeP < 1) {
+          w9_swing_time += 0.4;
+          w9_r = 25 + Math.sin(w9_swing_time) * 45; // Swing between 70 and -20
+          changed = true;
+      } else {
+          w9_swing_time = 0;
+          if (w9_r < 60) {
+              w9_r += (60 - w9_r) * 0.2;
+              if(Math.abs(w9_r - 60) > 1) changed = true; else w9_r = 60;
+          }
+      }
+
+      // Draw Depth from 25 to 108 (Total = 83)
+      var currY = 25 + w9_holeP * 83;
+      var currL = 40 + w9_holeP * 12; // Top 40 to Bot 52
+      var currR = 110 - w9_holeP * 12; // Top 110 to Bot 98
+      
+      var dPath = 'M40 25 L'+currL+' '+currY+' L'+currR+' '+currY+' L110 25';
+      if(w9shaft) w9shaft.setAttribute('d', dPath);
+      if(w9clipPath) w9clipPath.setAttribute('d', dPath + ' Z');
+
+      // Water sits inside
+      var waterH = w9_waterP * 72; // Almost full (max depth 83)
+      if(w9water) {
+          w9water.setAttribute('y', currY - waterH);
+          w9water.setAttribute('height', waterH);
+      }
+
+      // Sync mambatti
+      if(w9mambatti) {
+          w9mambatti.setAttribute('transform', 'translate(75, ' + currY + ') rotate(' + w9_r + ', 18, -28)');
+      }
+
+      // Handle Opacity
+      if (w9_is_holding && w9_holeP < 1) {
+          if(w9mambattiGrp) w9mambattiGrp.style.opacity = 1;
+      } else if (w9_targetP === 1 && w9_holeP === 1 && Math.abs(w9_r - 60) <= 1) {
+          if(w9mambattiGrp) w9mambattiGrp.style.opacity = 0;
+      } else if (w9_targetP === 0) {
+          if(w9mambattiGrp) w9mambattiGrp.style.opacity = 0;
+      }
+
+      if (changed) {
+          requestAnimationFrame(w9Loop);
+      } else {
+          w9_animating = false;
+      }
   }
-  
+
+  function w9Tick() {
+      if(w9_targetP < 1) {
+          w9_targetP += 0.02;
+          if(w9_targetP > 1) w9_targetP = 1;
+          if(!w9_animating) { w9_animating = true; w9Loop(); }
+      } else if(!w9_done) {
+          w9_done = true;
+          w9_is_holding = false;
+          if(w9note) w9note.innerHTML='<span class="L en">The water came. It was waiting for you all along.</span><span class="L ta">நீர் வந்தது. உங்களுக்காகவே காத்திருந்தது.</span>';
+          if(w9btn) {
+              confetti(w9btn.closest('.widget'), 28);
+              setTimeout(function(){
+                  w9btn.style.display = 'none';
+                  if(w9reset) w9reset.style.display = 'block';
+              }, 1200);
+          }
+      }
+  }
+
+  var w9timer = null;
   if(w9btn) {
-      w9btn.addEventListener('pointerdown', function(e){ e.preventDefault(); if(!w9timer && !w9done) w9timer=setInterval(w9tick,50); });
-      ['pointerup','pointerleave','pointercancel'].forEach(function(ev){ w9btn.addEventListener(ev, function(){ if(!w9done){ clearInterval(w9timer); w9timer=null; } }); });
-      w9btn.addEventListener('keydown', function(e){ if((e.key===' '||e.key==='Enter') && !w9done){ for(var i=0;i<10;i++) w9tick(); }});
+      w9btn.addEventListener('pointerdown', function(e){ 
+          e.preventDefault(); 
+          w9_is_holding = true;
+          if(w9mambattiGrp) w9mambattiGrp.style.opacity = 1;
+          if(!w9timer && !w9_done) w9timer=setInterval(w9Tick,50); 
+          if(!w9_animating) { w9_animating = true; w9Loop(); }
+      });
+      ['pointerup','pointerleave','pointercancel'].forEach(function(ev){ 
+          w9btn.addEventListener(ev, function(){ 
+              w9_is_holding = false;
+              if(!w9_done && w9timer){ clearInterval(w9timer); w9timer=null; } 
+          }); 
+      });
+      w9btn.addEventListener('keydown', function(e){ 
+          if((e.key===' '||e.key==='Enter') && !w9_done){ 
+              w9_is_holding = true;
+              if(w9mambattiGrp) w9mambattiGrp.style.opacity = 1;
+              for(var i=0;i<10;i++) w9Tick(); 
+              setTimeout(function(){ w9_is_holding = false; }, 300);
+          }
+      });
   }
+
   if(w9reset) {
       w9reset.addEventListener('click', function(){
-        if(w9timer) { clearInterval(w9timer); w9timer = null; }
-        w9p = 0; w9done = false;
-        
-        w9water.style.transition = 'none';
-        if(w9sand) w9sand.setAttribute('y', 25);
-        if(w9water) { 
-          w9water.setAttribute('y', 108); 
-          w9water.setAttribute('height', 0); 
-        }
-        // Restore transition after reset
-        setTimeout(function(){ if(w9water) w9water.style.transition = 'all 0.8s ease'; }, 50);
-
-        if(w9note) w9note.innerHTML = '';
-        w9reset.style.display = 'none';
-        w9btn.style.display = 'block';
+          if(w9timer) { clearInterval(w9timer); w9timer = null; }
+          w9_targetP = 0; w9_done = false; w9_is_holding = false;
+          if(!w9_animating) { w9_animating = true; w9Loop(); }
+          if(w9note) w9note.innerHTML = '';
+          this.style.display = 'none';
+          if(w9btn) w9btn.style.display = 'inline-block';
       });
   }
   

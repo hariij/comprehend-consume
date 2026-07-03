@@ -29,14 +29,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4  # Fully updated checkout action
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Install and Build Project
+        run: |
+          npm ci
+          npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3 # Fully updated artifact action
         with:
-          # Upload entire repository
-          path: './dist'
+          path: './dist' # Uploads the newly generated build folder
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4 # Fully updated deployment engine
