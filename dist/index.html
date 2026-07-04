@@ -326,8 +326,8 @@
     display:block;margin:-1.6rem auto 2.2rem;opacity:.75}
   .share-line:hover{opacity:1;text-decoration:underline}
   #hpShareRow{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin-top:1.6rem}
-  #hpToast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--paper);
-    padding:.6rem 1.2rem;border-radius:999px;font-size:.85rem;opacity:0;transition:all .35s ease;z-index:95;pointer-events:none}
+  #hpToast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--paper);
+    padding:.7rem 1.3rem;border-radius:12px;font-size:.85rem;line-height:1.4;max-width:min(320px,88vw);text-align:center;opacity:0;transition:all .35s ease;z-index:95;pointer-events:none}
   #hpToast.show{opacity:1;transform:translateX(-50%)}
   #wsPlay{margin-top:.7rem}
   #hpScrim{position:fixed;inset:0;background:rgba(43,33,24,.35);z-index:39;display:none}
@@ -352,7 +352,7 @@
     figure{margin:1.2rem 0}
   }
   body.lamplight .art::after{background:#A5744E}
-  .wreset{font-size:.78rem;padding:.35rem 1rem;margin-top:.9rem;opacity:.65}
+  .wreset{font-size:.8rem;padding:.4rem 1.1rem;margin-top:1rem;opacity:.9;border-width:2px}
   .wreset:hover{opacity:1}
   #hpShareMenu{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:70;background:rgba(43,33,24,.45);padding:1rem}
   #hpShareMenu.show{display:flex}
@@ -395,6 +395,23 @@
   .navdot.showlbl span{opacity:1;transform:translateY(-50%) translateX(-4px)}
   #hpResetAll{margin-top:1.1rem;font-size:.78rem;opacity:.75;width:100%}
   @media (prefers-reduced-motion: reduce){#wGgrid:not(.started) .gdot.lit{animation:none}}
+  #themeMenu{position:fixed;z-index:46;background:var(--paper);border:2px solid var(--ink);
+    border-radius:12px;padding:.4rem;display:none;box-shadow:0 8px 24px rgba(43,33,24,.2);min-width:160px}
+  #themeMenu.show{display:block}
+  #themeMenu button{display:block;width:100%;text-align:left;background:none;border:none;cursor:pointer;
+    color:var(--ink);font-family:inherit;font-size:.88rem;padding:.5rem .7rem;border-radius:8px}
+  #themeMenu button:hover{background:var(--sand)}
+  #themeMenu button.sel{background:var(--sand);font-weight:600}
+    #hpScrim{position:fixed;inset:0;background:rgba(43,33,24,.4);z-index:38;opacity:0;visibility:hidden;transition:opacity .3s ease}
+  #hpScrim.show{opacity:1;visibility:visible}
+  .wreset{position:absolute;top:12px;right:12px;margin:0;font-size:.72rem;padding:.3rem .8rem;
+    opacity:.85;z-index:3;background:var(--paper);border:1.5px solid var(--terra);color:var(--terra)}
+  .wreset:hover{opacity:1;background:var(--terra);color:var(--paper)}
+  body.lamplight .wreset{background:var(--sand)}
+  .widget{padding-top:3rem}
+  .wchip{top:10px}
+  footer{padding-bottom:120px!important}
+  @media(max-width:640px){ footer{padding-bottom:150px!important} }
 </style>
 <link rel="alternate" hreflang="en" href="https://hariprav.in/comprehend-consume/">
 <link rel="alternate" hreflang="ta" href="https://hariprav.in/comprehend-consume/?lang=ta">
@@ -1219,8 +1236,10 @@
       w4rst.innerHTML='<span class="L en">↺ Reset</span><span class="L ta">↺ மீண்டும் தொடங்கு</span>';
       w4wrap.closest('.widget').appendChild(w4rst);
       w4rst.addEventListener('click', function(){
-        w4flipped=0; if(w4door) w4door.classList.remove('open');
-        w4list.forEach(function(b,i){ b.classList.remove('flipped'); b.textContent=GIBBERISH[i]; b.style.background=''; b.style.borderColor=''; b.style.color=''; });
+        hpConfirm(dual('Reset this widget?','இந்த விட்ஜெட்டை மீட்டமைக்கவா?'), function(){
+          w4flipped=0; if(w4door) w4door.classList.remove('open');
+          w4list.forEach(function(b,i){ b.classList.remove('flipped'); b.textContent=GIBBERISH[i]; b.style.background=''; b.style.borderColor=''; b.style.color=''; });
+        });
       });
       [btnEn,btnTa].forEach(function(bt){ 
           if(bt) bt.addEventListener('click', function(){
@@ -1531,6 +1550,7 @@
 </script>
 
 <div id="hpScrim"></div>
+<div id="hpScrim"></div>
 <div id="hpDrawer" role="dialog" aria-label="Collected artifacts">
   <button id="hpClose" type="button" aria-label="Close">×</button>
   <h4><span class="L en">Your Pouch</span><span class="L ta">உங்கள் பொக்கிஷம்</span></h4>
@@ -1585,6 +1605,32 @@
   document.querySelectorAll('.note, .answer').forEach(function(el){ el.setAttribute('aria-live','polite'); });
 
   /* ================= toast ================= */
+  function hpConfirm(msg, onYes){
+    var m=$('hpConfirmM');
+    if(!m){
+      m=document.createElement('div'); m.id='hpConfirmM';
+      m.style.cssText='position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:90;background:rgba(43,33,24,.5);padding:1rem';
+      m.innerHTML='<div class="inner" style="background:var(--paper);border-radius:16px;padding:1.6rem 1.4rem;max-width:340px;width:100%;text-align:center">'
+        +'<p id="hpConfirmMsg" style="margin-bottom:1.1rem;font-size:1rem"></p>'
+        +'<div style="display:flex;gap:.6rem;justify-content:center">'
+        +'<button class="wbtn" id="hpConfirmYes" type="button"></button>'
+        +'<button class="wbtn alt" id="hpConfirmNo" type="button"></button></div></div>';
+      document.body.appendChild(m);
+      m.addEventListener('click',function(e){ if(e.target===m) m.style.display='none'; });
+      $('hpConfirmNo').addEventListener('click',function(){ m.style.display='none'; });
+    }
+    $('hpConfirmMsg').innerHTML=msg;
+    $('hpConfirmYes').innerHTML=dual('Yes, reset','ஆம், மீட்டமை');
+    $('hpConfirmNo').innerHTML=dual('Cancel','வேண்டாம்');
+    var yes=$('hpConfirmYes'), clone=yes.cloneNode(true); yes.parentNode.replaceChild(clone,yes);
+    clone.addEventListener('click',function(){ m.style.display='none'; onYes(); });
+    m.style.display='flex';
+  }
+  function hpCloseOverlays(){
+    var b=$('hpBloom'); if(b) b.classList.remove('show');
+    ['hpShareMenu','themeMenu'].forEach(function(id){ var e=$(id); if(e) e.classList.remove('show'); });
+    ['hpTea','hpNameM'].forEach(function(id){ var e=$(id); if(e) e.style.display='none'; });
+  }
   var toastT=null;
   function toast(en,ta){
     var t=$('hpToast'); t.textContent = isTa()? ta : en;
@@ -1615,6 +1661,8 @@
     got[k]=1;
     try{ localStorage.setItem('hp-arts', JSON.stringify(Object.keys(got))); }catch(e){}
     paint();
+    var wel=artEl(k);
+    if(wel){ var wid=wel.closest('.widget'); if(wid) burst(wid); }
     var badge=$('hpBadge');
     if(badge){ badge.classList.remove('pop'); void badge.offsetWidth; badge.classList.add('pop'); }
     if(count()===ARTS.length && !celebrated){
@@ -1639,7 +1687,11 @@
   var w4b=$('w4bricks'); if(w4b) w4b.addEventListener('click',function(){
     setTimeout(function(){
       var all=w4b.querySelectorAll('.brick').length, fl=w4b.querySelectorAll('.brick.flipped').length;
-      if(all>0 && fl>=all) collect('brick');
+      if(all>0 && fl>=all){
+        collect('brick');
+        var dd=$('w4door');
+        if(dd && !dd.classList.contains('open')){ dd.classList.add('open'); burst(w4b.closest('.widget')); }
+      }
     },0);
   });
   var w5k=$('w5coach'); if(w5k) w5k.addEventListener('click',function(){ collect('match'); });
@@ -1676,11 +1728,13 @@
     gauge.addEventListener('click',openDrawer);
     gauge.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openDrawer(); }});
   }
-  function hpCloseDrawer(){ $('hpDrawer').classList.remove('open'); var s=$('hpScrim'); if(s) s.classList.remove('show'); }
+  function hpCloseDrawer(){ $('hpDrawer').classList.remove('open'); { var _s=$('hpScrim'); if(_s) _s.classList.remove('show'); }; var s=$('hpScrim'); if(s) s.classList.remove('show'); }
   $('hpClose').addEventListener('click',hpCloseDrawer);
   var hpScrimEl=$('hpScrim'); if(hpScrimEl) hpScrimEl.addEventListener('click',hpCloseDrawer);
   document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ hpCloseDrawer(); $('hpBloom').classList.remove('show'); }});
   $('hpBloomClose').addEventListener('click',function(){ $('hpBloom').classList.remove('show'); });
+  var _bloom=$('hpBloom');
+  if(_bloom) _bloom.addEventListener('click',function(e){ if(e.target===_bloom) _bloom.classList.remove('show'); });
 
   /* ---- chapter indicator in gauge ---- */
   var TA_N=['·','௧','௨','௩','௪','௫','௬','௭','௮'];
@@ -1705,9 +1759,6 @@
       smenu.innerHTML='<div class="inner"><button id="hpSmClose" type="button" aria-label="Close">×</button>'
         +'<h5>'+dual('Share via','இதன் வழியாகப் பகிர')+'</h5>'
         +'<a class="wbtn" id="smWa" target="_blank" rel="noopener">WhatsApp</a>'
-        +'<a class="wbtn alt" id="smX" target="_blank" rel="noopener">X (Twitter)</a>'
-        +'<a class="wbtn alt" id="smLi" target="_blank" rel="noopener">LinkedIn</a>'
-        +'<a class="wbtn alt" id="smFb" target="_blank" rel="noopener">Facebook</a>'
         +'<button class="wbtn alt" id="smCopy" type="button">'+dual('Copy link','இணைப்பை நகலெடுக்க')+'</button></div>';
       document.body.appendChild(smenu);
       $('hpSmClose').addEventListener('click',function(){ smenu.classList.remove('show'); });
@@ -1715,9 +1766,6 @@
     }
     var u=encodeURIComponent(url), t=encodeURIComponent(text);
     $('smWa').href='https://wa.me/?text='+t+'%20'+u;
-    $('smX').href='https://twitter.com/intent/tweet?text='+t+'&url='+u;
-    $('smLi').href='https://www.linkedin.com/sharing/share-offsite/?url='+u;
-    $('smFb').href='https://www.facebook.com/sharer/sharer.php?u='+u;
     $('smCopy').onclick=function(){
       if(navigator.clipboard) navigator.clipboard.writeText(text+' '+url).then(function(){
         toast('Link copied','இணைப்பு நகலெடுக்கப்பட்டது'); smenu.classList.remove('show');
@@ -1741,9 +1789,6 @@
     row.innerHTML =
       '<button class="wbtn" id="hpShareBtn" type="button">'+dual('Share this essay','கட்டுரையைப் பகிர')+'</button>'+
       '<a class="wbtn alt" id="hpWaBtn" target="_blank" rel="noopener">WhatsApp</a>'+
-      '<a class="wbtn alt" id="hpXBtn" target="_blank" rel="noopener">X</a>'+
-      '<a class="wbtn alt" id="hpLiBtn" target="_blank" rel="noopener">LinkedIn</a>'+
-      '<a class="wbtn alt" id="hpFbBtn" target="_blank" rel="noopener">Facebook</a>'+
       '<button class="wbtn alt" id="hpCopyBtn" type="button">'+dual('Copy link','இணைப்பை நகலெடுக்க')+'</button>';
     footer.insertBefore(row, footer.querySelector('div'));
     function shareText(){
@@ -1752,9 +1797,6 @@
     function updateShareHrefs(){
       var u=encodeURIComponent(pageUrl()), t=encodeURIComponent(shareText());
       $('hpWaBtn').href='https://wa.me/?text='+t+'%20'+u;
-      $('hpXBtn').href='https://twitter.com/intent/tweet?text='+t+'&url='+u;
-      $('hpLiBtn').href='https://www.linkedin.com/sharing/share-offsite/?url='+u;
-      $('hpFbBtn').href='https://www.facebook.com/sharer/sharer.php?u='+u;
     }
     updateShareHrefs();
     $('hpShareBtn').addEventListener('click',function(){ doShare(shareText(), pageUrl()); });
@@ -1815,8 +1857,9 @@
       ? 'பன்னிரண்டு பொக்கிஷங்களையும் சேர்த்து கிணற்றைத் தோண்டிவிட்டேன்! நீங்களும் படித்து விளையாடுங்கள்:'
       : 'I collected all 12 artifacts and dug the well! Read and play the interactive essay:';
   }
-  function shareAchievement(){ doShare(achieveText(), pageUrl()); }
+  function shareAchievement(){ var b=$('hpBloom'); if(b) b.classList.remove('show'); doShare(achieveText(), pageUrl()); }
   function downloadCard(){
+    var _b=$('hpBloom'); if(_b) _b.classList.remove('show');
     ensureName(function(){
       var go=function(){
         makeCard().toBlob(function(blob){
@@ -1898,32 +1941,53 @@
     });
   })();
 
-  /* ================= விளக்கு lamplight mode ================= */
+  /* ================= theme: System / Light / Lamplight (default Light) ================= */
   var lt=$('langToggle');
   if(lt){
     var tb=document.createElement('button');
     tb.type='button'; tb.id='themeBtn';
-    tb.setAttribute('aria-label','Toggle lamplight mode');
+    tb.setAttribute('aria-label','Theme'); tb.setAttribute('aria-haspopup','true');
     tb.textContent='🪔';
     lt.appendChild(tb);
-    function setTheme(on, save){
+    var tMenu=document.createElement('div'); tMenu.id='themeMenu';
+    tMenu.innerHTML =
+      '<button data-mode="paper" type="button">'+dual('☀️ Light','☀️ வெளிச்சம்')+'</button>'
+      +'<button data-mode="lamp" type="button">'+dual('🪔 Lamplight','🪔 விளக்கொளி')+'</button>'
+      +'<button data-mode="os" type="button">'+dual('🖥️ Follow system','🖥️ கணினிப்படி')+'</button>';
+    document.body.appendChild(tMenu);
+    var mq = window.matchMedia ? matchMedia('(prefers-color-scheme: dark)') : {matches:false};
+    function themeMode(){
+      var m=null; try{ m=localStorage.getItem('hp-theme'); }catch(e){}
+      return (m==='os'||m==='lamp'||m==='paper') ? m : 'paper';
+    }
+    function applyTheme(){
+      var m=themeMode(), on = (m==='lamp') || (m==='os' && mq.matches);
       document.body.classList.toggle('lamplight', on);
+      tb.textContent = on ? '☀️' : '🪔';
       tb.classList.toggle('active', on);
-      tb.textContent = on ? '\u2600\ufe0f' : '\ud83e\ude94';
-      tb.setAttribute('aria-pressed', on ? 'true' : 'false');
-      var m=$('metaTheme'); if(m) m.setAttribute('content', on?'#201B31':'#F7F0E1');
-      if(save){ try{ localStorage.setItem('hp-theme', on?'lamp':'paper'); }catch(e){} }
+      tb.setAttribute('aria-pressed', on?'true':'false');
+      var mt=$('metaTheme'); if(mt) mt.setAttribute('content', on?'#201B31':'#F7F0E1');
+      tMenu.querySelectorAll('[data-mode]').forEach(function(b){
+        b.classList.toggle('sel', b.getAttribute('data-mode')===m);
+      });
     }
-    tb.addEventListener('click',function(){ setTheme(!document.body.classList.contains('lamplight'), true); });
-    var pref=null;
-    try{ pref=localStorage.getItem('hp-theme'); }catch(e){}
-    if(pref==='lamp') setTheme(true,false);
-    else if(pref===null && window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) setTheme(true,false);
-    if(window.matchMedia){
-      var mq=matchMedia('(prefers-color-scheme: dark)');
-      var onOS=function(ev){ var p=null; try{p=localStorage.getItem('hp-theme');}catch(_e){} if(p===null) setTheme(ev.matches,false); };
-      if(mq.addEventListener) mq.addEventListener('change',onOS); else if(mq.addListener) mq.addListener(onOS);
-    }
+    tb.addEventListener('click',function(e){
+      e.stopPropagation();
+      var r=tb.getBoundingClientRect();
+      tMenu.style.top=(r.bottom+8)+'px';
+      tMenu.style.right=Math.max(8,(window.innerWidth-r.right))+'px';
+      tMenu.classList.toggle('show');
+    });
+    tMenu.addEventListener('click',function(e){
+      e.stopPropagation();
+      var b=e.target.closest('[data-mode]'); if(!b) return;
+      try{ localStorage.setItem('hp-theme', b.getAttribute('data-mode')); }catch(err){}
+      applyTheme(); tMenu.classList.remove('show');
+    });
+    document.addEventListener('click',function(){ tMenu.classList.remove('show'); });
+    var onOS=function(){ if(themeMode()==='os') applyTheme(); };
+    if(mq.addEventListener) mq.addEventListener('change',onOS); else if(mq.addListener) mq.addListener(onOS);
+    applyTheme();
   }
 
   /* ================= resets for all widgets ================= */
@@ -1934,7 +1998,11 @@
       var b=document.createElement('button');
       b.type='button'; b.className='wbtn alt wreset';
       b.innerHTML='<span class="L en">↺ Reset</span><span class="L ta">↺ மீண்டும் தொடங்கு</span>';
-      w.appendChild(b); b.addEventListener('click', fn);
+      w.appendChild(b);
+      b.addEventListener('click', function(){
+        if(b.getAttribute('data-raw')){ fn(); return; }
+        hpConfirm(dual('Reset this widget?','இந்த விட்ஜெட்டை மீட்டமைக்கவா?'), fn);
+      });
     }
     function fire(el){ el.dispatchEvent(new Event('input',{bubbles:true})); }
     var r3=$('w3range'); addReset(r3, function(){ r3.value=10; fire(r3); });
@@ -2033,58 +2101,149 @@
     if(t){ e.preventDefault(); e.stopPropagation(); openTea(); }
   }, true);
 
-  /* ================= discoverability chips ================= */
-  document.querySelectorAll('.widget').forEach(function(w){
-    if(w.querySelector('.wchip')) return;
-    var c=document.createElement('div'); c.className='wchip';
-    c.innerHTML=dual('👆 tap to play','👆 தட்டி விளையாடுங்கள்');
-    w.insertBefore(c, w.firstChild);
-  });
+  /* ================= discoverability chips (per-widget guidance) ================= */
+  (function(){
+    var HINTS=[
+      ['#w1btn','tap to dig','தட்டித் தோண்டுங்கள்'],
+      ['#w2btn','press & hold','அழுத்திப் பிடியுங்கள்'],
+      ['#w3range','drag the slider','இழுத்துப் பாருங்கள்'],
+      ['#w4bricks','tap each brick','செங்கற்களைத் தட்டுங்கள்'],
+      ['#w5casual','switch the views','பார்வையை மாற்றுங்கள்'],
+      ['#wMchild','switch the eyes','கண்களை மாற்றுங்கள்'],
+      ['[data-listen]','try all 3 listens','மூன்று முறையும் கேளுங்கள்'],
+      ['[data-chip]','tap all 3 ways','மூன்று விதமும் தட்டுங்கள்'],
+      ['#w7then','flip then & now','அன்று - இன்று மாற்றுங்கள்'],
+      ['#w8range','slide to add lamps','இழுத்து விளக்குகளைச் சேருங்கள்'],
+      ['#wGgrid','tap the glowing lamp','ஒளிரும் விளக்கைத் தட்டுங்கள்'],
+      ['#w9btn','press & hold to dig','அழுத்திப் பிடித்துத் தோண்டுங்கள்']
+    ];
+    HINTS.forEach(function(p){
+      var el=document.querySelector(p[0]); if(!el) return;
+      var w=el.closest('.widget'); if(!w || w.querySelector('.wchip')) return;
+      var c=document.createElement('div'); c.className='wchip';
+      c.innerHTML='👆 '+dual(p[1],p[2]);
+      w.insertBefore(c, w.firstChild);
+    });
+    document.querySelectorAll('.widget').forEach(function(w){
+      if(!w.querySelector('.wchip')){
+        var c=document.createElement('div'); c.className='wchip';
+        c.innerHTML='👆 '+dual('tap to play','தட்டி விளையாடுங்கள்');
+        w.insertBefore(c, w.firstChild);
+      }
+    });
+  })();
 
   /* ================= long-press suppression ================= */
   document.addEventListener('contextmenu',function(e){
     if(e.target.closest && e.target.closest('.wbtn,.brick,.gdot')) e.preventDefault();
   });
 
-  /* ================= pouch: locked artifact -> go to its widget ================= */
+  /* ================= pouch: artifact -> its widget (locked or earned) ================= */
   var ART2W={dig:'w1btn',thumb:'w2btn',lamp:'w3range',brick:'w4bricks',match:'w5casual',
              pot:'wMchild',question:'w7then',race:'w8range',sharing:'wGgrid',well:'w9btn'};
+  function artEl(k){
+    if(k==='raga') return document.querySelector('[data-listen]');
+    if(k==='patience') return document.querySelector('[data-chip]');
+    return $(ART2W[k]);
+  }
+  function burst(host,n){
+    if(!host) return;
+    if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    n=n||16; var C=['#C0603A','#2E6E6A','#E5A33C','#4E5AA8'];
+    for(var i=0;i<n;i++){
+      var d=document.createElement('span'); d.className='kdot'; d.style.background=C[i%4];
+      d.style.setProperty('--dx',(Math.random()*220-110)+'px');
+      d.style.setProperty('--dy',(Math.random()*170-120)+'px');
+      host.appendChild(d);
+      (function(el){ setTimeout(function(){ el.remove(); },1300); })(d);
+    }
+  }
+  function closeOverlays(){
+    ['hpNameM','hpTea','hpConfirmM'].forEach(function(id){ var el=$(id); if(el){ el.style.display='none'; el.classList.remove('show'); } });
+    ['hpBloom','hpShareMenu','themeMenu'].forEach(function(id){ var el=$(id); if(el){ el.classList.remove('show'); el.style.display=''; } });
+  }
+  // any stale grey backdrop: one tap anywhere on it dismisses it
+  document.addEventListener('click',function(e){
+    ['hpBloom','hpNameM','hpTea','hpShareMenu'].forEach(function(id){
+      var el=$(id);
+      if(el && e.target===el){
+        el.classList.remove('show');
+        el.style.display = (id==='hpNameM'||id==='hpTea') ? 'none' : '';
+      }
+    });
+  }, true);
+  var bc=$('hpBloomClose'); if(bc) bc.addEventListener('click',closeOverlays);
+  // capture pristine brick texts, then guarantee a brick reset exists
+  document.querySelectorAll('.brick').forEach(function(b){ if(!b.dataset.g) b.dataset.g=b.textContent; });
+  (function(){
+    var wrap=$('w4bricks'); if(!wrap) return;
+    var w=wrap.closest('.widget'); if(!w || w.querySelector('.wreset')) return;
+    var b=document.createElement('button');
+    b.type='button'; b.className='wbtn alt wreset';
+    b.innerHTML=dual('↺ Reset','↺ மீண்டும் தொடங்கு');
+    w.appendChild(b);
+    b.addEventListener('click',function(){
+      var door=$('w4door'); if(door) door.classList.remove('open');
+      wrap.querySelectorAll('.brick').forEach(function(br){
+        br.classList.remove('flipped');
+        if(br.dataset.g) br.textContent=br.dataset.g;
+        br.style.background=''; br.style.borderColor=''; br.style.color='';
+      });
+    });
+  })();
   document.querySelectorAll('.art').forEach(function(a){
     a.style.cursor='pointer';
     a.addEventListener('click',function(){
-      if(a.classList.contains('got')) return;
-      var k=a.getAttribute('data-art'), el=null;
-      if(k==='raga') el=document.querySelector('[data-listen]');
-      else if(k==='patience') el=document.querySelector('[data-chip]');
-      else el=$(ART2W[k]);
+      var el=artEl(a.getAttribute('data-art'));
       if(!el) return;
       var w=el.closest('.widget')||el;
-      $('hpDrawer').classList.remove('open');
+      $('hpDrawer').classList.remove('open'); { var _s=$('hpScrim'); if(_s) _s.classList.remove('show'); };
       if(w.scrollIntoView) w.scrollIntoView({behavior:'smooth',block:'center'});
       w.classList.add('hilite');
       setTimeout(function(){ w.classList.remove('hilite'); },1800);
     });
   });
 
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape') hpCloseOverlays();
+  });
+
+  /* ================= wall reset guarantee ================= */
+  (function(){
+    var wrap=$('w4bricks'); if(!wrap) return;
+    var widget=wrap.closest('.widget'); if(!widget) return;
+    if(!widget.querySelector('.wreset')){
+      var orig=[].map.call(wrap.querySelectorAll('.brick'),function(b){ return b.textContent; });
+      var b=document.createElement('button');
+      b.type='button'; b.className='wbtn alt wreset';
+      b.innerHTML='<span class="L en">↺ Reset</span><span class="L ta">↺ மீண்டும் தொடங்கு</span>';
+      widget.appendChild(b);
+      b.addEventListener('click',function(){
+        hpConfirm(dual('Reset this widget?','இந்த விட்ஜெட்டை மீட்டமைக்கவா?'), function(){
+          [].forEach.call(wrap.querySelectorAll('.brick'),function(br,i){
+            br.classList.remove('flipped'); br.textContent=orig[i];
+            br.style.background=''; br.style.borderColor=''; br.style.color='';
+          });
+          var d=$('w4door'); if(d) d.classList.remove('open');
+        });
+      });
+    }
+  })();
+
   /* ================= reset everything ================= */
-  var raBtn=$('hpResetAll'), raArm=false, raT=null;
+  var raBtn=$('hpResetAll');
   if(raBtn){
-    var raLbl=raBtn.innerHTML;
     raBtn.addEventListener('click',function(){
-      if(!raArm){
-        raArm=true;
-        raBtn.innerHTML=dual('Tap again to confirm','உறுதிக்கு மீண்டும் தட்டவும்');
-        raT=setTimeout(function(){ raArm=false; raBtn.innerHTML=raLbl; },3000);
-        return;
-      }
-      clearTimeout(raT); raArm=false; raBtn.innerHTML=raLbl;
-      ['w1reset','w2reset','w9reset'].forEach(function(id){ var b=$(id); if(b) b.click(); });
-      document.querySelectorAll('.wreset').forEach(function(b){ b.click(); });
-      got={}; celebrated=false;
-      try{ localStorage.removeItem('hp-arts'); localStorage.removeItem('hp-celebrated'); }catch(e){}
-      paint();
-      $('hpDrawer').classList.remove('open');
-      toast('Everything reset. Dig again!','அனைத்தும் மீண்டும் தொடக்கம். மீண்டும் தோண்டுங்கள்!');
+      hpConfirm(dual('Reset <b>everything</b>? All collected artifacts reset.','<b>அனைத்தையும்</b> மீட்டமைக்கவா? எல்லா பொக்கிஷங்களும் நீக்கப்படும்.'), function(){
+        hpCloseOverlays();
+        ['w1reset','w2reset','w9reset'].forEach(function(id){ var b=$(id); if(b){ var f=b.getAttribute('data-raw'); b.setAttribute('data-raw','1'); b.click(); b.removeAttribute('data-raw'); } });
+        document.querySelectorAll('.wreset').forEach(function(b){ b.setAttribute('data-raw','1'); b.click(); b.removeAttribute('data-raw'); });
+        got={}; celebrated=false;
+        try{ localStorage.removeItem('hp-arts'); localStorage.removeItem('hp-celebrated'); }catch(e){}
+        paint();
+        $('hpDrawer').classList.remove('open'); { var _s=$('hpScrim'); if(_s) _s.classList.remove('show'); }
+        toast('Everything reset. Dig again!','அனைத்தும் மீண்டும் தொடக்கம். மீண்டும் தோண்டுங்கள்!');
+      });
     });
   }
 
@@ -2102,6 +2261,8 @@
       navigator.serviceWorker.register('./sw.js').catch(function(){});
     });
   }
+
+  var _scrim=$('hpScrim'); if(_scrim) _scrim.addEventListener('click',function(){ $('hpDrawer').classList.remove('open'); _scrim.classList.remove('show'); });
 
   paint();
 })();
