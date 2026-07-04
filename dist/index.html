@@ -2234,7 +2234,7 @@
   var raBtn=$('hpResetAll');
   if(raBtn){
     raBtn.addEventListener('click',function(){
-      hpConfirm(dual('Reset <b>everything</b>? All artifacts and widgets clear.','<b>அனைத்தையும்</b> மீட்டமைக்கவா? எல்லா பொக்கிஷங்களும் விட்ஜெட்களும் அழியும்.'), function(){
+      hpConfirm(dual('Reset <b>everything</b>? All artifacts and widgets clear.','<b>அனைத்தையும்</b> மீட்டமைக்கவா? சேகரிக்கப்பட்ட அனைத்து ஆவணங்களும் நீக்கப்படும்.'), function(){
         hpCloseOverlays();
         ['w1reset','w2reset','w9reset','w4reset'].forEach(function(id){ var b=$(id); if(b){ var f=b.getAttribute('data-raw'); b.setAttribute('data-raw','1'); b.click(); b.removeAttribute('data-raw'); } });
         document.querySelectorAll('.wreset').forEach(function(b){ b.setAttribute('data-raw','1'); b.click(); b.removeAttribute('data-raw'); });
