@@ -270,7 +270,7 @@
     .brick,.doorway,.pool{transition:none}
   }
 
-  footer{border-top:1px solid rgba(43,33,24,.15); max-width:680px; margin:0 auto; padding:2.6rem 1.6rem 4.5rem; text-align:center; font-size:.95rem}
+  footer{border-top:1px solid rgba(43,33,24,.15); max-width:680px; margin:0 auto; padding:2.6rem 1.6rem calc(4.5rem + env(safe-area-inset-bottom, 0px)); text-align:center; font-size:.95rem}
   footer .share{font-style:italic; opacity:.8; margin-bottom:1.4rem}
   body.lang-ta footer .share{font-style:normal}
   footer a{color:var(--teal)}
@@ -404,14 +404,19 @@
   #themeMenu button.sel{background:var(--sand);font-weight:600}
     #hpScrim{position:fixed;inset:0;background:rgba(43,33,24,.4);z-index:38;opacity:0;visibility:hidden;transition:opacity .3s ease}
   #hpScrim.show{opacity:1;visibility:visible}
-  .wreset{position:absolute;top:12px;right:12px;margin:0;font-size:.72rem;padding:.3rem .8rem;
-    opacity:.85;z-index:3;background:var(--paper);border:1.5px solid var(--terra);color:var(--terra)}
+  .wreset{margin-top:0;font-size:.9rem;opacity:.9;background:var(--paper);border:1.5px solid var(--terra);color:var(--terra)}
   .wreset:hover{opacity:1;background:var(--terra);color:var(--paper)}
   body.lamplight .wreset{background:var(--sand)}
-  .widget{padding-top:3rem}
-  .wchip{top:10px}
+  .widget{padding-top:2.8rem}
+  .wchip{top:12px}
   footer{padding-bottom:120px!important}
   @media(max-width:640px){ footer{padding-bottom:150px!important} }
+  @media(max-width:640px){ footer{padding-bottom:120px} }
+  .hp-modal{background:var(--paper);border-radius:16px;padding:1.8rem 1.5rem 1.5rem;width:100%;text-align:center;position:relative}
+  body.lang-ta .hp-modal{padding:2rem 1.6rem 1.6rem;line-height:1.7}
+  .hpX{position:absolute;top:8px;right:12px;background:none;border:none;font-size:1.5rem;line-height:1;cursor:pointer;color:var(--ink);opacity:.6;padding:2px 6px}
+  .hpX:hover{opacity:1}
+  body.lamplight .hp-modal{background:var(--sand)}
 </style>
 <link rel="alternate" hreflang="en" href="https://hariprav.in/comprehend-consume/">
 <link rel="alternate" hreflang="ta" href="https://hariprav.in/comprehend-consume/?lang=ta">
@@ -637,6 +642,7 @@
   <div class="widget reveal">
     <h3><span class="L en">Tap the bricks. Turn them into your language.</span><span class="L ta">செங்கற்களைத் தட்டுங்கள். உங்கள் மொழியாக்குங்கள்.</span></h3>
     <div class="bricks" id="w4bricks"></div>
+    <button class="wbtn alt wreset" id="w4reset" type="button" style="display:none;margin-top:1rem"><span class="L en">Reset</span><span class="L ta">மீண்டும்</span></button>
     <div class="doorway" id="w4door"><p class="note"><span class="L en">A doorway opens. The wall was never about your mind.</span><span class="L ta">ஒரு வாசல் திறக்கிறது. சுவர் ஒருபோதும் உங்கள் மூளையால் எழவில்லை.</span></p></div>
     <p class="note" id="w4note"><span class="L en">Each brick is a locked idea. Tap to unlock.</span><span class="L ta">ஒவ்வொரு செங்கல்லும் பூட்டிய ஒரு யோசனை. தட்டித் திறங்கள்.</span></p>
   </div>
@@ -1227,20 +1233,27 @@
           b.classList.add('flipped'); b.textContent=w4word(idx);
           b.style.background=FLIPC[idx%4]; b.style.borderColor=FLIPC[idx%4];
           w4flipped++;
-          if(w4flipped===GIBBERISH.length){ w4door.classList.add('open'); confetti(w4wrap.closest('.widget')); }
+          if(w4flipped===GIBBERISH.length){ w4door.classList.add('open'); confetti(w4wrap.closest('.widget')); var w4r=document.getElementById('w4reset'); if(w4r) w4r.style.display='inline-block'; }
         });
         w4list.push(b); w4wrap.appendChild(b);
       });
-      var w4rst=document.createElement('button');
-      w4rst.type='button'; w4rst.className='wbtn alt wreset';
-      w4rst.innerHTML='<span class="L en">↺ Reset</span><span class="L ta">↺ மீண்டும் தொடங்கு</span>';
-      w4wrap.closest('.widget').appendChild(w4rst);
-      w4rst.addEventListener('click', function(){
-        hpConfirm(dual('Reset this widget?','இந்த விட்ஜெட்டை மீட்டமைக்கவா?'), function(){
-          w4flipped=0; if(w4door) w4door.classList.remove('open');
-          w4list.forEach(function(b,i){ b.classList.remove('flipped'); b.textContent=GIBBERISH[i]; b.style.background=''; b.style.borderColor=''; b.style.color=''; });
+      var w4reset=document.getElementById('w4reset');
+      if(w4reset){
+        w4reset.addEventListener('click', function(){
+          if(w4reset.getAttribute('data-raw')){
+            w4flipped=0; if(w4door) w4door.classList.remove('open');
+            w4list.forEach(function(b,i){ b.classList.remove('flipped'); b.textContent=GIBBERISH[i]; b.style.background=''; b.style.borderColor=''; b.style.color=''; });
+            w4reset.style.display='none';
+            return;
+          }
+          var _d=window.dual||function(a,b){return '<span class="L en">'+a+'</span><span class="L ta">'+b+'</span>';};
+          (window.hpConfirm||function(m,f){f();})(_d('Reset this widget?','இந்த பகுதியை மீண்டும் அமைக்கவா?'), function(){
+            w4flipped=0; if(w4door) w4door.classList.remove('open');
+            w4list.forEach(function(b,i){ b.classList.remove('flipped'); b.textContent=GIBBERISH[i]; b.style.background=''; b.style.borderColor=''; b.style.color=''; });
+            w4reset.style.display='none';
+          });
         });
-      });
+      }
       [btnEn,btnTa].forEach(function(bt){ 
           if(bt) bt.addEventListener('click', function(){
              w4list.forEach(function(b,i){ if(b.classList.contains('flipped')) b.textContent=w4word(i); });
@@ -1578,7 +1591,8 @@
   </div>
   <button id="hpResetAll" class="wbtn alt" type="button"><span class="L en">↺ Reset everything</span><span class="L ta">↺ அனைத்தையும் மீண்டும் தொடங்கு</span></button>
 </div>
-<div id="hpBloom"><div class="inner">
+<div id="hpBloom"><div class="inner hp-modal">
+  <button class="hpX" id="hpBloomX" type="button" aria-label="Close">×</button>
   <h4><span class="L en">The well is full.</span><span class="L ta">கிணறு நிறைந்தது.</span></h4>
   <p style="font-size:.95rem"><span class="L en">You played all twelve. The water rose to meet you.</span><span class="L ta">பன்னிரண்டையும் விளையாடினீர்கள். நீர் உங்களை நோக்கி ஊறியது.</span></p>
   <div id="hpShareRow">
@@ -1596,6 +1610,7 @@
   function $(id){ return document.getElementById(id); }
   function isTa(){ return document.body.classList.contains('lang-ta'); }
   function dual(en,ta){ return '<span class="L en">'+en+'</span><span class="L ta">'+ta+'</span>'; }
+  window.dual = dual;
   function pageUrl(){
     var u = 'https://hariprav.in/comprehend-consume/';
     return isTa() ? u+'?lang=ta' : u;
@@ -1610,14 +1625,16 @@
     if(!m){
       m=document.createElement('div'); m.id='hpConfirmM';
       m.style.cssText='position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:90;background:rgba(43,33,24,.5);padding:1rem';
-      m.innerHTML='<div class="inner" style="background:var(--paper);border-radius:16px;padding:1.6rem 1.4rem;max-width:340px;width:100%;text-align:center">'
-        +'<p id="hpConfirmMsg" style="margin-bottom:1.1rem;font-size:1rem"></p>'
-        +'<div style="display:flex;gap:.6rem;justify-content:center">'
+      m.innerHTML='<div class="inner hp-modal" style="max-width:320px">'
+        +'<button class="hpX" id="hpConfirmX" type="button" aria-label="Close">×</button>'
+        +'<p id="hpConfirmMsg" style="margin:.4rem 0 1.3rem;font-size:1rem;line-height:1.6"></p>'
+        +'<div style="display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap">'
         +'<button class="wbtn" id="hpConfirmYes" type="button"></button>'
         +'<button class="wbtn alt" id="hpConfirmNo" type="button"></button></div></div>';
       document.body.appendChild(m);
       m.addEventListener('click',function(e){ if(e.target===m) m.style.display='none'; });
       $('hpConfirmNo').addEventListener('click',function(){ m.style.display='none'; });
+      $('hpConfirmX').addEventListener('click',function(){ m.style.display='none'; });
     }
     $('hpConfirmMsg').innerHTML=msg;
     $('hpConfirmYes').innerHTML=dual('Yes, reset','ஆம், மீட்டமை');
@@ -1626,6 +1643,7 @@
     clone.addEventListener('click',function(){ m.style.display='none'; onYes(); });
     m.style.display='flex';
   }
+  window.hpConfirm = hpConfirm;
   function hpCloseOverlays(){
     var b=$('hpBloom'); if(b) b.classList.remove('show');
     ['hpShareMenu','themeMenu'].forEach(function(id){ var e=$(id); if(e) e.classList.remove('show'); });
@@ -1682,24 +1700,22 @@
   onResetVisible('w1reset','dig');
   onResetVisible('w2reset','thumb');
   onResetVisible('w9reset','well');
+  onResetVisible('w4reset','brick');
 
   var w3=$('w3range'); if(w3) w3.addEventListener('input',function(){ if(+w3.value===100) collect('lamp'); });
   var w4b=$('w4bricks'); if(w4b) w4b.addEventListener('click',function(){
     setTimeout(function(){
       var all=w4b.querySelectorAll('.brick').length, fl=w4b.querySelectorAll('.brick.flipped').length;
-      if(all>0 && fl>=all){
-        collect('brick');
-        var dd=$('w4door');
-        if(dd && !dd.classList.contains('open')){ dd.classList.add('open'); burst(w4b.closest('.widget')); }
-      }
+      if(all>0 && fl>=all) collect('brick');
     },0);
   });
   var w5k=$('w5coach'); if(w5k) w5k.addEventListener('click',function(){ collect('match'); });
-  var chipsSeen={};
+  var chipsSeen={kid:false,pro:false,again:false};
   document.querySelectorAll('[data-chip]').forEach(function(c){
     c.addEventListener('click',function(){
-      chipsSeen[c.getAttribute('data-chip')]=1;
-      if(Object.keys(chipsSeen).length>=3) collect('patience');
+      var k=c.getAttribute('data-chip');
+      if(k in chipsSeen) chipsSeen[k]=true;
+      if(chipsSeen.kid && chipsSeen.pro && chipsSeen.again) collect('patience');
     });
   });
   var w7n=$('w7now'); if(w7n) w7n.addEventListener('click',function(){ collect('question'); });
@@ -1735,6 +1751,7 @@
   $('hpBloomClose').addEventListener('click',function(){ $('hpBloom').classList.remove('show'); });
   var _bloom=$('hpBloom');
   if(_bloom) _bloom.addEventListener('click',function(e){ if(e.target===_bloom) _bloom.classList.remove('show'); });
+  var _bx=$('hpBloomX'); if(_bx) _bx.addEventListener('click',function(){ $('hpBloom').classList.remove('show'); });
 
   /* ---- chapter indicator in gauge ---- */
   var TA_N=['·','௧','௨','௩','௪','௫','௬','௭','௮'];
@@ -1835,11 +1852,15 @@
       while(x.measureText(txt).width>960 && s>18){ s=Math.floor(s*0.93); x.font=style+s+'px '+fam; }
       x.fillText(txt,600,y);
     }
-    T('hariprav.in',150,26,'','#2E6E6A',false);
-    var head = name ? (ta? name+' தோண்டினார்.' : name+' dug the well.')
-                    : (ta? 'நான் தோண்டினேன்.' : 'I dug the well.');
-    T(head,295,64, ta?'600 ':'italic 600 ', '#2B2118', ta);
-    T(ta?'12 / 12 பொக்கிஷங்கள் சேர்ந்தன':'12 / 12 artifacts collected',362,32,'','#C0603A',ta);
+    T('hariprav.in',140,26,'','#2E6E6A',false);
+    if(name){
+      T(name,250,54, ta?'600 ':'italic 600 ', '#2B2118', ta);
+      T(ta?'தோண்டினார்.':'dug the well.',322,54, ta?'600 ':'italic 600 ', '#2B2118', ta);
+      T(ta?'12 / 12 பொக்கிஷங்கள் சேர்ந்தன':'12 / 12 artifacts collected',392,30,'','#C0603A',ta);
+    } else {
+      T(ta?'நான் தோண்டினேன்.':'I dug the well.',290,64, ta?'600 ':'italic 600 ', '#2B2118', ta);
+      T(ta?'12 / 12 பொக்கிஷங்கள் சேர்ந்தன':'12 / 12 artifacts collected',356,30,'','#C0603A',ta);
+    }
     x.strokeStyle='#2B2118'; x.lineWidth=14; x.lineJoin='round'; x.lineCap='round';
     x.beginPath(); x.moveTo(330,445); x.lineTo(470,445); x.moveTo(730,445); x.lineTo(870,445); x.stroke();
     x.beginPath(); x.moveTo(480,445); x.lineTo(510,715); x.lineTo(690,715); x.lineTo(720,445); x.stroke();
@@ -2193,7 +2214,8 @@
   })();
   document.querySelectorAll('.art').forEach(function(a){
     a.style.cursor='pointer';
-    a.addEventListener('click',function(){
+    a.addEventListener('click',function(ev){
+      ev.stopPropagation();
       var el=artEl(a.getAttribute('data-art'));
       if(!el) return;
       var w=el.closest('.widget')||el;
@@ -2208,35 +2230,13 @@
     if(e.key==='Escape') hpCloseOverlays();
   });
 
-  /* ================= wall reset guarantee ================= */
-  (function(){
-    var wrap=$('w4bricks'); if(!wrap) return;
-    var widget=wrap.closest('.widget'); if(!widget) return;
-    if(!widget.querySelector('.wreset')){
-      var orig=[].map.call(wrap.querySelectorAll('.brick'),function(b){ return b.textContent; });
-      var b=document.createElement('button');
-      b.type='button'; b.className='wbtn alt wreset';
-      b.innerHTML='<span class="L en">↺ Reset</span><span class="L ta">↺ மீண்டும் தொடங்கு</span>';
-      widget.appendChild(b);
-      b.addEventListener('click',function(){
-        hpConfirm(dual('Reset this widget?','இந்த விட்ஜெட்டை மீட்டமைக்கவா?'), function(){
-          [].forEach.call(wrap.querySelectorAll('.brick'),function(br,i){
-            br.classList.remove('flipped'); br.textContent=orig[i];
-            br.style.background=''; br.style.borderColor=''; br.style.color='';
-          });
-          var d=$('w4door'); if(d) d.classList.remove('open');
-        });
-      });
-    }
-  })();
-
-  /* ================= reset everything ================= */
+/* ================= reset everything ================= */
   var raBtn=$('hpResetAll');
   if(raBtn){
     raBtn.addEventListener('click',function(){
-      hpConfirm(dual('Reset <b>everything</b>? All collected artifacts reset.','<b>அனைத்தையும்</b> மீட்டமைக்கவா? எல்லா பொக்கிஷங்களும் நீக்கப்படும்.'), function(){
+      hpConfirm(dual('Reset <b>everything</b>? All artifacts and widgets clear.','<b>அனைத்தையும்</b> மீட்டமைக்கவா? எல்லா பொக்கிஷங்களும் விட்ஜெட்களும் அழியும்.'), function(){
         hpCloseOverlays();
-        ['w1reset','w2reset','w9reset'].forEach(function(id){ var b=$(id); if(b){ var f=b.getAttribute('data-raw'); b.setAttribute('data-raw','1'); b.click(); b.removeAttribute('data-raw'); } });
+        ['w1reset','w2reset','w9reset','w4reset'].forEach(function(id){ var b=$(id); if(b){ var f=b.getAttribute('data-raw'); b.setAttribute('data-raw','1'); b.click(); b.removeAttribute('data-raw'); } });
         document.querySelectorAll('.wreset').forEach(function(b){ b.setAttribute('data-raw','1'); b.click(); b.removeAttribute('data-raw'); });
         got={}; celebrated=false;
         try{ localStorage.removeItem('hp-arts'); localStorage.removeItem('hp-celebrated'); }catch(e){}
